@@ -1,7 +1,6 @@
 package com.example.composetest2
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.composetest2.ui.theme.ComposeTest2Theme
 
 class MainActivity : ComponentActivity() {
-    val t = 11
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,15 +21,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    var someText by remember { mutableStateOf(name) }
+fun Greeting(txt: String) {
+    var someText by remember { mutableStateOf(txt) }
     val styler = TextStyler()
-
     val listOfLabels by remember {mutableStateOf(
-        MutableList<String>(styler.getAlphabetCount()) { "" }
-
+        MutableList<String>(styler.getAlphabetCount()) { txt }
     )}
-
 
     Column() {
         TextField(value = someText, onValueChange = {
@@ -39,29 +34,20 @@ fun Greeting(name: String) {
             repeat(listOfLabels.count()) { _index ->
                 listOfLabels[_index] = styler.switchToUnicode(it, _index)
             }
-            //someText2 = t.switchToUnicode(it, 1)
         })
-        doSomeThing(listOfLabels)
+        AddTextLabels(listOfLabels)
     }
 }
 
 @Composable
-fun doSomeThing(list: List<String>) {
+fun AddTextLabels(list: List<String>) {
     repeat(list.count()) {
         Text(list[it])
     }
-
-}
-
-fun useSomeState(someText: String) {
-    println("some")
-    Log.i("some", "123")
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ComposeTest2Theme {
-
-    }
+    ComposeTest2Theme { }
 }
