@@ -23,6 +23,7 @@ class TextStyler(var text: String = "") {
     fun getAlphabetCount(): Int {
         return AlphabetList.count()
     }
+
     fun switchToUnicode(inputText: String, unicodeAlphabetIndex: Int): String {
         var output = ""
         inputText.forEach {
