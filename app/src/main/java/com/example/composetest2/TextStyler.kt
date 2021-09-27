@@ -7,6 +7,10 @@ fun main(args: Array<String>) {
     t.rootToUnicode("jghfdjghdf", 1)
 }
 
+/*
+    Main class where all logic
+ */
+
 class TextStyler(var text: String = "") {
     private var result = ""
     private var prefix = ""
@@ -28,16 +32,17 @@ class TextStyler(var text: String = "") {
                 root += it
             }
         }
-        return root
+        return switchToUnicode()
     }
-    fun addPrefix() {
+    fun addPrefix(): String {
         prefix += "<"
+        return switchToUnicode()
     }
-    fun addSuffix() {
+    fun addSuffix(): String {
         suffix += ">"
+        return switchToUnicode()
     }
-    fun switchToUnicode(inputText: String, unicodeAlphabetIndex: Int): String {
-        rootToUnicode(inputText, unicodeAlphabetIndex)
+    fun switchToUnicode(): String {
         return "$prefix$root$suffix"
     }
 }

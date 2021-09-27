@@ -32,7 +32,7 @@ fun Greeting(txt: String) {
         TextField(value = someText, onValueChange = {
             someText = it
             repeat(listOfLabels.count()) { _index ->
-                listOfLabels[_index] = styler.switchToUnicode(it, _index)
+                listOfLabels[_index] = styler.rootToUnicode(it, _index)
             }
         })
         AddTextLabels(listOfLabels)
