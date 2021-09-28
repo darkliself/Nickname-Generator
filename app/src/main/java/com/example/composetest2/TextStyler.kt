@@ -25,22 +25,22 @@ class TextStyler(var text: String = "") {
     }
 
     fun rootToUnicode(inputText: String, unicodeAlphabetIndex: Int): String {
+        var text = ""
         inputText.forEach {
             if (baseAlphabet.contains(it)) {
-                root += unicodeAlphabetList[unicodeAlphabetIndex][baseAlphabet.indexOf(it)]
+                text += unicodeAlphabetList[unicodeAlphabetIndex][baseAlphabet.indexOf(it)]
             } else {
-                root += it
+                text += it
             }
         }
+        root = text
         return switchToUnicode()
     }
-    fun addPrefix(): String {
+    fun addPrefix() {
         prefix += "<"
-        return switchToUnicode()
     }
-    fun addSuffix(): String {
+    fun addSuffix() {
         suffix += ">"
-        return switchToUnicode()
     }
     fun switchToUnicode(): String {
         return "$prefix$root$suffix"
