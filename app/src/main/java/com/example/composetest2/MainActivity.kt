@@ -3,92 +3,76 @@ package com.example.composetest2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composetest2.ui.theme.ComposeTest2Theme
-import com.example.composetest2.ui.theme.border
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
+import com.example.composetest2.ui.theme.NickCreator1
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeTest2Theme(darkTheme = true) {
-                Greeting("Hello")
+
+                Header("Create your perfect nickname")
+
+        }
+    }
+}
+
+@Composable
+fun Header(str: String) {
+    val constraints = ConstraintSet {
+        val greenBox = createRefFor("greenBox")
+        val redBox = createRefFor("redBox")
+        constrain(greenBox) {
+            top.linkTo(parent.top)
+            start.linkTo(parent.start)
+            width = Dimension.value(100.dp)
+            height = Dimension.value(100.dp)
+        }
+        constrain(redBox) {
+            top.linkTo(parent.top)
+            start.linkTo(greenBox.end)
+            width = Dimension.value(100.dp)
+            height = Dimension.value(100.dp)
+        }
+    }
+    ConstraintLayout(constraintSet = constraints, Modifier.fillMaxSize()) {
+
+            Box(
+                modifier = Modifier
+                    .background(Color.Green)
+                    .layoutId("greenBox")
+            ) {
+
+            }
+            Box(
+                modifier = Modifier
+                    .background(Color.Red)
+                    .layoutId("redBox")
+            ) {
+
             }
         }
-    }
-}
 
-@Composable
-fun Greeting(txt: String) {
-    var someText by remember { mutableStateOf(txt) }
-    val styler = TextStyler()
-    val listOfLabels by remember {
-        mutableStateOf(
-            MutableList<String>(styler.getAlphabetCount()) { txt }
-        )
-    }
 
-    Column() {
-        TextField(
-            value = someText,
-            modifier = Modifier
-                .border(border = border),
-            textStyle = TextStyle(textAlign = TextAlign.Center),
-            onValueChange = {
-                someText = it
-                repeat(listOfLabels.count()) { _index ->
-                    listOfLabels[_index] = styler.rootToUnicode(it, _index)
-                }
-            },
-        )
-        Row() {
-            PrefixSuffixListView()
-            PrefixSuffixListView()
-        }
-        AddTextLabels(listOfLabels)
-    }
-}
 
-@Composable
-fun AddTextLabels(list: List<String>) {
-    repeat(list.count()) {
-        Text(
-            list[it],
-            Modifier
-                .border(border)
-                .size(800.dp, 30.dp),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun PrefixSuffixListView() {
-    LazyColumn(
-        Modifier
-            .border(border)
-            .size(50.dp, 100.dp)
-    ) {
-        items(listOf("123", "123", "213", "123", "123", "213")) { item ->
-            Text(item)
-        }
-    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ComposeTest2Theme { }
+    NickCreator1 { }
 }
