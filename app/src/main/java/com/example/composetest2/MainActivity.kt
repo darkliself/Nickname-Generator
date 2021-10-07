@@ -3,20 +3,20 @@ package com.example.composetest2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
 import com.example.composetest2.ui.theme.NickCreator1
 
 
@@ -24,8 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-                Header("Create your perfect nickname")
+            Header("Create your perfect nickname")
 
         }
     }
@@ -33,42 +32,84 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Header(str: String) {
-    val constraints = ConstraintSet {
-        val greenBox = createRefFor("greenBox")
-        val redBox = createRefFor("redBox")
-        constrain(greenBox) {
-            top.linkTo(parent.top)
-            start.linkTo(parent.start)
-            width = Dimension.value(100.dp)
-            height = Dimension.value(100.dp)
+    Column(
+        Modifier
+            .fillMaxSize()
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.2f)
+                .border(border = BorderStroke(1.dp, Color.Black))
+                .padding(top = 20.dp, end = 20.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Box(
+                Modifier
+                    .size(20.dp, 20.dp)
+                    .background(Color.Black)
+                    .padding(top = 20.dp)
+            ) {
+            }
         }
-        constrain(redBox) {
-            top.linkTo(parent.top)
-            start.linkTo(greenBox.end)
-            width = Dimension.value(100.dp)
-            height = Dimension.value(100.dp)
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.2f)
+                .border(border = BorderStroke(1.dp, Color.Black)),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Create\nyour perfect nickname", textAlign = TextAlign.Center)
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.2f)
+                .border(border = BorderStroke(1.dp, Color.Black)), Arrangement.Center
+        ) {
+            Button(onClick = { /*TODO*/ }) {
+                Image(
+                    painter = painterResource(R.drawable.icon),
+                    contentDescription = "ok icon",
+                    Modifier.size(20.dp, 20.dp)
+                )
+                Text("some simple text")
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.2f)
+                .border(border = BorderStroke(1.dp, Color.Black)), Arrangement.Center
+        ) {
+            Button(onClick = { /*TODO*/ }) {
+                Image(
+                    painter = painterResource(R.drawable.icon),
+                    contentDescription = "ok icon",
+                    Modifier.size(20.dp, 20.dp)
+                )
+                Text("some simple text")
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.2f)
+                .border(border = BorderStroke(1.dp, Color.Black)),
+
+            Arrangement.Center,
+
+        ) {
+            Button(onClick = { /*TODO*/ }) {
+                Image(
+                    painter = painterResource(R.drawable.icon),
+                    contentDescription = "ok icon",
+                    Modifier.size(20.dp, 20.dp)
+                )
+                Text("some simple text")
+            }
         }
     }
-    ConstraintLayout(constraintSet = constraints, Modifier.fillMaxSize()) {
-
-            Box(
-                modifier = Modifier
-                    .background(Color.Green)
-                    .layoutId("greenBox")
-            ) {
-
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.Red)
-                    .layoutId("redBox")
-            ) {
-
-            }
-        }
-
-
-
 }
 
 @Preview(showBackground = true)
