@@ -1,23 +1,20 @@
 package com.example.composetest2
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,15 +27,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Header("Create your perfect nickname")
+            Header("Create your perfect nickname", this)
 
         }
     }
 }
 
 @Composable
-fun Header(str: String) {
+fun Header(str: String, context: Context) {
 
+    val ttt by remember {
+        mutableStateOf(context)
+    }
 
     fun fromPxToDp(px: Float): Float {
         val density = Resources.getSystem().displayMetrics.density
@@ -66,6 +66,7 @@ fun Header(str: String) {
             ) {
             }
         }
+        Spacer(modifier = Modifier.size(10.dp))
         Box(
             Modifier
                 .fillMaxWidth()
@@ -78,6 +79,7 @@ fun Header(str: String) {
             Text(text = "Create\nyour perfect nickname", textAlign = TextAlign.Center)
 
         }
+        Spacer(modifier = Modifier.size(10.dp))
         Box(
             Modifier
                 .fillMaxWidth()
@@ -86,84 +88,118 @@ fun Header(str: String) {
             contentAlignment = Alignment.Center
         ) {
 
-            Button(onClick = { /*TODO*/ }) {
-                Image(
-                    painter = painterResource(R.drawable.icon),
-                    contentDescription = "ok icon",
-                    Modifier.size(20.dp, 20.dp)
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    "some text here",
+                    Modifier
+                        .zIndex(3F)
+                        .padding(bottom = 5.dp, end = 5.dp),
+                    color = Color.Black
                 )
-                Text("some simple text")
-            }
-        }
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
-            contentAlignment = Alignment.Center
-        ) {
+                // icon box
+                Box(
+                    Modifier
+                        .background(Color.Black)
+                        .size(20.dp, 20.dp)
+                        .zIndex(10f)
+                        .align(BiasAlignment(-0.5f, 0f))
 
-            Button(onClick = { /*TODO*/ }) {
-                Image(
-                    painter = painterResource(R.drawable.icon),
-                    contentDescription = "ok icon",
-                    Modifier.size(20.dp, 20.dp)
-                )
-                Text("some simple text")
-            }
-        }
+                ) {
 
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
-            contentAlignment = Alignment.Center
-        ) {
-
-            Button(onClick = { /*TODO*/ }) {
-                Image(
-                    painter = painterResource(R.drawable.icon),
-                    contentDescription = "ok icon",
-                    Modifier.size(20.dp, 20.dp)
-                )
-                Text("some simple text")
-            }
-
-        }
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
-            contentAlignment = Alignment.Center
-        ) {
-            Button(
-                onClick = { /*TODO*/ },
-                Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-            ) {
-                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("jhdjhsf", Modifier.zIndex(2F))
-                    Image(
-                        ImageVector.vectorResource(id = R.drawable.ic_rec_101),
-                        "some description",
-                        Modifier
-                            .size(180.dp, 75.dp)
-                            .zIndex(1f)
-                    )
-                    Image(
-                        ImageVector.vectorResource(id = R.drawable.ic_rec_101_1), "bk_101",
-                        Modifier
-                            .size(200.dp, 80.dp)
-                            .zIndex(0f)
-
-                    )
                 }
-
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101),
+                    "some description",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(2f)
+                        .padding(bottom = 5.dp, end = 5.dp)
+                        .clickable {
+                            testClickToast(context)
+                        }
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(1f)
+                        .padding(top = 5.dp, start = 5.dp)
+                )
             }
+        }
+        Spacer(modifier = Modifier.size(10.dp))
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .border(border = BorderStroke(1.dp, Color.Black)),
+            contentAlignment = Alignment.Center
+        ) {
 
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    "some text here",
+                    Modifier
+                        .zIndex(3F)
+                        .padding(bottom = 5.dp, end = 5.dp),
+                    color = Color.Black
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101),
+                    "some description",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(2f)
+                        .padding(bottom = 5.dp, end = 5.dp)
+                        .clickable {
+                            testClickToast(context)
+                        }
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(1f)
+                        .padding(top = 5.dp, start = 5.dp)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.size(10.dp))
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .border(border = BorderStroke(1.dp, Color.Black)),
+            contentAlignment = Alignment.Center
+        ) {
+
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    "some text here",
+                    Modifier
+                        .zIndex(3F)
+                        .padding(bottom = 5.dp, end = 5.dp),
+                    color = Color.Black
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101),
+                    "some description",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(2f)
+                        .padding(bottom = 5.dp, end = 5.dp)
+                        .clickable {
+                            testClickToast(context)
+                        }
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
+                    Modifier
+                        .size(300.dp, 180.dp)
+                        .zIndex(1f)
+                        .padding(top = 5.dp, start = 5.dp)
+                )
+            }
         }
     }
 }
@@ -172,4 +208,8 @@ fun Header(str: String) {
 @Composable
 fun DefaultPreview() {
     NickCreator1 { }
+}
+
+fun testClickToast(context: Context) {
+    Toast.makeText(context, "its clicked", Toast.LENGTH_SHORT).show()
 }
