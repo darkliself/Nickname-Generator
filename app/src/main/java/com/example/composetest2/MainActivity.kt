@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,7 +29,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Header("Create your perfect nickname", this)
-
         }
     }
 }
@@ -36,19 +36,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Header(str: String, context: Context) {
 
-    val ttt by remember {
-        mutableStateOf(context)
-    }
-
-    fun fromPxToDp(px: Float): Float {
-        val density = Resources.getSystem().displayMetrics.density
-        return px / density;
-    }
-
     Column(
         Modifier
-            .fillMaxSize()
-    ) {
+            .fillMaxSize(),
+
+        ) {
         Row(
             Modifier
                 .fillMaxWidth()
@@ -75,58 +67,75 @@ fun Header(str: String, context: Context) {
             contentAlignment = Alignment.Center
 
         ) {
-
             Text(text = "Create\nyour perfect nickname", textAlign = TextAlign.Center)
-
         }
         Spacer(modifier = Modifier.size(10.dp))
+
+        ///////////////////////
         Box(
             Modifier
-                .fillMaxWidth()
+                .width(280.dp)
                 .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
+                .border(border = BorderStroke(1.dp, Color.Black))
+                .align(CenterHorizontally),
             contentAlignment = Alignment.Center
         ) {
+            Text(
+                "some text here",
+                Modifier
+                    .zIndex(3F),
+                color = Color.Black
+            )
+            // icon box
+            Box(
+                Modifier
+                    //.background(Color.Black)
+                    .size(50.dp, 50.dp)
+                    .zIndex(10f)
+                    .align(BiasAlignment(-0.75f, -0.05f)),
+                Alignment.Center
 
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(
-                    "some text here",
-                    Modifier
-                        .zIndex(3F)
-                        .padding(bottom = 5.dp, end = 5.dp),
-                    color = Color.Black
-                )
-                // icon box
-                Box(
-                    Modifier
-                        .background(Color.Black)
-                        .size(20.dp, 20.dp)
-                        .zIndex(10f)
-                        .align(BiasAlignment(-0.5f, 0f))
-
-                ) {
-
-                }
+            ) {
                 Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101),
-                    "some description",
+                    ImageVector.vectorResource(id = R.drawable.ic_view_01_yellow_button_icon),
+                    "icon",
                     Modifier
-                        .size(300.dp, 180.dp)
-                        .zIndex(2f)
-                        .padding(bottom = 5.dp, end = 5.dp)
-                        .clickable {
-                            testClickToast(context)
-                        }
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
-                    Modifier
-                        .size(300.dp, 180.dp)
+                        .fillMaxSize(1f)
                         .zIndex(1f)
-                        .padding(top = 5.dp, start = 5.dp)
+                )
+                Image(
+                    ImageVector.vectorResource(id = R.drawable.ic_view_01_yellow_button_icon_pen),
+                    "icon",
+                    Modifier
+                        .fillMaxSize(0.5f)
+                        .zIndex(2f)
                 )
             }
+
+            Image(
+                ImageVector.vectorResource(id = R.drawable.rec_101),
+                "some description",
+                Modifier
+                    .size(280.dp, 180.dp)
+                    .zIndex(2f)
+                    .padding(bottom = 5.dp, end = 5.dp)
+                    .clickable {
+                        testClickToast(context)
+                    }
+            )
+            Image(
+                ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
+                Modifier
+                    .size(300.dp, 180.dp)
+                    .zIndex(1f)
+                    .padding(top = 5.dp, start = 5.dp)
+            )
         }
+
+
+        ///////////////////////////////
+
+
         Spacer(modifier = Modifier.size(10.dp))
         Box(
             Modifier
