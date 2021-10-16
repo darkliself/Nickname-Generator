@@ -1,7 +1,6 @@
 package com.example.composetest2
 
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -11,17 +10,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
+import com.example.composetest2.components.ButtonWithImages
+import com.example.composetest2.components.IconForButton
 import com.example.composetest2.ui.theme.NickCreator1
+import com.example.composetest2.ui.theme.border
 
 
 class MainActivity : ComponentActivity() {
@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Header(str: String, context: Context) {
-
     Column(
         Modifier
             .fillMaxSize(),
@@ -73,142 +72,86 @@ fun Header(str: String, context: Context) {
 
         ///////////////////////
         Box(
-            Modifier
-                .width(280.dp)
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black))
-                .align(CenterHorizontally),
-            contentAlignment = Alignment.Center
+            modifier = Modifier
+                .size(280.dp, 100.dp)
+                .align(CenterHorizontally)
         ) {
-            Text(
-                "some text here",
+            ButtonWithImages(
+                "text",
+                listOf(R.drawable.rec_101, R.drawable.rec_101_1),
                 Modifier
-                    .zIndex(3F),
-                color = Color.Black
+                    .align(Center)
+                    .size(280.dp, 100.dp),
+                onClick = { testClickToast(context) }
             )
-            // icon box
-            Box(
+            IconForButton(
+                listOf(
+                    R.drawable.ic_view_01_yellow_button_icon,
+                    R.drawable.ic_view_01_yellow_button_icon_pen
+                ),
                 Modifier
-                    //.background(Color.Black)
+                    .align(BiasAlignment(-0.75f, -0.05f))
                     .size(50.dp, 50.dp)
-                    .zIndex(10f)
-                    .align(BiasAlignment(-0.75f, -0.05f)),
-                Alignment.Center
-
-            ) {
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.ic_view_01_yellow_button_icon),
-                    "icon",
-                    Modifier
-                        .fillMaxSize(1f)
-                        .zIndex(1f)
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.ic_view_01_yellow_button_icon_pen),
-                    "icon",
-                    Modifier
-                        .fillMaxSize(0.5f)
-                        .zIndex(2f)
-                )
-            }
-
-            Image(
-                ImageVector.vectorResource(id = R.drawable.rec_101),
-                "some description",
-                Modifier
-                    .size(280.dp, 180.dp)
-                    .zIndex(2f)
-                    .padding(bottom = 5.dp, end = 5.dp)
-                    .clickable {
-                        testClickToast(context)
-                    }
             )
-            Image(
-                ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
-                Modifier
-                    .size(300.dp, 180.dp)
-                    .zIndex(1f)
-                    .padding(top = 5.dp, start = 5.dp)
-            )
+
         }
-
 
         ///////////////////////////////
 
-
         Spacer(modifier = Modifier.size(10.dp))
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
-            contentAlignment = Alignment.Center
-        ) {
 
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(
-                    "some text here",
-                    Modifier
-                        .zIndex(3F)
-                        .padding(bottom = 5.dp, end = 5.dp),
-                    color = Color.Black
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101),
-                    "some description",
-                    Modifier
-                        .size(300.dp, 180.dp)
-                        .zIndex(2f)
-                        .padding(bottom = 5.dp, end = 5.dp)
-                        .clickable {
-                            testClickToast(context)
-                        }
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
-                    Modifier
-                        .size(300.dp, 180.dp)
-                        .zIndex(1f)
-                        .padding(top = 5.dp, start = 5.dp)
-                )
-            }
+        Box(
+            modifier = Modifier
+                .size(280.dp, 100.dp)
+                .align(CenterHorizontally)
+        ) {
+            ButtonWithImages(
+                "text",
+                listOf(
+                    R.drawable.rec_101, R.drawable.rec_101_1
+                ),
+                Modifier
+                    .align(Center)
+                    .size(280.dp, 100.dp),
+                onClick = { testClickToast(context) }
+            )
+            IconForButton(
+                listOf(
+                    R.drawable.ic_view_01_yellow_button_icon,
+                    R.drawable.ic_view_01_yellow_button_icon_pen
+                ),
+                Modifier
+                    .align(BiasAlignment(-0.75f, -0.05f))
+                    .size(50.dp, 50.dp)
+            )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .border(border = BorderStroke(1.dp, Color.Black)),
-            contentAlignment = Alignment.Center
-        ) {
 
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(
-                    "some text here",
-                    Modifier
-                        .zIndex(3F)
-                        .padding(bottom = 5.dp, end = 5.dp),
-                    color = Color.Black
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101),
-                    "some description",
-                    Modifier
-                        .size(300.dp, 180.dp)
-                        .zIndex(2f)
-                        .padding(bottom = 5.dp, end = 5.dp)
-                        .clickable {
-                            testClickToast(context)
-                        }
-                )
-                Image(
-                    ImageVector.vectorResource(id = R.drawable.rec_101_1), "bk_101",
-                    Modifier
-                        .size(300.dp, 180.dp)
-                        .zIndex(1f)
-                        .padding(top = 5.dp, start = 5.dp)
-                )
-            }
+        // element
+        Box(
+            modifier = Modifier
+                .size(280.dp, 100.dp)
+                .align(CenterHorizontally)
+        ) {
+            ButtonWithImages(
+                "text",
+                listOf(
+                    R.drawable.rec_101, R.drawable.rec_101_1
+                ),
+                Modifier
+                    .align(Center)
+                    .size(280.dp, 100.dp),
+                onClick = { testClickToast(context) }
+            )
+            IconForButton(
+                listOf(
+                    R.drawable.ic_view_01_yellow_button_icon,
+                    R.drawable.ic_view_01_yellow_button_icon_pen
+                ),
+                Modifier
+                    .align(BiasAlignment(-0.75f, -0.05f))
+                    .size(50.dp, 50.dp)
+            )
         }
     }
 }
