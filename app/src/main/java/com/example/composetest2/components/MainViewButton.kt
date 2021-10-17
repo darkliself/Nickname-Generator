@@ -30,14 +30,14 @@ fun IconForButton(
     ) {
         Image(
             ImageVector.vectorResource(id = iconId[0]),
-            "icon ${iconId[0]}",
+            null,
             Modifier
                 .fillMaxSize()
                 .zIndex(1f)
         )
         Image(
             ImageVector.vectorResource(id = iconId[1]),
-            "background ${iconId[1]}",
+            null,
             Modifier
                 .fillMaxSize(0.5f)
                 .zIndex(2f)
@@ -46,9 +46,9 @@ fun IconForButton(
 }
 
 @Composable
-fun ButtonWithImages(
+fun ButtonWithImage(
     txt: String,
-    @DrawableRes imagesIds: List<Int>,
+    @DrawableRes image: Int,
     modifier: Modifier,
     onClick: () -> Unit,
 ) {
@@ -61,24 +61,14 @@ fun ButtonWithImages(
             text = txt,
             Modifier
                 .zIndex(3F)
-                .padding(bottom = 5.dp, end = 5.dp),
+                .padding(start = 100.dp, bottom = 5.dp, end = 5.dp)
+                .align(Alignment.CenterStart),
             color = Color.Black
         )
-        // icon box
         Image(
-            ImageVector.vectorResource(id = imagesIds[0]),
-            imagesIds.toString(),
-            Modifier
-                .size(300.dp, 180.dp)
-                .zIndex(2f)
-                .padding(bottom = 5.dp, end = 5.dp)
-        )
-        Image(
-            ImageVector.vectorResource(id = imagesIds[1]), imagesIds.toString(),
-            Modifier
-                .size(300.dp, 180.dp)
-                .zIndex(1f)
-                .padding(top = 5.dp, start = 5.dp)
+            ImageVector.vectorResource(id = image),
+            null,
+            Modifier.fillMaxSize()
         )
     }
 }

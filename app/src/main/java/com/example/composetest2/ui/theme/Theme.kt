@@ -28,7 +28,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun NickCreator1(
+fun NickCreator(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
@@ -42,6 +42,7 @@ fun NickCreator1(
         colors = colors,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
+
     )
 }
