@@ -50,6 +50,7 @@ fun ButtonWithImage(
     txt: String,
     @DrawableRes image: Int,
     modifier: Modifier,
+    textModifier: Modifier = Modifier.padding(start = 100.dp, bottom = 5.dp, end = 5.dp),
     onClick: () -> Unit,
 ) {
     Box(
@@ -59,10 +60,8 @@ fun ButtonWithImage(
     ) {
         Text(
             text = txt,
-            Modifier
-                .zIndex(3F)
-                .padding(start = 100.dp, bottom = 5.dp, end = 5.dp)
-                .align(Alignment.CenterStart),
+            modifier = textModifier
+                .zIndex(3F),
             color = Color.Black
         )
         Image(

@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.Font
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Header(this)
+            SecondView(this)
         }
     }
 }
@@ -42,8 +43,8 @@ fun Header(context: Context) {
         ImageVector.vectorResource(id = R.drawable.bg_main_view),
         contentDescription = null,
         Modifier
-            .fillMaxSize()
-            .padding(0.dp)
+            .fillMaxSize(),
+        contentScale = ContentScale.FillBounds
     )
     Column(
         Modifier
@@ -168,7 +169,7 @@ fun Header(context: Context) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    Header(LocalContext.current)
+    SecondView(LocalContext.current)
 }
 
 fun testClickToast(context: Context) {
