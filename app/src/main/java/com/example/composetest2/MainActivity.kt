@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SecondView(this)
+            Header(this)
         }
     }
 }
@@ -53,7 +53,7 @@ fun Header(context: Context) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .height(80.dp)
+                .height(100.dp)
                 .padding(top = 40.dp, end = 20.dp),
 
             horizontalArrangement = Arrangement.End
@@ -71,7 +71,7 @@ fun Header(context: Context) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(100.dp),
+                .size(320.dp, 120.dp),
             contentAlignment = Center
         ) {
             Text(

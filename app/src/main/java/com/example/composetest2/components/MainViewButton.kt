@@ -25,7 +25,8 @@ fun IconForButton(
 ) {
     Box(
         modifier = modifier,
-        Alignment.Center
+        Alignment.Center,
+
 
     ) {
         Image(
