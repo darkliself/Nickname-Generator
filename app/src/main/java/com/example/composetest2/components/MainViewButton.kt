@@ -48,7 +48,7 @@ fun IconForButton(
 
 @Composable
 fun ButtonWithImage(
-    txt: String,
+    text: String,
     @DrawableRes image: Int,
     modifier: Modifier,
     textModifier: Modifier = Modifier.padding(start = 100.dp, bottom = 5.dp, end = 5.dp),
@@ -60,7 +60,7 @@ fun ButtonWithImage(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = txt,
+            text = text,
             modifier = textModifier
                 .zIndex(3F),
             color = Color.Black

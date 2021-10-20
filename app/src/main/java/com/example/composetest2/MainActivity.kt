@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetest2.components.ButtonWithImage
 import com.example.composetest2.components.IconForButton
+import com.example.composetest2.ui.theme.MainView
 
 
 class MainActivity : ComponentActivity() {
@@ -66,7 +67,7 @@ fun Header(context: Context) {
             )
         }
 
-        Spacer(modifier = Modifier.size(50.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         Box(
             Modifier
@@ -83,12 +84,12 @@ fun Header(context: Context) {
             )
         }
 
-        Spacer(modifier = Modifier.size(60.dp))
+        Spacer(modifier = Modifier.size(30.dp))
 
         // element
         Box(
             modifier = Modifier
-                .size(320.dp, 120.dp)
+                .size(300.dp, 120.dp)
                 .align(CenterHorizontally)
         ) {
             ButtonWithImage(
@@ -115,7 +116,7 @@ fun Header(context: Context) {
         // element
         Box(
             modifier = Modifier
-                .size(320.dp, 120.dp)
+                .size(300.dp, 120.dp)
                 .align(CenterHorizontally)
         ) {
             ButtonWithImage(
@@ -142,7 +143,7 @@ fun Header(context: Context) {
         // element
         Box(
             modifier = Modifier
-                .size(320.dp, 120.dp)
+                .size(300.dp, 120.dp)
                 .align(CenterHorizontally)
         ) {
             ButtonWithImage(
@@ -169,7 +170,7 @@ fun Header(context: Context) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    SecondView(LocalContext.current)
+    Header(LocalContext.current)
 }
 
 fun testClickToast(context: Context) {
