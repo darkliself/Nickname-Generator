@@ -24,6 +24,7 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.zIndex
 import com.example.composetest2.components.ButtonWithImage
+import com.example.composetest2.components.IconForButton
 import com.example.composetest2.testClickToast
 
 @Composable
@@ -48,9 +49,24 @@ fun MainView(context: Context) {
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -0.55f))
-                .background(Color.Blue)
         )
-        MainViewButton("Choose from category", context, Modifier.align(BiasAlignment(0f, -0.25f)))
+
+        MainViewButton(
+            "Create custom nickname",
+            context,
+            Modifier.align(BiasAlignment(0f, -0.25f))
+        )
+
+        MainViewButton(
+            "Choose from category",
+            context,
+            Modifier.align(BiasAlignment(0f, 0.3f))
+        )
+        MainViewButton(
+            "Autogenerate nickname",
+            context,
+            Modifier.align(BiasAlignment(0f, 0.85f))
+        )
     }
 
 }
@@ -61,10 +77,6 @@ fun Header(modifier: Modifier) {
         modifier
             .fillMaxHeight(0.2f)
             .fillMaxWidth(0.8f)
-            .background(
-                Color.Red
-            ),
-
         ) {
         Image(
             ImageVector.vectorResource(id = R.drawable.menu),
@@ -96,16 +108,24 @@ fun TextBox(text: String, modifier: Modifier) {
 fun MainViewButton(text: String, context: Context, modifier: Modifier) {
     Box(
         modifier = modifier
-            .fillMaxHeight(0.2f)
+            .fillMaxHeight(0.25f)
             .fillMaxWidth(0.8f)
     ) {
         ButtonWithImage(
             text,
             R.drawable.btn_large_green,
             Modifier
-                .align(Alignment.Center)
-                .size(320.dp, 120.dp),
+                .fillMaxWidth()
+                .fillMaxHeight(0.8f)
+                .align(Alignment.Center),
+            textModifier = Modifier.align(BiasAlignment(-0.15f, -0.05f)),
             onClick = { testClickToast(context) }
+        )
+        IconForButton(
+            iconId = listOf(R.drawable.icon_light_green_bg, R.drawable.icon_light_green_bg),
+            modifier = Modifier
+                .fillMaxSize(0.25f)
+                .align(BiasAlignment(-1f, -0.05f))
         )
     }
 }
