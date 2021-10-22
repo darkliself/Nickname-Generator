@@ -48,28 +48,28 @@ fun SecondView(contex: Context) {
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            ButtonWithImage(
-                "some text",
-                R.drawable.btn_green,
-                Modifier.size(170.dp, 100.dp),
-                textModifier = Modifier
-                    .padding(0.dp)
-                    .rotate(-3f)
-
-            ) {
-
-            }
-            Spacer(modifier = Modifier.size(10.dp))
-            ButtonWithImage(
-                "some text",
-                R.drawable.btn_pink,
-                Modifier.size(170.dp, 100.dp),
-                textModifier = Modifier
-                    .padding(0.dp)
-                    .rotate(3f)
-            ) {
-
-            }
+//            ButtonWithImage(
+//                "some text",
+//                R.drawable.btn_green,
+//                Modifier.size(170.dp, 100.dp),
+//                textModifier = Modifier
+//                    .padding(0.dp)
+//                    .rotate(-3f)
+//
+//            ) {
+//
+//            }
+//            Spacer(modifier = Modifier.size(10.dp))
+//            ButtonWithImage(
+//                "some text",
+//                R.drawable.btn_pink,
+//                Modifier.size(170.dp, 100.dp),
+//                textModifier = Modifier
+//                    .padding(0.dp)
+//                    .rotate(3f)
+//            ) {
+//
+//            }
         }
     }
 }

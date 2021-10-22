@@ -114,19 +114,27 @@ fun MainViewButton(text: String, context: Context, modifier: Modifier) {
         ButtonWithImage(
             text,
             R.drawable.btn_large_green,
+            listOf<Int>(R.drawable.icon_light_pink, R.drawable.icon_pen),
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8f)
                 .align(Alignment.Center),
             textModifier = Modifier.align(BiasAlignment(-0.15f, -0.05f)),
             onClick = { testClickToast(context) }
-        )
-        IconForButton(
-            iconId = listOf(R.drawable.icon_light_green_bg, R.drawable.icon_light_green_bg),
-            modifier = Modifier
-                .fillMaxSize(0.25f)
-                .align(BiasAlignment(-1f, -0.05f))
-        )
+        ) {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Cyan)
+                .zIndex(20f)) {
+                Image(ImageVector.vectorResource(id = R.drawable.menu), contentDescription = null)
+            }
+        }
+//        IconForButton(
+//            iconId = listOf(R.drawable.icon_light_green_bg, R.drawable.icon_light_green_bg),
+//            modifier = Modifier
+//                .fillMaxSize(0.25f)
+//                .align(BiasAlignment(-1f, -0.05f))
+//        )
     }
 }
 
