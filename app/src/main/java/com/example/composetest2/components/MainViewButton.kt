@@ -50,11 +50,9 @@ fun IconForButton(
 fun ButtonWithImage(
     text: String,
     @DrawableRes image: Int,
-    @DrawableRes icon: List<Int>,
     modifier: Modifier,
     textModifier: Modifier = Modifier.padding(start = 100.dp, bottom = 5.dp, end = 5.dp),
     onClick: () -> Unit,
-    content: @Composable BoxScope.() -> Unit
 ) {
     Box(
         modifier = modifier
@@ -72,13 +70,6 @@ fun ButtonWithImage(
             null,
             Modifier.fillMaxSize()
         )
-        Image(
-            ImageVector.vectorResource(id = icon[0]),
-            null,
-            Modifier.align(BiasAlignment(-1f, -0.05f))
-        )
-        Image(ImageVector.vectorResource(id = icon[1]), null,
-            Modifier.align(BiasAlignment(-1f, -0.05f)))
     }
 }
 

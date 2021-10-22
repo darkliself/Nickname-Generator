@@ -2,74 +2,73 @@ package com.example.composetest2
 
 import android.content.Context
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
-import com.example.composetest2.components.ButtonWithImage
+import androidx.compose.ui.tooling.preview.Preview
+
 
 @Composable
 fun SecondView(contex: Context) {
-    val t = LocalContext.current.resources.displayMetrics.heightPixels.dp /
-            LocalContext.current.resources.displayMetrics.density
-    var size by remember { mutableStateOf("") }
-    val t2 = Dimensions
     Image(
         ImageVector.vectorResource(id = R.drawable.bg_category_view),
-        contentDescription = null,
+        null,
         Modifier.fillMaxSize(),
         contentScale = ContentScale.FillBounds
     )
-    Column(
-        Modifier
-            .fillMaxSize().onGloballyPositioned { coordinates ->
-                size = coordinates.size.toSize().toString()
-            }
-
-        ) {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .height(100.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(t.toString(), Modifier.align(CenterVertically))
-        }
-        Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-//            ButtonWithImage(
-//                "some text",
-//                R.drawable.btn_green,
-//                Modifier.size(170.dp, 100.dp),
-//                textModifier = Modifier
-//                    .padding(0.dp)
-//                    .rotate(-3f)
-//
-//            ) {
-//
-//            }
-//            Spacer(modifier = Modifier.size(10.dp))
-//            ButtonWithImage(
-//                "some text",
-//                R.drawable.btn_pink,
-//                Modifier.size(170.dp, 100.dp),
-//                textModifier = Modifier
-//                    .padding(0.dp)
-//                    .rotate(3f)
-//            ) {
-//
-//            }
-        }
+    Box(
+        Modifier.fillMaxSize()
+    ) {
+        Header(contex)
     }
 }
+
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview2() {
+    //SecondView(LocalContext.current)
+}
+
+@Composable
+fun Header(context: Context) {
+    Box(
+        Modifier
+            .fillMaxWidth(0.8f)
+            .fillMaxHeight(0.2f)
+            .background(Color.Cyan)
+
+    ) {
+        Text("some text", Modifier.align(Alignment.Center))
+        Image(
+            ImageVector.vectorResource(id = R.drawable.menu),
+            contentDescription = null,
+            Modifier.align(
+                BiasAlignment(0f, 0f)
+            )
+        )
+    }
+    Box(
+        Modifier
+            .fillMaxWidth(0.8f)
+            .fillMaxHeight(0.2f)
+            .background(Color.Cyan)
+
+    )
+}
+//
+//fun testClickToast(context: Context) {
+//    Toast.makeText(context, "its clicked", Toast.LENGTH_SHORT).show()
+//}

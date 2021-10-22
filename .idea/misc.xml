@@ -3,12 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable-main-view/bg_main_view.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable-main-view/btn_pink.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/bg_category_view.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/bg_main_view.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/btn_create_pink.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/btn_large_green.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/btn_large_pink.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/button_test.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/ic_rec_101.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/ic_rec_101_1.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/ic_tempory.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/icon_autogenerate.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/main_view.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/menu.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_boys.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_charm.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_emoji.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_girls.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_indian.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_legendary.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_other.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_space.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/alekoz/Desktop/AndroidProj/ComposeTest2/app/src/main/res/drawable/view_02_btn_squard.xml" value="0.3769230769230769" />
       </map>
     </option>
   </component>

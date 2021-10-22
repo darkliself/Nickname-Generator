@@ -1,6 +1,7 @@
 package com.example.composetest2.ui.theme
 
 import android.content.Context
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -44,8 +45,10 @@ fun MainView(context: Context) {
                 .align(BiasAlignment(0f, -1f))
                 .zIndex(1f)
         )
+
         TextBox(
-            "Create\nyour perfect nickname", modifier = Modifier
+            "Create\nyour perfect nickname",
+            modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -0.55f))
@@ -54,21 +57,25 @@ fun MainView(context: Context) {
         MainViewButton(
             "Create custom nickname",
             context,
-            Modifier.align(BiasAlignment(0f, -0.25f))
+            Modifier.align(BiasAlignment(0f, -0.25f)),
+            R.drawable.btn_create_pink,
+
+
         )
 
         MainViewButton(
             "Choose from category",
             context,
-            Modifier.align(BiasAlignment(0f, 0.3f))
+            Modifier.align(BiasAlignment(0f, 0.3f)),
+            R.drawable.btn_choose_category_green
         )
         MainViewButton(
             "Autogenerate nickname",
             context,
-            Modifier.align(BiasAlignment(0f, 0.85f))
+            Modifier.align(BiasAlignment(0f, 0.85f)),
+            R.drawable.btn_autogenerate_pink
         )
     }
-
 }
 
 @Composable
@@ -105,36 +112,26 @@ fun TextBox(text: String, modifier: Modifier) {
 }
 
 @Composable
-fun MainViewButton(text: String, context: Context, modifier: Modifier) {
+fun MainViewButton(
+    text: String,
+    context: Context, modifier: Modifier,
+    @DrawableRes image: Int
+) {
     Box(
         modifier = modifier
             .fillMaxHeight(0.25f)
             .fillMaxWidth(0.8f)
     ) {
         ButtonWithImage(
-            text,
-            R.drawable.btn_large_green,
-            listOf<Int>(R.drawable.icon_light_pink, R.drawable.icon_pen),
-            Modifier
+            text = text,
+            image = image,
+            modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.8f)
                 .align(Alignment.Center),
-            textModifier = Modifier.align(BiasAlignment(-0.15f, -0.05f)),
+            textModifier = Modifier.align(BiasAlignment(0f, -0.05f)),
             onClick = { testClickToast(context) }
-        ) {
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Cyan)
-                .zIndex(20f)) {
-                Image(ImageVector.vectorResource(id = R.drawable.menu), contentDescription = null)
-            }
-        }
-//        IconForButton(
-//            iconId = listOf(R.drawable.icon_light_green_bg, R.drawable.icon_light_green_bg),
-//            modifier = Modifier
-//                .fillMaxSize(0.25f)
-//                .align(BiasAlignment(-1f, -0.05f))
-//        )
+        )
     }
 }
 
