@@ -3,11 +3,7 @@ package com.example.composetest2
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -18,20 +14,38 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import com.example.composetest2.ui.theme.Header
+import com.example.composetest2.ui.theme.TextBox
 
 
 @Composable
-fun SecondView(contex: Context) {
+fun SecondView(context: Context) {
     Image(
-        ImageVector.vectorResource(id = R.drawable.bg_category_view),
+        ImageVector.vectorResource(id = R.drawable.view_02_bg),
         null,
         Modifier.fillMaxSize(),
+
         contentScale = ContentScale.FillBounds
     )
     Box(
-        Modifier.fillMaxSize()
+        Modifier.fillMaxSize(),
+        Alignment.TopCenter
     ) {
-        Header(contex)
+        Header( modifier = Modifier
+            .align(BiasAlignment(0f, -1f))
+            .fillMaxHeight(0.1f),
+        iconModifier = Modifier.align(Alignment.CenterEnd)
+           )
+        TextBox(
+            "Category",
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .fillMaxHeight(0.1f)
+                .align(BiasAlignment(0f, -1f))
+        )
+
     }
 }
 
@@ -39,36 +53,11 @@ fun SecondView(contex: Context) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-    //SecondView(LocalContext.current)
+    SecondView(LocalContext.current)
 }
 
-@Composable
-fun Header(context: Context) {
-    Box(
-        Modifier
-            .fillMaxWidth(0.8f)
-            .fillMaxHeight(0.2f)
-            .background(Color.Cyan)
-
-    ) {
-        Text("some text", Modifier.align(Alignment.Center))
-        Image(
-            ImageVector.vectorResource(id = R.drawable.menu),
-            contentDescription = null,
-            Modifier.align(
-                BiasAlignment(0f, 0f)
-            )
-        )
-    }
-    Box(
-        Modifier
-            .fillMaxWidth(0.8f)
-            .fillMaxHeight(0.2f)
-            .background(Color.Cyan)
-
-    )
-}
 //
 //fun testClickToast(context: Context) {
 //    Toast.makeText(context, "its clicked", Toast.LENGTH_SHORT).show()
 //}
+

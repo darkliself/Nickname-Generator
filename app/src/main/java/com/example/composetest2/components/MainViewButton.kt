@@ -18,7 +18,6 @@ import androidx.compose.ui.zIndex
 
 
 @Composable
-@Note("You need to 2 elements in list for icon, first is background and second is center of the icon, its temporary until designer makes normal icons")
 fun IconForButton(
     @DrawableRes iconId: List<Int>,
     modifier: Modifier,
@@ -72,5 +71,3 @@ fun ButtonWithImage(
         )
     }
 }
-
-annotation class Note(val explain: String)

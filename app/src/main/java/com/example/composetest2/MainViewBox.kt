@@ -3,12 +3,10 @@ package com.example.composetest2.ui.theme
 import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -25,13 +23,12 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.zIndex
 import com.example.composetest2.components.ButtonWithImage
-import com.example.composetest2.components.IconForButton
 import com.example.composetest2.testClickToast
 
 @Composable
 fun MainView(context: Context) {
     Image(
-        ImageVector.vectorResource(id = R.drawable.bg_main_view),
+        ImageVector.vectorResource(id = R.drawable.view_01_bg),
         contentDescription = null,
         Modifier
             .fillMaxSize(),
@@ -43,7 +40,8 @@ fun MainView(context: Context) {
         Header(
             modifier = Modifier
                 .align(BiasAlignment(0f, -1f))
-                .zIndex(1f)
+                .zIndex(1f),
+            iconModifier = Modifier.align(BiasAlignment(1f, -0.75f))
         )
 
         TextBox(
@@ -58,39 +56,41 @@ fun MainView(context: Context) {
             "Create custom nickname",
             context,
             Modifier.align(BiasAlignment(0f, -0.25f)),
-            R.drawable.btn_create_pink,
+            R.drawable.view_01_btn_create,
 
 
-        )
+            )
 
         MainViewButton(
             "Choose from category",
             context,
             Modifier.align(BiasAlignment(0f, 0.3f)),
-            R.drawable.btn_choose_category_green
+            R.drawable.view_01_btn_choose_cat
         )
+
         MainViewButton(
             "Autogenerate nickname",
             context,
             Modifier.align(BiasAlignment(0f, 0.85f)),
-            R.drawable.btn_autogenerate_pink
+            R.drawable.view_01_btn_autogenerate
         )
     }
 }
 
 @Composable
-fun Header(modifier: Modifier) {
+fun Header(
+    modifier: Modifier,
+    iconModifier: Modifier = Modifier.size(35.dp, 35.dp)
+) {
     Box(
         modifier
             .fillMaxHeight(0.2f)
             .fillMaxWidth(0.8f)
-        ) {
+    ) {
         Image(
-            ImageVector.vectorResource(id = R.drawable.menu),
+            ImageVector.vectorResource(id = R.drawable.btn_menu),
             contentDescription = null,
-            Modifier
-                .size(35.dp, 35.dp)
-                .align(BiasAlignment(1f, -0.75f))
+            modifier = iconModifier
         )
     }
 }
