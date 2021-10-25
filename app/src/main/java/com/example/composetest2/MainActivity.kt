@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SecondView(this)
+            CreateNickNameView()
         }
     }
 }
@@ -44,9 +44,10 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    SecondView(LocalContext.current)
+    CreateNickNameView()
 }
 
-fun testClickToast(context: Context) {
-    Toast.makeText(context, "its clicked", Toast.LENGTH_SHORT).show()
+fun testClickToast() {
+    println("its clicked")
 }
+

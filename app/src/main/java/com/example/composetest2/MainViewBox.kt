@@ -54,23 +54,18 @@ fun MainView(context: Context) {
 
         MainViewButton(
             "Create custom nickname",
-            context,
             Modifier.align(BiasAlignment(0f, -0.25f)),
             R.drawable.view_01_btn_create,
-
-
-            )
+        )
 
         MainViewButton(
             "Choose from category",
-            context,
             Modifier.align(BiasAlignment(0f, 0.3f)),
             R.drawable.view_01_btn_choose_cat
         )
 
         MainViewButton(
             "Autogenerate nickname",
-            context,
             Modifier.align(BiasAlignment(0f, 0.85f)),
             R.drawable.view_01_btn_autogenerate
         )
@@ -114,7 +109,7 @@ fun TextBox(text: String, modifier: Modifier) {
 @Composable
 fun MainViewButton(
     text: String,
-    context: Context, modifier: Modifier,
+    modifier: Modifier,
     @DrawableRes image: Int
 ) {
     Box(
@@ -130,7 +125,7 @@ fun MainViewButton(
                 .fillMaxHeight(0.8f)
                 .align(Alignment.Center),
             textModifier = Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = { testClickToast(context) }
+            onClick = { testClickToast() }
         )
     }
 }
