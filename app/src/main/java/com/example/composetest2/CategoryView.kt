@@ -20,7 +20,7 @@ import com.example.composetest2.ui.theme.TextBox
 @Composable
 fun CategoryView() {
     Image(
-        ImageVector.vectorResource(id = R.drawable.view_02_bg),
+        ImageVector.vectorResource(id = R.drawable.view_03_bg),
         null,
         Modifier.fillMaxSize(),
         contentScale = ContentScale.FillBounds
@@ -47,52 +47,52 @@ fun CategoryView() {
         SecondViewButton(
             "Legendary",
             Modifier.align(BiasAlignment(-0.9f, -0.7f)),
-            R.drawable.view_02_btn_legendary
+            R.drawable.view_03_btn_legendary
         )
         SecondViewButton(
             "Girls",
             Modifier.align(BiasAlignment(0.9f, -0.7f)),
-            R.drawable.view_02_btn_girls
+            R.drawable.view_03_btn_girls
         )
         SecondViewButton(
             "Squard",
             Modifier.align(BiasAlignment(-0.9f, -0.3f)),
-            R.drawable.view_02_btn_squard
+            R.drawable.view_03_btn_squard
         )
         SecondViewButton(
             "Boys",
             Modifier.align(BiasAlignment(0.9f, -0.3f)),
-            R.drawable.view_02_btn_boys
+            R.drawable.view_03_btn_boys
         )
         SecondViewButton(
             "Charm",
             Modifier.align(BiasAlignment(-0.9f, 0.1f)),
-            R.drawable.view_02_btn_charm
+            R.drawable.view_03_btn_charm
         )
         SecondViewButton(
             "Emoji",
             Modifier.align(BiasAlignment(0.9f, 0.1f)),
-            R.drawable.view_02_btn_emoji
+            R.drawable.view_03_btn_emoji
         )
         SecondViewButton(
             "Indian",
             Modifier.align(BiasAlignment(-0.9f, 0.5f)),
-            R.drawable.view_02_btn_indian
+            R.drawable.view_03_btn_indian
         )
         SecondViewButton(
             "Space",
             Modifier.align(BiasAlignment(0.9f, 0.5f)),
-            R.drawable.view_02_btn_space
+            R.drawable.view_03_btn_space
         )
         SecondViewButton(
             "Historical",
             Modifier.align(BiasAlignment(-0.9f, 0.9f)),
-            R.drawable.view_02_btn_historical
+            R.drawable.view_03_btn_historical
         )
         SecondViewButton(
             "Other",
             Modifier.align(BiasAlignment(0.9f, 0.9f)),
-            R.drawable.view_02_btn_other
+            R.drawable.view_03_btn_other
         )
     }
 }
