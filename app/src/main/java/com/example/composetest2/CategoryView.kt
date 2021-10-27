@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.composetest2.ui.theme.Header
+import com.example.composetest2.ui.theme.MenuButton
 import com.example.composetest2.ui.theme.TextBox
 
 @Composable
@@ -28,7 +28,7 @@ fun CategoryView() {
     Box(
         Modifier.fillMaxSize(),
     ) {
-        Header(modifier = Modifier
+        MenuButton(modifier = Modifier
             .align(BiasAlignment(0f, -1f))
             .fillMaxHeight(0.1f),
             iconModifier = Modifier

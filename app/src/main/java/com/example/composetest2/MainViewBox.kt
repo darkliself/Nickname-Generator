@@ -37,7 +37,7 @@ fun MainView(context: Context) {
     Box(
         Modifier.fillMaxSize(),
     ) {
-        Header(
+        MenuButton(
             modifier = Modifier
                 .align(BiasAlignment(0f, -1f))
                 .zIndex(1f),
@@ -73,7 +73,7 @@ fun MainView(context: Context) {
 }
 
 @Composable
-fun Header(
+fun MenuButton(
     modifier: Modifier,
     iconModifier: Modifier = Modifier.size(35.dp, 35.dp)
 ) {
