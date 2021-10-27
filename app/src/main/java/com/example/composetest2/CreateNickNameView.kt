@@ -2,23 +2,21 @@ package com.example.composetest2
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composetest2.ui.theme.MenuButton
@@ -26,31 +24,73 @@ import com.example.composetest2.ui.theme.TextBox
 
 @Composable
 fun CreateNickNameView() {
+    var t by remember { mutableStateOf("some some") }
     Box(
         Modifier.fillMaxSize()
     ) {
         Header()
-        Box(modifier = Modifier
-            .fillMaxWidth(0.9f)
-            .fillMaxHeight(0.85f)
-            .align(BiasAlignment(0f, 0.6f))) {
-//            Image(
-//                ImageVector.vectorResource(id = R.drawable.view_02_card_bg),
-//                null,
-//                Modifier.fillMaxSize(),
-//                contentScale = ContentScale.FillBounds
-//                //.align(BiasAlignment(-0.5f, 0f))
-//            )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .fillMaxHeight(0.85f)
+                .align(BiasAlignment(0f, 0.6f))
+            //.clip(RoundedCornerShape(50.dp))
+            //.background(Color(0xffE9F3D6))
+            //.border(BorderStroke(1.dp, color = Color.Black))
+        ) {
             Surface(
-                Modifier.fillMaxSize(),
-                color = Color(0xFFE7F2D7),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize(),
+                border = BorderStroke(2.dp, Color.Black),
+                //contentColor = Color.Blue,
+                elevation = 8.dp,
                 shape = RoundedCornerShape(60.dp),
-                border = BorderStroke(1.dp, color = Color.Black)
             ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Red)
+                ) {
+                    Surface(
+                        Modifier
+                            .fillMaxWidth(0.9f)
+                            .fillMaxHeight(0.2f)
+                            .align(Alignment.Center),
+                                border = BorderStroke(2.dp, Color.Black),
+                        shape = RoundedCornerShape(60.dp)
+                    ) {
+                        TextField(
+                            value = t,
+                            onValueChange = {
+                                t = it
+                            },
+                            Modifier
+                                .align(Alignment.Center)
+                                .background(Color.Blue)
+                                .border(1.dp, Color.Black),
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                // backgroundColor = Color.Red
+                            )
+                        )
+                    }
 
+                }
+
+//                OutlinedTextField(
+//                    value = t,
+//                    onValueChange = {
+//                        t = it
+//                    },
+//                    Modifier
+//                        .align(Alignment.Center)
+//                        .background(Color.Red),
+//                    colors = TextFieldDefaults.outlinedTextFieldColors(
+//                        // backgroundColor = Color.Red
+//                    )
+//                )
             }
         }
-
     }
 }
 

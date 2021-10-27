@@ -41,11 +41,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CreateNickNameView()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    //CreateNickNameView()
+//}
 
 fun testClickToast() {
     println("its clicked")
