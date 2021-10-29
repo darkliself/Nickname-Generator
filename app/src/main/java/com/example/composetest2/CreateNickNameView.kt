@@ -13,17 +13,24 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.example.composetest2.ui.theme.MenuButton
 import com.example.composetest2.ui.theme.TextBox
 
 @Composable
 fun CreateNickNameView() {
-    var t by remember { mutableStateOf("some some") }
+    val resString = stringResource(R.string.view_02_nickname_text_field)
+    var nackname by remember { mutableStateOf(resString) }
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -38,7 +45,7 @@ fun CreateNickNameView() {
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxSize(),
-                border = BorderStroke(2.dp, Color.Black),
+                border = BorderStroke(1.dp, Color.Black),
                 //contentColor = Color.Blue,
                 elevation = 8.dp,
                 shape = RoundedCornerShape(60.dp),
@@ -52,8 +59,8 @@ fun CreateNickNameView() {
                         Modifier
                             .fillMaxWidth(0.9f)
                             .fillMaxHeight(0.15f)
-                            .align(BiasAlignment(0f, -0.5f)),
-                        border = BorderStroke(2.dp, Color.Black),
+                            .align(BiasAlignment(0f, -0.2f)),
+                        border = BorderStroke(1.dp, Color.Black),
                         shape = RoundedCornerShape(30.dp),
 
                         ) {
@@ -61,15 +68,18 @@ fun CreateNickNameView() {
                             Modifier.fillMaxSize()
                         ) {
                             BasicTextField(
-                                value = t,
+                                value = nackname,
                                 onValueChange = {
-                                    t = it
+                                    nackname = it
                                 },
                                 Modifier
                                     .align(Alignment.Center)
                                     .border(0.dp, Color.White),
                                 textStyle = TextStyle(
-                                    textAlign = TextAlign.Center
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 18.sp,
+                                    fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
+                                    fontWeight = FontWeight.W900,
                                 )
                             )
                         }
@@ -78,20 +88,29 @@ fun CreateNickNameView() {
                     Box(
                         Modifier
                             .fillMaxWidth(0.9f)
-                            .fillMaxHeight(0.2f)
-                            .align(BiasAlignment(0f, 0f))
+                            .fillMaxHeight(0.15f)
+                            .align(BiasAlignment(0f, 0.2f))
                     ) {
                         Image(
                             ImageVector.vectorResource(id = R.drawable.view_02_btn_create),
                             null,
-                            Modifier.fillMaxSize()
+                            Modifier
+                                .fillMaxSize()
+                                .wrapContentSize()
+                                .clickable {
+                                    println("clicked on create")
+                                }
+                        )
+                        Text(
+                            "Create", Modifier.align(Alignment.Center),
+                            textAlign = TextAlign.Center,
+                            fontSize = 18.sp,
+                            fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
+                            fontWeight = FontWeight.W900,
                         )
                     }
                 }
-
-
             }
-
         }
     }
 }

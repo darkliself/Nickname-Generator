@@ -1,6 +1,5 @@
 package com.example.composetest2.ui.theme
 
-import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -9,7 +8,6 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -21,12 +19,15 @@ import androidx.compose.ui.unit.sp
 import com.example.composetest2.R
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.zIndex
 import com.example.composetest2.components.ButtonWithImage
-import com.example.composetest2.testClickToast
 
 @Composable
-fun MainView(context: Context) {
+
+
+
+fun MainView() {
     Image(
         ImageVector.vectorResource(id = R.drawable.view_01_bg),
         contentDescription = null,
@@ -45,7 +46,7 @@ fun MainView(context: Context) {
         )
 
         TextBox(
-            "Create\nyour perfect nickname",
+            stringResource(R.string.view_01_create_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
@@ -53,19 +54,19 @@ fun MainView(context: Context) {
         )
 
         MainViewButton(
-            "Create custom nickname",
+            stringResource(R.string.view_01_btn_create),
             Modifier.align(BiasAlignment(0f, -0.25f)),
             R.drawable.view_01_btn_create,
         )
 
         MainViewButton(
-            "Choose from category",
+            stringResource(R.string.view_01_btn_category),
             Modifier.align(BiasAlignment(0f, 0.3f)),
             R.drawable.view_01_btn_choose_cat
         )
 
         MainViewButton(
-            "Autogenerate nickname",
+            stringResource(R.string.view_01_btn_autogenerate),
             Modifier.align(BiasAlignment(0f, 0.85f)),
             R.drawable.view_01_btn_autogenerate
         )
@@ -125,7 +126,7 @@ fun MainViewButton(
                 .fillMaxHeight(0.8f)
                 .align(Alignment.Center),
             textModifier = Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = { testClickToast() }
+            onClick = { println("123")}
         )
     }
 }
@@ -133,7 +134,7 @@ fun MainViewButton(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainView(LocalContext.current)
+    MainView()
 }
 
 

@@ -12,6 +12,7 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composetest2.ui.theme.MenuButton
@@ -45,52 +46,52 @@ fun CategoryView() {
                 .align(BiasAlignment(0f, -1f))
         )
         SecondViewButton(
-            "Legendary",
+            stringResource(R.string.view_03_btn_legendary),
             Modifier.align(BiasAlignment(-0.9f, -0.7f)),
             R.drawable.view_03_btn_legendary
         )
         SecondViewButton(
-            "Girls",
+            stringResource(R.string.view_03_btn_girls),
             Modifier.align(BiasAlignment(0.9f, -0.7f)),
             R.drawable.view_03_btn_girls
         )
         SecondViewButton(
-            "Squard",
+            stringResource(R.string.view_03_btn_squard),
             Modifier.align(BiasAlignment(-0.9f, -0.3f)),
             R.drawable.view_03_btn_squard
         )
         SecondViewButton(
-            "Boys",
+            stringResource(R.string.view_03_btn_boys),
             Modifier.align(BiasAlignment(0.9f, -0.3f)),
             R.drawable.view_03_btn_boys
         )
         SecondViewButton(
-            "Charm",
+            stringResource(R.string.view_03_btn_charm),
             Modifier.align(BiasAlignment(-0.9f, 0.1f)),
             R.drawable.view_03_btn_charm
         )
         SecondViewButton(
-            "Emoji",
+            stringResource(R.string.view_03_btn_emoji),
             Modifier.align(BiasAlignment(0.9f, 0.1f)),
             R.drawable.view_03_btn_emoji
         )
         SecondViewButton(
-            "Indian",
+            stringResource(R.string.view_03_btn_indian),
             Modifier.align(BiasAlignment(-0.9f, 0.5f)),
             R.drawable.view_03_btn_indian
         )
         SecondViewButton(
-            "Space",
+            stringResource(R.string.view_03_btn_space),
             Modifier.align(BiasAlignment(0.9f, 0.5f)),
             R.drawable.view_03_btn_space
         )
         SecondViewButton(
-            "Historical",
+            stringResource(R.string.view_03_btn_historical),
             Modifier.align(BiasAlignment(-0.9f, 0.9f)),
             R.drawable.view_03_btn_historical
         )
         SecondViewButton(
-            "Other",
+            stringResource(R.string.view_03_btn_other),
             Modifier.align(BiasAlignment(0.9f, 0.9f)),
             R.drawable.view_03_btn_other
         )
