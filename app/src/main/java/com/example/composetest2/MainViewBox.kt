@@ -19,15 +19,19 @@ import androidx.compose.ui.unit.sp
 import com.example.composetest2.R
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
+import com.example.composetest2.Navigation
+import com.example.composetest2.Screen
 import com.example.composetest2.components.ButtonWithImage
 
 @Composable
 
 
 
-fun MainView() {
+fun MainScreen(navController: NavController) {
     Image(
         ImageVector.vectorResource(id = R.drawable.view_01_bg),
         contentDescription = null,
@@ -57,18 +61,25 @@ fun MainView() {
             stringResource(R.string.view_01_btn_create),
             Modifier.align(BiasAlignment(0f, -0.25f)),
             R.drawable.view_01_btn_create,
+            onClick = {
+                navController.navigate(Screen.CreateNickNameScreen.route)
+            }
         )
 
         MainViewButton(
             stringResource(R.string.view_01_btn_category),
             Modifier.align(BiasAlignment(0f, 0.3f)),
-            R.drawable.view_01_btn_choose_cat
+            R.drawable.view_01_btn_choose_cat,
+            onClick = {
+                navController.navigate(Screen.CategoryScreen.route)
+            }
         )
 
         MainViewButton(
             stringResource(R.string.view_01_btn_autogenerate),
             Modifier.align(BiasAlignment(0f, 0.85f)),
-            R.drawable.view_01_btn_autogenerate
+            R.drawable.view_01_btn_autogenerate,
+            {}
         )
     }
 }
@@ -111,7 +122,8 @@ fun TextBox(text: String, modifier: Modifier) {
 fun MainViewButton(
     text: String,
     modifier: Modifier,
-    @DrawableRes image: Int
+    @DrawableRes image: Int,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -126,7 +138,7 @@ fun MainViewButton(
                 .fillMaxHeight(0.8f)
                 .align(Alignment.Center),
             textModifier = Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = { println("123")}
+            onClick = onClick
         )
     }
 }
@@ -134,7 +146,7 @@ fun MainViewButton(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainView()
+    MainScreen(NavController(LocalContext.current))
 }
 
 
