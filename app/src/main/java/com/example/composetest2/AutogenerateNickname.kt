@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +35,9 @@ private fun Header() {
     Box(
         Modifier
             .fillMaxWidth(0.9f)
-            .fillMaxHeight(0.1f)
+            .fillMaxHeight(0.1f),
+        Alignment.Center
+
     ) {
         MenuButton(
             Modifier.align(BiasAlignment(1f, -1f))
