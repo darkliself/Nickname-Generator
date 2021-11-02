@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,14 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
+import com.example.composetest2.components.WideButton
 import com.example.composetest2.ui.theme.MenuButton
 import com.example.composetest2.ui.theme.TextBox
 
 @Composable
 fun CreateNickNameView() {
-    val resString = stringResource(R.string.view_02_nickname_text_field)
-    var nackname by remember { mutableStateOf(resString) }
+    var nickname by remember { mutableStateOf("") }
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -55,60 +53,11 @@ fun CreateNickNameView() {
                         .fillMaxSize()
                         .background(Color(0xFFE7F2D7))
                 ) {
-                    Surface(
-                        Modifier
-                            .fillMaxWidth(0.9f)
-                            .fillMaxHeight(0.15f)
-                            .align(BiasAlignment(0f, -0.2f)),
-                        border = BorderStroke(1.dp, Color.Black),
-                        shape = RoundedCornerShape(30.dp),
-
-                        ) {
-                        Box(
-                            Modifier.fillMaxSize()
-                        ) {
-                            BasicTextField(
-                                value = nackname,
-                                onValueChange = {
-                                    nackname = it
-                                },
-                                Modifier
-                                    .align(Alignment.Center)
-                                    .border(0.dp, Color.White),
-                                textStyle = TextStyle(
-                                    textAlign = TextAlign.Center,
-                                    fontSize = 18.sp,
-                                    fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
-                                    fontWeight = FontWeight.W900,
-                                )
-                            )
-                        }
-                    }
-
-                    Box(
-                        Modifier
-                            .fillMaxWidth(0.9f)
-                            .fillMaxHeight(0.15f)
-                            .align(BiasAlignment(0f, 0.2f))
-                    ) {
-                        Image(
-                            ImageVector.vectorResource(id = R.drawable.view_02_btn_create),
-                            null,
-                            Modifier
-                                .fillMaxSize()
-                                .wrapContentSize()
-                                .clickable {
-                                    println("clicked on create")
-                                }
-                        )
-                        Text(
-                            "Create", Modifier.align(Alignment.Center),
-                            textAlign = TextAlign.Center,
-                            fontSize = 18.sp,
-                            fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
-                            fontWeight = FontWeight.W900,
-                        )
-                    }
+                    NicknameTextField(
+                        Modifier.align(BiasAlignment(0f, -0.2f)),
+                        nickname
+                    )
+                    WideButton(Modifier.align(BiasAlignment(0f, 0.2f)))
                 }
             }
         }
@@ -117,7 +66,7 @@ fun CreateNickNameView() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview3() {
+private fun DefaultPreview3() {
     CreateNickNameView()
 }
 
@@ -147,3 +96,76 @@ private fun Header() {
         )
     }
 }
+
+@Composable
+private fun NicknameTextField(modifier: Modifier = Modifier, nickname: String = "") {
+    var mutableNickname by remember { mutableStateOf(nickname) }
+    Surface(
+        modifier
+            .fillMaxWidth(0.9f)
+            .fillMaxHeight(0.15f),
+        // .align(+BiasAlignment(0f, -0.2f)),
+        border = BorderStroke(1.dp, Color.Black),
+        shape = RoundedCornerShape(30.dp),
+    ) {
+        Box(
+            Modifier.fillMaxSize()
+        ) {
+            TextField(
+                value = mutableNickname,
+                onValueChange = {
+                    mutableNickname = it
+                },
+                Modifier
+                    .align(Alignment.Center)
+                    .border(0.dp, Color.White)
+                    .background(Color.White),
+                textStyle = TextStyle(
+                    textAlign = TextAlign.Center,
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
+                    fontWeight = FontWeight.W900,
+                ),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.White,
+                    focusedIndicatorColor = Color.White,
+                    unfocusedIndicatorColor = Color.White
+                ),
+                placeholder = { Text(stringResource(R.string.view_02_nickname_placeholder),
+                    Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Center), textAlign = TextAlign.Center) },
+                singleLine = true
+            )
+        }
+    }
+}
+
+@Composable
+private fun CreateButton(modifier: Modifier = Modifier) {
+    Box(
+        modifier
+            .fillMaxWidth(0.9f)
+            .fillMaxHeight(0.15f)
+        //.align(BiasAlignment(0f, 0.2f))
+    ) {
+        Image(
+            ImageVector.vectorResource(id = R.drawable.view_02_btn_create),
+            null,
+            Modifier
+                .fillMaxSize()
+                .wrapContentSize()
+                .clickable {
+                    println("clicked on create")
+                }
+        )
+        Text(
+            stringResource(id = R.string.view_02_btn_create), Modifier.align(Alignment.Center),
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp,
+            fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
+            fontWeight = FontWeight.W900,
+        )
+    }
+}
+

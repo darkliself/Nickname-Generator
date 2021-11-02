@@ -6,7 +6,7 @@
     <string name="view_01_btn_category" translatable="false">Choose from category</string>
     <string name="view_01_btn_autogenerate" translatable="false">Autogenerate nickname</string>
     <!-- create nickname view -->
-    <string name="view_02_nickname_text_field">your nick</string>
+    <string name="view_02_nickname_placeholder">Type your nickname here</string>
     <string name="view_02_btn_create">Create</string>
     <!-- create nickname view -->
     <string name="view_03_btn_legendary">Legendary</string>
@@ -19,4 +19,6 @@
     <string name="view_03_btn_space">Space</string>
     <string name="view_03_btn_historical">Historical</string>
     <string name="view_03_btn_other">Other</string>
+
+
 </resources>
