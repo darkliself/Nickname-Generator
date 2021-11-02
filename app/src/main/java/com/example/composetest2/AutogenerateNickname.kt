@@ -59,8 +59,14 @@ fun AutogenerateNickname() {
                         .fillMaxSize()
                         .background(Color(0xFFFFEFEB))
                 ) {
-                    WideButton(Modifier.align(BiasAlignment(0f, 0.2f)))
-                    WideButton(Modifier.align(BiasAlignment(0f, 0.5f)))
+                    WideButton(
+                        Modifier.align(BiasAlignment(0f, 0.2f)),
+                        R.drawable.view_02_btn_create, "123"
+                    )
+                    WideButton(
+                        Modifier.align(BiasAlignment(0f, 0.5f)),
+                        R.drawable.view_02_btn_create, "dsfdsf"
+                    )
                 }
             }
         }

@@ -57,7 +57,8 @@ fun CreateNickNameView() {
                         Modifier.align(BiasAlignment(0f, -0.2f)),
                         nickname
                     )
-                    WideButton(Modifier.align(BiasAlignment(0f, 0.2f)))
+                    WideButton(Modifier.align(BiasAlignment(0f, 0.2f)),
+                        R.drawable.view_02_btn_create, "fsfds")
                 }
             }
         }
