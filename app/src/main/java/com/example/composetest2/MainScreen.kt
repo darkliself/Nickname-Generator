@@ -1,6 +1,5 @@
 package com.example.composetest2.ui.theme
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -14,21 +13,19 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetest2.R
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.example.composetest2.Navigation
 import com.example.composetest2.Screen
-import com.example.composetest2.components.ButtonWithImage
+import com.example.composetest2.components.Header
+import com.example.composetest2.components.IconButton
+import com.example.composetest2.components.SmallButton
 
 @Composable
-
 
 
 fun MainScreen(navController: NavController) {
@@ -42,62 +39,55 @@ fun MainScreen(navController: NavController) {
     Box(
         Modifier.fillMaxSize(),
     ) {
-        MenuButton(
-            modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .zIndex(1f),
-            iconModifier = Modifier.align(BiasAlignment(1f, -0.75f))
+        SmallButton(modifier = Modifier
+            .align(BiasAlignment(0f, -1f))
+            .fillMaxHeight(0.1f),
+            iconModifier = Modifier
+                .align(Alignment.CenterEnd)
         )
-
-        TextBox(
-            stringResource(R.string.view_01_create_header),
+        Header(
+            stringResource(R.string.view_01_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -0.55f))
+                .align(BiasAlignment(0f, -0.65f))
         )
 
-        MainViewButton(
+        IconButton(
             stringResource(R.string.view_01_btn_create),
-            Modifier.align(BiasAlignment(0f, -0.25f)),
             R.drawable.view_01_btn_create,
+            Modifier
+                .fillMaxHeight(0.25f)
+                .fillMaxWidth(0.8f)
+                .align(BiasAlignment(0f, -0.25f)),
+            Modifier.align(BiasAlignment(0.1f, -0.05f)),
             onClick = {
                 navController.navigate(Screen.CreateNickNameScreen.route)
             }
         )
 
-        MainViewButton(
+        IconButton(
             stringResource(R.string.view_01_btn_category),
-            Modifier.align(BiasAlignment(0f, 0.3f)),
             R.drawable.view_01_btn_choose_cat,
+            Modifier
+                .fillMaxHeight(0.25f)
+                .fillMaxWidth(0.8f).align(BiasAlignment(0f, 0.3f)),
+            Modifier.align(BiasAlignment(0f, -0.05f)),
             onClick = {
                 navController.navigate(Screen.CategoryScreen.route)
             }
         )
 
-        MainViewButton(
+        IconButton(
             stringResource(R.string.view_01_btn_autogenerate),
-            Modifier.align(BiasAlignment(0f, 0.85f)),
             R.drawable.view_01_btn_autogenerate,
-            {}
-        )
-    }
-}
-
-@Composable
-fun MenuButton(
-    modifier: Modifier,
-    iconModifier: Modifier = Modifier.size(35.dp, 35.dp)
-) {
-    Box(
-        modifier
-            .fillMaxHeight(0.2f)
-            .fillMaxWidth(0.8f)
-    ) {
-        Image(
-            ImageVector.vectorResource(id = R.drawable.btn_menu),
-            contentDescription = null,
-            modifier = iconModifier
+            Modifier
+                .fillMaxHeight(0.25f)
+                .fillMaxWidth(0.8f).align(BiasAlignment(0f, 0.85f)),
+            Modifier.align(BiasAlignment(0f, -0.05f)),
+            onClick = {
+                navController.navigate(Screen.AutogenerateNicknameScreen.route)
+            }
         )
     }
 }
@@ -118,34 +108,9 @@ fun TextBox(text: String, modifier: Modifier) {
     }
 }
 
-@Composable
-fun MainViewButton(
-    text: String,
-    modifier: Modifier,
-    @DrawableRes image: Int,
-    onClick: () -> Unit,
-) {
-    Box(
-        modifier = modifier
-            .fillMaxHeight(0.25f)
-            .fillMaxWidth(0.8f)
-    ) {
-        ButtonWithImage(
-            text = text,
-            image = image,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.8f)
-                .align(Alignment.Center),
-            textModifier = Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = onClick
-        )
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     MainScreen(NavController(LocalContext.current))
 }
 

@@ -18,40 +18,12 @@ import androidx.compose.ui.zIndex
 
 
 @Composable
-fun IconForButton(
-    @DrawableRes iconId: List<Int>,
-    modifier: Modifier,
-) {
-    Box(
-        modifier = modifier,
-        Alignment.Center,
-
-
-        ) {
-        Image(
-            ImageVector.vectorResource(id = iconId[0]),
-            null,
-            Modifier
-                .fillMaxSize()
-                .zIndex(1f)
-        )
-        Image(
-            ImageVector.vectorResource(id = iconId[1]),
-            null,
-            Modifier
-                .fillMaxSize(0.5f)
-                .zIndex(2f)
-        )
-    }
-}
-
-@Composable
-fun ButtonWithImage(
+fun IconButton(
     text: String,
     @DrawableRes image: Int,
     modifier: Modifier,
-    textModifier: Modifier = Modifier.padding(start = 100.dp, bottom = 5.dp, end = 5.dp),
-    onClick: () -> Unit,
+    textModifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Box(
         modifier = modifier
