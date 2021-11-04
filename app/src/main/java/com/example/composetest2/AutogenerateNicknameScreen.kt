@@ -28,9 +28,6 @@ import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.TransparentTextField
-import com.example.composetest2.ui.theme.PinkStyle
-import com.example.composetest2.ui.theme.Styles
-import com.example.composetest2.ui.theme.TextFieldStyleColors
 
 
 @Composable
