@@ -27,6 +27,10 @@ import androidx.compose.ui.unit.sp
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
+import com.example.composetest2.components.TransparentTextField
+import com.example.composetest2.ui.theme.PinkStyle
+import com.example.composetest2.ui.theme.Styles
+import com.example.composetest2.ui.theme.TextFieldStyleColors
 
 
 @Composable
@@ -36,9 +40,10 @@ fun AutogenerateNickname() {
         Alignment.Center
     ) {
         // header components
-        SmallButton(modifier = Modifier
-            .align(BiasAlignment(0f, -1f))
-            .fillMaxHeight(0.1f),
+        SmallButton(
+            modifier = Modifier
+                .align(BiasAlignment(0f, -1f))
+                .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterEnd)
         )
@@ -72,18 +77,22 @@ fun AutogenerateNickname() {
                 ) {
                     ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-                    RandomNicknameTextField(Modifier.align(BiasAlignment(0f, -0.1f)))
+                    TransparentTextField(Modifier.align(BiasAlignment(0f, -0.1f)))
 
                     WideButton(
-                        Modifier.align(BiasAlignment(0f, 0.2f)),
-                        R.drawable.view_02_btn_create,
-                        stringResource(R.string.view_04_btn_try_again)
+                        R.drawable.btn_wide_pink,
+                        stringResource(R.string.view_04_btn_try_again),
+                        Modifier
+                            .fillMaxHeight(0.1f)
+                            .align(BiasAlignment(0f, 0.2f)),
                     )
 
                     WideButton(
-                        Modifier.align(BiasAlignment(0f, 0.5f)),
-                        R.drawable.view_02_btn_create,
-                        stringResource(R.string.view_04_btn_customise)
+                        R.drawable.btn_wide_green,
+                        stringResource(R.string.view_04_btn_customise),
+                        Modifier
+                            .fillMaxHeight(0.1f)
+                            .align(BiasAlignment(0f, 0.5f)),
                     )
                 }
             }
@@ -114,32 +123,4 @@ private fun ImageBox(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-private fun RandomNicknameTextField(modifier: Modifier = Modifier) {
-    var randomName by remember {
-        mutableStateOf("random nickname")
-    }
-    Box(
-        modifier
-            .fillMaxWidth(0.9f)
-            .fillMaxHeight(0.2f)
-    ) {
-        TextField(
-            value = randomName, onValueChange = { randomName = it },
-            Modifier.align(Alignment.Center),
-            textStyle = TextStyle(
-                textAlign = TextAlign.Center,
-                fontSize = 18.sp,
-                fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
-                fontWeight = FontWeight.W900,
-            ),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color(0xFFFFEFEB),
-                focusedIndicatorColor = Color(0xFFFFEFEB),
-                unfocusedIndicatorColor = Color(0xFFFFEFEB)
-            ),
-            singleLine = true
-        )
-    }
-}
 

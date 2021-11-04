@@ -23,9 +23,10 @@ import com.example.composetest2.TextStyler
 
 @Composable
 fun WideButton(
-    modifier: Modifier = Modifier,
     @DrawableRes image: Int,
     text: String,
+    modifier: Modifier = Modifier,
+    imageModifier: Modifier = Modifier,
     textModifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
     fontSize: TextUnit = 18.sp,
@@ -41,9 +42,9 @@ fun WideButton(
         Image(
             ImageVector.vectorResource(image),
             null,
-            Modifier
+            imageModifier
                 .fillMaxSize()
-                .wrapContentSize()
+                //.wrapContentSize()
                 .clickable {
                     println("clicked on $this")
                 }

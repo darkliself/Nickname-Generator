@@ -10,7 +10,7 @@ import com.example.composetest2.ui.theme.MainScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.CustomizeNickNameScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.AutogenerateNicknameScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }

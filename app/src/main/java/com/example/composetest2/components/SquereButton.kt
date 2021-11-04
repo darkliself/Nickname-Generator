@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 
 @Composable
-fun SquereButton(
+fun SquareButton(
     text: String,
     modifier: Modifier,
     @DrawableRes image: Int

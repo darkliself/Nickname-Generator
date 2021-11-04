@@ -62,7 +62,7 @@ fun MainScreen(navController: NavController) {
                 .align(BiasAlignment(0f, -0.25f)),
             Modifier.align(BiasAlignment(0.1f, -0.05f)),
             onClick = {
-                navController.navigate(Screen.CreateNickNameScreen.route)
+                navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
 

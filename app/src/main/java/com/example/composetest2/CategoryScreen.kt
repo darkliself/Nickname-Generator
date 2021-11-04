@@ -13,7 +13,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
-import com.example.composetest2.components.SquereButton
+import com.example.composetest2.components.SquareButton
 
 @Composable
 fun CategoryView() {
@@ -39,52 +39,52 @@ fun CategoryView() {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_legendary),
             Modifier.align(BiasAlignment(-0.9f, -0.7f)),
             R.drawable.view_03_btn_legendary
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_girls),
             Modifier.align(BiasAlignment(0.9f, -0.7f)),
             R.drawable.view_03_btn_girls
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_squard),
             Modifier.align(BiasAlignment(-0.9f, -0.3f)),
             R.drawable.view_03_btn_squard
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_boys),
             Modifier.align(BiasAlignment(0.9f, -0.3f)),
             R.drawable.view_03_btn_boys
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_charm),
             Modifier.align(BiasAlignment(-0.9f, 0.1f)),
             R.drawable.view_03_btn_charm
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_emoji),
             Modifier.align(BiasAlignment(0.9f, 0.1f)),
             R.drawable.view_03_btn_emoji
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_indian),
             Modifier.align(BiasAlignment(-0.9f, 0.5f)),
             R.drawable.view_03_btn_indian
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_space),
             Modifier.align(BiasAlignment(0.9f, 0.5f)),
             R.drawable.view_03_btn_space
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_historical),
             Modifier.align(BiasAlignment(-0.9f, 0.9f)),
             R.drawable.view_03_btn_historical
         )
-        SquereButton(
+        SquareButton(
             stringResource(R.string.view_03_btn_other),
             Modifier.align(BiasAlignment(0.9f, 0.9f)),
             R.drawable.view_03_btn_other

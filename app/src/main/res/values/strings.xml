@@ -30,5 +30,6 @@
     <string name="view_05_btn_left_decoration">Left decoration</string>
     <string name="view_05_btn_font_style">Font style</string>
     <string name="view_05_btn_right_decoration">Right decoration</string>
+    <string name="view_05_btn_ready">Ready</string>
 
 </resources>

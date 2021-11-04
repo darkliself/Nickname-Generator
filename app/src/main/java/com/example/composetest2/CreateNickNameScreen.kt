@@ -25,7 +25,7 @@ import com.example.composetest2.components.WideButton
 
 @Composable
 fun CreateNickNameView() {
-    var nickname by remember { mutableStateOf("") }
+    val nickname by remember { mutableStateOf("") }
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -63,15 +63,14 @@ fun CreateNickNameView() {
                 ) {
                     NicknameTextField(
                         Modifier.align(BiasAlignment(0f, -0.2f)),
-                        nickname = nickname
+                        nickname = ""
                     )
                     WideButton(
+                        R.drawable.btn_wide_green,
+                        stringResource(id = R.string.view_02_btn_create),
                         Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(0.2f)
+                            .fillMaxHeight(0.1f)
                             .align(BiasAlignment(0f, 0.25f)),
-                        R.drawable.view_02_btn_create,
-                        stringResource(id = R.string.view_02_btn_create)
                     )
                 }
             }
