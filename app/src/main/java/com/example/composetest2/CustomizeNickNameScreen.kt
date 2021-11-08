@@ -21,8 +21,6 @@ import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
 
-
-
 @Composable
 fun CustomizeNickNameScreen() {
     Box(
@@ -65,7 +63,6 @@ fun CustomizeNickNameScreen() {
         )
     }
 }
-
 
 @Preview
 @Composable
