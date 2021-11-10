@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -16,13 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
-import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
 
 @Composable
 fun CustomizeNickNameScreen() {
+    val nickname by remember { mutableStateOf("Nickname 3") }
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -35,7 +37,7 @@ fun CustomizeNickNameScreen() {
             image = R.drawable.arrow_left_icon
         )
         Header(
-            stringResource(id = R.string.view_02_header),
+            stringResource(id = R.string.view_05_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
@@ -51,7 +53,42 @@ fun CustomizeNickNameScreen() {
                 .background(Color(0xFFE7F2D7))
         ) {
             IconFace(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
-            TransparentTextField()
+            //TransparentTextField(Modifier.align(BiasAlignment(0f, 0f)))
+            Text(
+                text = nickname,
+                Modifier
+                    .fillMaxWidth(0.6f)
+                    .align(BiasAlignment(1f, -0.75f)),
+                fontSize = 18.sp
+            )
+            Text(
+                text = "Length: ${nickname.length}",
+                Modifier
+                    .fillMaxWidth(0.6f)
+                    .align(BiasAlignment(1f, -0.6f)),
+                color = Color(0xff9EC06A)
+            )
+            WideButton(
+                image = R.drawable.view_05_btn_left_decoration,
+                text = stringResource(id = R.string.view_05_btn_left_decoration),
+                Modifier
+                    .fillMaxHeight(0.2f)
+                    .align(BiasAlignment(0f, -0.25f))
+            )
+            WideButton(
+                image = R.drawable.view_05_btn_font_style,
+                text = stringResource(id = R.string.view_05_btn_font_style),
+                Modifier
+                    .fillMaxHeight(0.2f)
+                    .align(BiasAlignment(0f, 0.25f))
+            )
+            WideButton(
+                image = R.drawable.view_05_btn_right_decoration,
+                text = stringResource(id = R.string.view_05_btn_right_decoration),
+                Modifier
+                    .fillMaxHeight(0.2f)
+                    .align(BiasAlignment(0f, 0.75f))
+            )
         }
         WideButton(
             image = R.drawable.btn_wide_pink,
@@ -76,8 +113,8 @@ private fun IconFace(modifier: Modifier) {
         ImageVector.vectorResource(id = R.drawable.view_05_customize_icon),
         null,
         modifier
-            .fillMaxWidth(0.3f)
-            .fillMaxHeight(0.25f)
+            .fillMaxWidth(0.25f)
+            .fillMaxHeight(0.2f)
     )
 }
 

@@ -10,7 +10,7 @@ import com.example.composetest2.ui.theme.MainScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.CustomizeNickNameScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.CategoriesNickNameListScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }
@@ -26,6 +26,11 @@ fun Navigation() {
         composable(route = Screen.CustomizeNickNameScreen.route) {
             CustomizeNickNameScreen()
         }
+        composable(route = Screen.CategoriesNickNameListScreen.route) {
+            CategoriesNickNameListScreen()
+        }
+
+
 //        composable(
 //            route = Screen.SecondScreen.route + "?name={name}",
 //            arguments = listOf(
