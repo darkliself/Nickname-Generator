@@ -22,6 +22,10 @@ import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 
+/*
+    View 05
+*/
+
 @Composable
 fun CustomizeNickNameScreen() {
     val nickname by remember { mutableStateOf("Nickname 3") }

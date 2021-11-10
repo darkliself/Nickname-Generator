@@ -23,6 +23,10 @@ import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.TransparentTextField
 
+/*
+    View 05
+*/
+
 
 @Composable
 fun AutogenerateNickname() {

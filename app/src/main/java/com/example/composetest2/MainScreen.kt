@@ -25,9 +25,12 @@ import com.example.composetest2.components.Header
 import com.example.composetest2.components.IconButton
 import com.example.composetest2.components.SmallButton
 
+
+/*
+    View 01
+*/
+
 @Composable
-
-
 fun MainScreen(navController: NavController) {
     Image(
         ImageVector.vectorResource(id = R.drawable.view_01_bg),

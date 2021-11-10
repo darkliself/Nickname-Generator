@@ -23,9 +23,13 @@ import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 
 
+/*
+    View 02
+*/
+
+
 @Composable
 fun CreateNickNameView() {
-    val nickname by remember { mutableStateOf("") }
     Box(
         Modifier.fillMaxSize()
     ) {

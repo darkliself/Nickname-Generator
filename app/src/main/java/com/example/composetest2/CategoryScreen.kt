@@ -15,6 +15,11 @@ import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.SquareButton
 
+/*
+    View 03
+*/
+
+
 @Composable
 fun CategoryView() {
     Image(

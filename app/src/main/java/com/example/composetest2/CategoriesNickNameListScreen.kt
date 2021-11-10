@@ -1,34 +1,30 @@
 package com.example.composetest2
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.composetest2.components.Header
+import com.example.composetest2.components.LazyColumnItem
+import com.example.composetest2.components.RoundedButton
 import com.example.composetest2.components.SmallButton
 
-@ExperimentalComposeUiApi
+
+/*
+    View 06
+*/
+
+
 @Composable
 fun CategoriesNickNameListScreen() {
-    val (item1, item2, item3) = remember { FocusRequester.createRefs() }
-    var all by remember { mutableStateOf(Color.White) }
-    var new by remember { mutableStateOf(Color.White) }
-    var popular by remember { mutableStateOf(Color.White) }
-
     Image(
         ImageVector.vectorResource(id = R.drawable.view_01_bg),
         contentDescription = null,
@@ -58,65 +54,40 @@ fun CategoriesNickNameListScreen() {
         Row(
             Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.1f)
+                .fillMaxHeight(0.07f)
                 .align(BiasAlignment(0f, -0.8f))
         ) {
-            Button(
-                onClick = {
-                    item1.requestFocus()
-                },
-                modifier = Modifier
-                    .focusRequester(item1)
-                    .onFocusChanged { all = if (it.isFocused) Color.Green else Color.White }
-                    .focusable(),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = all
-                )
-            ) {
-                Text("ALL")
-            }
-            Button(
-                onClick = {
-                    item2.requestFocus()
-                },
-                modifier = Modifier
-                    .focusRequester(item2)
-                    .onFocusChanged { new = if (it.isFocused) Color.Green else Color.White }
-                    .focusable(),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = new
-                )
-            ) {
-                Text("NEW")
-            }
-            Button(
-                onClick = {
-                    item3.requestFocus()
-                },
-                modifier = Modifier
-                    .focusRequester(item3)
-                    .onFocusChanged { popular = if (it.isFocused) Color.Green else Color.White }
-                    .focusable(),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = popular
-                )
-            ) {
-                Text("POPULAR")
-            }
+            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+
+            RoundedButton("ALL", onClick = { println("ALL") })
+
+            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+
+            RoundedButton("NEW", onClick = { println("NEW") })
+
+            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+
+            RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
         LazyColumn(
-            Modifier.fillMaxWidth().fillMaxHeight().align(BiasAlignment(-0.8f, 0.5f))
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.8f)
+                .padding(start = 20.dp)
+                .align(BiasAlignment(-0.8f, 0.7f)),
+            //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
             items(20) { index ->
-                Text("Item: $index")
+                LazyColumnItem("Item: $index")
             }
         }
     }
 }
 
-@ExperimentalComposeUiApi
 @Preview
 @Composable
 private fun Preview() {
     CategoriesNickNameListScreen()
 }
+
+
