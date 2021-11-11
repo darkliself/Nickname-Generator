@@ -9,6 +9,7 @@ sealed class Screen(val route: String) {
     object AutogenerateNicknameScreen : Screen("autogenerate_nickname")
     object CustomizeNickNameScreen : Screen("customize_nickname")
     object CategoriesNickNameListScreen : Screen("category_nickname_list_screen")
+    object DecorationScreen : Screen("decoration_screen")
 
     fun withArgs(vararg args: String): String {
         return buildString {

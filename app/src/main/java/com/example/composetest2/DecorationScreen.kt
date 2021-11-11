@@ -1,32 +1,32 @@
 package com.example.composetest2
 
+
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composetest2.components.Header
-import com.example.composetest2.components.LazyColumnItem
 import com.example.composetest2.components.RoundedButton
 import com.example.composetest2.components.SmallButton
-
-
-/*
-    View 06
-*/
+import com.example.composetest2.components.TransparentTextField
 
 
 @Composable
-fun CategoriesNickNameListScreen() {
+fun DecorationScreen() {
     Image(
-        ImageVector.vectorResource(id = R.drawable.view_01_bg),
+        ImageVector.vectorResource(id = R.drawable.view_06_07_bg),
         contentDescription = null,
         Modifier
             .fillMaxSize(),
@@ -50,12 +50,19 @@ fun CategoriesNickNameListScreen() {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
+        TransparentTextField(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .fillMaxHeight(0.1f)
+                .border(1.dp, Color.Black)
+                .align(BiasAlignment(0f, -0.8f))
+        )
         // Filter buttons
         Row(
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.07f)
-                .align(BiasAlignment(0f, -0.8f))
+                .align(BiasAlignment(0f, -0.5f))
         ) {
             Spacer(modifier = Modifier.fillMaxWidth(0.05f))
 
@@ -69,25 +76,12 @@ fun CategoriesNickNameListScreen() {
 
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
-        LazyColumn(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.8f)
-                .padding(start = 20.dp)
-                .align(BiasAlignment(-0.8f, 0.7f)),
-            //horizontalAlignment = BiasAlignment.Horizontal(0f)
-        ) {
-            items(20) { index ->
-                LazyColumnItem("Item: $index")
-            }
-        }
     }
 }
 
 @Preview
 @Composable
 private fun Preview() {
-    CategoriesNickNameListScreen()
+    DecorationScreen()
 }
-
 
