@@ -73,6 +73,7 @@ fun ResultScreen() {
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.5f)),
             )
+
             Row(
                 Modifier
                     .fillMaxHeight(0.15f)
@@ -87,6 +88,7 @@ fun ResultScreen() {
                         .fillMaxWidth(0.5f)
                         .fillMaxHeight()
                 )
+                
                 WideButton(
                     R.drawable.view_07_btn_share,
                     stringResource(R.string.view_07_btn_share),
