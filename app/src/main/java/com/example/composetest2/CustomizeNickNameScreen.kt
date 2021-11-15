@@ -50,8 +50,8 @@ fun CustomizeNickNameScreen() {
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
-                .fillMaxHeight(0.75f)
-                .align(BiasAlignment(0f, -0.1f))
+                .fillMaxHeight(0.7f)
+                .align(BiasAlignment(0f, -0.15f))
                 .clip(RoundedCornerShape(60.dp))
                 .border(1.dp, Color.Black, shape = RoundedCornerShape(60.dp))
                 .background(Color(0xFFE7F2D7))
@@ -98,9 +98,10 @@ fun CustomizeNickNameScreen() {
             image = R.drawable.btn_wide_pink,
             text = stringResource(id = R.string.view_05_btn_ready),
             modifier = Modifier
-                .fillMaxWidth(0.85f)
-                .fillMaxHeight(0.1f)
+                .fillMaxWidth()
+                .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
+            imageModifier = Modifier.fillMaxWidth()
         )
     }
 }

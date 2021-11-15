@@ -62,7 +62,8 @@ fun MainScreen(navController: NavController) {
             Modifier
                 .fillMaxHeight(0.25f)
                 .fillMaxWidth(0.8f)
-                .align(BiasAlignment(0f, -0.25f)),
+                .align(BiasAlignment(0f, -0.25f))
+                .wrapContentSize(),
             Modifier.align(BiasAlignment(0.1f, -0.05f)),
             onClick = {
                 navController.navigate(Screen.CustomizeNickNameScreen.route)

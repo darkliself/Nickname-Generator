@@ -2,6 +2,7 @@ package com.example.composetest2.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -11,6 +12,7 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -26,8 +28,7 @@ fun IconButton(
     onClick: () -> Unit = {},
 ) {
     Box(
-        modifier = modifier
-            .clickable { onClick() },
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -39,7 +40,9 @@ fun IconButton(
         Image(
             ImageVector.vectorResource(id = image),
             null,
-            Modifier.fillMaxSize()
+
+            Modifier.clickable { onClick() },
+            contentScale = ContentScale.FillBounds
         )
     }
 }
