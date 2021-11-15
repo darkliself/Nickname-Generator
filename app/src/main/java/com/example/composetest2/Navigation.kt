@@ -1,5 +1,6 @@
 package com.example.composetest2
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -7,10 +8,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.composetest2.ui.theme.MainScreen
 
 
+@ExperimentalFoundationApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.DecorationScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.ResultScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }
@@ -31,6 +33,9 @@ fun Navigation() {
         }
         composable(route = Screen.DecorationScreen.route) {
             DecorationScreen()
+        }
+        composable(route = Screen.ResultScreen.route) {
+            ResultScreen()
         }
 
 

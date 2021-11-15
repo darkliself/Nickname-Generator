@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name" translatable="false">ComposeTest2</string>
-    <!-- main view strings -->
+    <!-- main view screen -->
     <string name="view_01_header">Create\nyour perfect nickname</string>
     <string name="view_01_btn_create">Create custom nickname</string>
     <string name="view_01_btn_category">Choose from category</string>
     <string name="view_01_btn_autogenerate">Autogenerate nickname</string>
-    <!-- create nickname view -->
+    <!-- create nickname screen -->
     <string name="view_02_header">Create custom nickname</string>
     <string name="view_02_nickname_placeholder">Type your nickname here</string>
     <string name="view_02_btn_create">Create</string>
-    <!-- create nickname view -->
+    <!-- create nickname screen -->
     <string name="view_03_header">Category</string>
     <string name="view_03_btn_legendary">Legendary</string>
     <string name="view_03_btn_girls">Girls</string>
@@ -21,15 +21,20 @@
     <string name="view_03_btn_space">Space</string>
     <string name="view_03_btn_historical">Historical</string>
     <string name="view_03_btn_other">Other</string>
-    <!-- Autogenerate nickname -->
+    <!-- autogenerate nickname screen -->
     <string name="view_04_header">Autogenerate nickname</string>
     <string name="view_04_btn_try_again">Try again</string>
     <string name="view_04_btn_customise">Customise</string>
-    <!-- Customize nickname -->
+    <!-- customize nickname screen -->
     <string name="view_05_header">Customize nickname</string>
     <string name="view_05_btn_left_decoration">Left decoration</string>
     <string name="view_05_btn_font_style">Font style</string>
     <string name="view_05_btn_right_decoration">Right decoration</string>
     <string name="view_05_btn_ready">Ready</string>
-
+    <!-- result screen -->
+    <string name="view_07_header">Result</string>
+    <string name="view_07_btn_save">Save</string>
+    <string name="view_07_btn_try_again">Try again</string>
+    <string name="view_07_btn_copy">Copy</string>
+    <string name="view_07_btn_share">Share</string>
 </resources>
