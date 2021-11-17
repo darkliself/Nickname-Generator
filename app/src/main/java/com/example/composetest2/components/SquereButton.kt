@@ -3,6 +3,7 @@ package com.example.composetest2.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +33,7 @@ fun SquareButton(
         Image(
             ImageVector.vectorResource(id = image),
             contentDescription = null,
+            Modifier.clickable { onClick() }
         )
         Text(text, Modifier.align(BiasAlignment(0f, 0.25f)))
     }

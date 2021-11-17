@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
@@ -29,7 +31,7 @@ import com.example.composetest2.components.TransparentTextField
 
 
 @Composable
-fun AutogenerateNickname() {
+fun AutogenerateNickname(navController: NavController) {
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -70,13 +72,13 @@ fun AutogenerateNickname() {
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.2f)),
             )
-
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_04_btn_customise),
                 Modifier
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.5f)),
+                onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
             )
         }
     }
@@ -85,7 +87,7 @@ fun AutogenerateNickname() {
 @Preview
 @Composable
 private fun defPreview() {
-    AutogenerateNickname()
+    AutogenerateNickname(NavController(LocalContext.current))
 }
 
 @Composable

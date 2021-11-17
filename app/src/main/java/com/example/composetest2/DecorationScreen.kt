@@ -18,25 +18,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composetest2.components.Header
-import com.example.composetest2.components.RoundedButton
-import com.example.composetest2.components.SmallButton
-import com.example.composetest2.components.TransparentTextField
+import androidx.navigation.NavController
+import com.example.composetest2.components.*
 
 
 @ExperimentalFoundationApi
 @Composable
-fun DecorationScreen() {
-    Image(
-        ImageVector.vectorResource(id = R.drawable.view_06_07_bg),
-        contentDescription = null,
-        Modifier
-            .fillMaxSize(),
-        contentScale = ContentScale.FillBounds
-    )
+fun DecorationScreen(navController: NavController) {
+    Background(image = R.drawable.view_06_07_bg)
+
     Box(
         Modifier.fillMaxSize(),
     ) {
@@ -46,9 +40,9 @@ fun DecorationScreen() {
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
-            image = R.drawable.arrow_left_icon
+            image = R.drawable.arrow_left_icon,
+            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
         )
-
         Header(
             "Select left decoration",
             modifier = Modifier
@@ -65,7 +59,6 @@ fun DecorationScreen() {
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White
         )
-
         // Filter buttons
         Row(
             Modifier
@@ -103,6 +96,6 @@ fun DecorationScreen() {
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen()
+    DecorationScreen(NavController(LocalContext.current))
 }
 

@@ -13,11 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
@@ -27,7 +29,7 @@ import com.example.composetest2.components.WideButton
 */
 
 @Composable
-fun CustomizeNickNameScreen() {
+fun CustomizeNickNameScreen(navController: NavController) {
     val nickname by remember { mutableStateOf("Nickname 3") }
     Box(
         Modifier.fillMaxSize()
@@ -72,36 +74,43 @@ fun CustomizeNickNameScreen() {
                     .align(BiasAlignment(1f, -0.6f)),
                 color = Color(0xff9EC06A)
             )
+            // left decoration
             WideButton(
                 image = R.drawable.view_05_btn_left_decoration,
                 text = stringResource(id = R.string.view_05_btn_left_decoration),
                 Modifier
                     .fillMaxHeight(0.2f)
-                    .align(BiasAlignment(0f, -0.25f))
+                    .align(BiasAlignment(0f, -0.25f)),
+                onClick = { navController.navigate(Screen.DecorationScreen.route) }
             )
+            // font style decoration
             WideButton(
                 image = R.drawable.view_05_btn_font_style,
                 text = stringResource(id = R.string.view_05_btn_font_style),
                 Modifier
                     .fillMaxHeight(0.2f)
-                    .align(BiasAlignment(0f, 0.25f))
+                    .align(BiasAlignment(0f, 0.25f)),
+                onClick = { navController.navigate(Screen.FontStyleScreen.route) }
             )
+            // right decoration
             WideButton(
                 image = R.drawable.view_05_btn_right_decoration,
                 text = stringResource(id = R.string.view_05_btn_right_decoration),
                 Modifier
                     .fillMaxHeight(0.2f)
-                    .align(BiasAlignment(0f, 0.75f))
+                    .align(BiasAlignment(0f, 0.75f)),
+                onClick = { navController.navigate(Screen.DecorationScreen.route) }
             )
         }
         WideButton(
             image = R.drawable.btn_wide_pink,
             text = stringResource(id = R.string.view_05_btn_ready),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
-            imageModifier = Modifier.fillMaxWidth()
+            imageModifier = Modifier.fillMaxWidth(),
+            onClick = { navController.navigate(Screen.ResultScreen.route) }
         )
     }
 }
@@ -109,7 +118,7 @@ fun CustomizeNickNameScreen() {
 @Preview
 @Composable
 private fun Preview() {
-    CustomizeNickNameScreen()
+    CustomizeNickNameScreen(NavController(LocalContext.current))
 }
 
 @Composable

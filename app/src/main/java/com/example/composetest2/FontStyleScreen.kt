@@ -1,29 +1,22 @@
 package com.example.composetest2
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
 
-/*
-    View 06
-*/
 
 @Composable
-fun CategoryNickNameListScreen(navController: NavController) {
-    Background(R.drawable.view_06_07_bg)
-
+fun FontStyleScreen(navController: NavController) {
+    Background(image = R.drawable.view_03_08_bg)
     Box(
         Modifier.fillMaxSize(),
     ) {
@@ -34,10 +27,10 @@ fun CategoryNickNameListScreen(navController: NavController) {
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CategoryScreen.route) }
+            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
         )
         Header(
-            "Category name \"Emoji\"",
+            stringResource(id = R.string.view_08_btn_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
@@ -71,6 +64,7 @@ fun CategoryNickNameListScreen(navController: NavController) {
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
             items(20) { index ->
+                // later will be custom items
                 LazyColumnItem("Item: $index")
             }
         }
@@ -80,7 +74,5 @@ fun CategoryNickNameListScreen(navController: NavController) {
 @Preview
 @Composable
 private fun Preview() {
-    CategoryNickNameListScreen(NavController(LocalContext.current))
+    FontStyleScreen(NavController(LocalContext.current))
 }
-
-

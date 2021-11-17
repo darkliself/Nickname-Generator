@@ -17,28 +17,29 @@ fun Navigation() {
             MainScreen(navController = navController)
         }
         composable(route = Screen.CreateNickNameScreen.route) {
-            CreateNickNameView()
+            CreateNickNameScreen(navController = navController)
         }
         composable(route = Screen.CategoryScreen.route) {
-            CategoryView()
+            CategoryView(navController = navController)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
-            AutogenerateNickname()
+            AutogenerateNickname(navController = navController)
         }
         composable(route = Screen.CustomizeNickNameScreen.route) {
-            CustomizeNickNameScreen()
+            CustomizeNickNameScreen(navController = navController)
         }
         composable(route = Screen.CategoriesNickNameListScreen.route) {
-            CategoryNickNameListScreen()
+            CategoryNickNameListScreen(navController = navController)
         }
         composable(route = Screen.DecorationScreen.route) {
-            DecorationScreen()
+            DecorationScreen(navController = navController)
         }
         composable(route = Screen.ResultScreen.route) {
-            ResultScreen()
+            ResultScreen(navController = navController)
         }
-
-
+        composable(route = Screen.FontStyleScreen.route) {
+            FontStyleScreen(navController = navController)
+        }
 //        composable(
 //            route = Screen.SecondScreen.route + "?name={name}",
 //            arguments = listOf(

@@ -22,7 +22,8 @@ import com.example.composetest2.R
 fun SmallButton(
     modifier: Modifier,
     iconModifier: Modifier = Modifier.size(35.dp, 35.dp),
-    @DrawableRes image: Int = R.drawable.btn_menu
+    @DrawableRes image: Int = R.drawable.btn_menu,
+    onClick: () -> Unit = { println("clicked") }
 ) {
     Box(
         modifier
@@ -32,7 +33,7 @@ fun SmallButton(
         Image(
             ImageVector.vectorResource(image),
             contentDescription = null,
-            modifier = iconModifier
+            modifier = iconModifier.clickable { onClick() }
         )
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
@@ -29,13 +31,14 @@ import com.example.composetest2.components.WideButton
 
 
 @Composable
-fun CreateNickNameView() {
+fun CreateNickNameScreen(navController: NavController) {
     Box(
         Modifier.fillMaxSize()
     ) {
-        SmallButton(modifier = Modifier
-            .align(BiasAlignment(0f, -1f))
-            .fillMaxHeight(0.1f),
+        SmallButton(
+            modifier = Modifier
+                .align(BiasAlignment(0f, -1f))
+                .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterEnd)
         )
@@ -67,6 +70,7 @@ fun CreateNickNameView() {
                 ) {
                     NicknameTextField(
                         Modifier.align(BiasAlignment(0f, -0.2f)),
+                        // here must be used nav params
                         nickname = ""
                     )
                     WideButton(
@@ -75,6 +79,7 @@ fun CreateNickNameView() {
                         Modifier
                             .fillMaxHeight(0.1f)
                             .align(BiasAlignment(0f, 0.25f)),
+                        onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
                     )
                 }
             }
@@ -85,7 +90,7 @@ fun CreateNickNameView() {
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview3() {
-    CreateNickNameView()
+    CreateNickNameScreen(NavController(LocalContext.current))
 }
 
 @Composable
