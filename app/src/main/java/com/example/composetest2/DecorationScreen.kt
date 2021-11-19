@@ -2,13 +2,11 @@ package com.example.composetest2
 
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,19 +14,22 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
 
+/*
+    View 07
+ */
+
 
 @ExperimentalFoundationApi
 @Composable
-fun DecorationScreen(navController: NavController) {
+fun DecorationScreen(nickname: String?, side: String?, navController: NavController) {
+    val nickname = nickname ?: ""
+
     Background(image = R.drawable.view_06_07_bg)
 
     Box(
@@ -44,13 +45,14 @@ fun DecorationScreen(navController: NavController) {
             onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
         )
         Header(
-            "Select left decoration",
+            "Select $side decoration",
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
         TransparentTextField(
+            text = nickname,
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
@@ -96,6 +98,6 @@ fun DecorationScreen(navController: NavController) {
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen(NavController(LocalContext.current))
+    DecorationScreen("", "left", NavController(LocalContext.current))
 }
 

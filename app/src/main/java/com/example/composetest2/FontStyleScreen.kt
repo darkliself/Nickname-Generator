@@ -14,6 +14,10 @@ import androidx.navigation.NavController
 import com.example.composetest2.components.*
 
 
+/*
+    View 08
+ */
+
 @Composable
 fun FontStyleScreen(navController: NavController) {
     Background(image = R.drawable.view_03_08_bg)

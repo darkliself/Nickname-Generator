@@ -2,9 +2,12 @@ package com.example.composetest2
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.composetest2.ui.theme.MainScreen
 
 
@@ -25,14 +28,37 @@ fun Navigation() {
         composable(route = Screen.AutogenerateNicknameScreen.route) {
             AutogenerateNickname(navController = navController)
         }
-        composable(route = Screen.CustomizeNickNameScreen.route) {
-            CustomizeNickNameScreen(navController = navController)
+        composable(
+            route = Screen.CustomizeNickNameScreen.route + "?nickname={nickname}",
+            arguments = listOf(
+                navArgument("nickname") {
+                    type = NavType.StringType
+                    defaultValue = "DefaultVal"
+                }
+            )
+        ) { entry ->
+            CustomizeNickNameScreen(
+                nickname = entry.arguments?.getString("nickname"),
+                navController = navController
+            )
         }
-        composable(route = Screen.CategoriesNickNameListScreen.route) {
-            CategoryNickNameListScreen(navController = navController)
-        }
-        composable(route = Screen.DecorationScreen.route) {
-            DecorationScreen(navController = navController)
+        composable(
+            route = Screen.DecorationScreen.route + "?nickname={nickname}/side={side}",
+            arguments = listOf(
+                navArgument("nickname") {
+                    type = NavType.StringType
+                    defaultValue = "Killer"
+                },
+                navArgument("side") {
+                    type = NavType.StringType
+                    defaultValue = "left"
+                }
+            )) { entry ->
+            DecorationScreen(
+                nickname = entry.arguments?.getString("nickname"),
+                side = entry.arguments?.getString("side"),
+                navController = navController
+            )
         }
         composable(route = Screen.ResultScreen.route) {
             ResultScreen(navController = navController)

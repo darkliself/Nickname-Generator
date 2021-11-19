@@ -1,12 +1,10 @@
 package com.example.composetest2
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -63,7 +61,7 @@ fun AutogenerateNickname(navController: NavController) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            TransparentTextField(Modifier.align(BiasAlignment(0f, -0.1f)))
+            TransparentTextField(modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
 
             WideButton(
                 R.drawable.btn_wide_pink,

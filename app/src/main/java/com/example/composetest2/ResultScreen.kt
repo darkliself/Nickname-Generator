@@ -56,7 +56,7 @@ fun ResultScreen(navController: NavController) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            TransparentTextField(Modifier.align(BiasAlignment(0f, -0.1f)))
+            TransparentTextField(modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
 
             WideButton(
                 R.drawable.btn_wide_pink,

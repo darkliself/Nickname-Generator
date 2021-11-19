@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -32,6 +33,9 @@ import com.example.composetest2.components.WideButton
 
 @Composable
 fun CreateNickNameScreen(navController: NavController) {
+    val initText = stringResource(id = R.string.view_02_nickname_placeholder)
+    var nickname by remember { mutableStateOf("") }
+    var placeHolder by remember { mutableStateOf(initText) }
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -71,7 +75,11 @@ fun CreateNickNameScreen(navController: NavController) {
                     NicknameTextField(
                         Modifier.align(BiasAlignment(0f, -0.2f)),
                         // here must be used nav params
-                        nickname = ""
+                        value = nickname,
+                        onValueChange = {
+                            nickname = it
+                        },
+                        placeholder = placeHolder,
                     )
                     WideButton(
                         R.drawable.btn_wide_green,
@@ -79,7 +87,13 @@ fun CreateNickNameScreen(navController: NavController) {
                         Modifier
                             .fillMaxHeight(0.1f)
                             .align(BiasAlignment(0f, 0.25f)),
-                        onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
+                        onClick = {
+                            if (nickname != "") {
+                                navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname")
+                            } else {
+                                placeHolder = "needed value"
+                            }
+                        }
                     )
                 }
             }
@@ -94,8 +108,12 @@ private fun DefaultPreview3() {
 }
 
 @Composable
-private fun NicknameTextField(modifier: Modifier = Modifier, nickname: String = "") {
-    var mutableNickname by remember { mutableStateOf(nickname) }
+private fun NicknameTextField(
+    modifier: Modifier = Modifier,
+    value: String = "",
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+) {
     Surface(
         modifier
             .fillMaxWidth(0.9f)
@@ -107,10 +125,8 @@ private fun NicknameTextField(modifier: Modifier = Modifier, nickname: String = 
             Modifier.fillMaxSize()
         ) {
             TextField(
-                value = mutableNickname,
-                onValueChange = {
-                    mutableNickname = it
-                },
+                value = value,
+                onValueChange = onValueChange,
                 Modifier
                     .align(Alignment.Center)
                     .border(0.dp, Color.White)
@@ -128,7 +144,8 @@ private fun NicknameTextField(modifier: Modifier = Modifier, nickname: String = 
                 ),
                 placeholder = {
                     Text(
-                        stringResource(R.string.view_02_nickname_placeholder),
+                        text = placeholder,
+                        //stringResource(R.string.view_02_nickname_placeholder),
                         Modifier
                             .fillMaxWidth()
                             .align(Alignment.Center), textAlign = TextAlign.Center

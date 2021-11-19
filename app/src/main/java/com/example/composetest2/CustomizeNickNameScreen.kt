@@ -29,8 +29,8 @@ import com.example.composetest2.components.WideButton
 */
 
 @Composable
-fun CustomizeNickNameScreen(navController: NavController) {
-    val nickname by remember { mutableStateOf("Nickname 3") }
+fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
+    val nickname = nickname ?: ""
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -79,16 +79,16 @@ fun CustomizeNickNameScreen(navController: NavController) {
                 image = R.drawable.view_05_btn_left_decoration,
                 text = stringResource(id = R.string.view_05_btn_left_decoration),
                 Modifier
-                    .fillMaxHeight(0.2f)
-                    .align(BiasAlignment(0f, -0.25f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route) }
+                    .fillMaxHeight(0.21f)
+                    .align(BiasAlignment(0f, -0.27f)),
+                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=left") }
             )
             // font style decoration
             WideButton(
                 image = R.drawable.view_05_btn_font_style,
                 text = stringResource(id = R.string.view_05_btn_font_style),
                 Modifier
-                    .fillMaxHeight(0.2f)
+                    .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = { navController.navigate(Screen.FontStyleScreen.route) }
             )
@@ -97,9 +97,9 @@ fun CustomizeNickNameScreen(navController: NavController) {
                 image = R.drawable.view_05_btn_right_decoration,
                 text = stringResource(id = R.string.view_05_btn_right_decoration),
                 Modifier
-                    .fillMaxHeight(0.2f)
-                    .align(BiasAlignment(0f, 0.75f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route) }
+                    .fillMaxHeight(0.21f)
+                    .align(BiasAlignment(0f, 0.77f)),
+                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=right") }
             )
         }
         WideButton(
@@ -110,7 +110,7 @@ fun CustomizeNickNameScreen(navController: NavController) {
                 .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
-            onClick = { navController.navigate(Screen.ResultScreen.route) }
+            onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname&?side=right") }
         )
     }
 }
@@ -118,7 +118,7 @@ fun CustomizeNickNameScreen(navController: NavController) {
 @Preview
 @Composable
 private fun Preview() {
-    CustomizeNickNameScreen(NavController(LocalContext.current))
+    CustomizeNickNameScreen("", NavController(LocalContext.current))
 }
 
 @Composable

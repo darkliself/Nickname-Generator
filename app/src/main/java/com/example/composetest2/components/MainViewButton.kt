@@ -28,7 +28,7 @@ fun IconButton(
     onClick: () -> Unit = {},
 ) {
     Box(
-        modifier = modifier,
+        modifier = modifier.wrapContentSize(),
         contentAlignment = Alignment.Center
     ) {
         Text(

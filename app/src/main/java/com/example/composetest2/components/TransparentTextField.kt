@@ -23,9 +23,14 @@ import com.example.composetest2.R
 
 
 @Composable
-fun TransparentTextField(modifier: Modifier = Modifier, backgroundColor: Color = Color.Transparent, textFieldModifier: Modifier = Modifier) {
+fun TransparentTextField(
+    modifier: Modifier = Modifier,
+    text: String = "random nickname",
+    backgroundColor: Color = Color.Transparent,
+    textFieldModifier: Modifier = Modifier
+) {
     var mutableText by remember {
-        mutableStateOf("random nickname")
+        mutableStateOf(text)
     }
     Box(
         modifier
@@ -34,7 +39,9 @@ fun TransparentTextField(modifier: Modifier = Modifier, backgroundColor: Color =
     ) {
         TextField(
             value = mutableText, onValueChange = { mutableText = it },
-            textFieldModifier.align(Alignment.Center).fillMaxWidth(),
+            textFieldModifier
+                .align(Alignment.Center)
+                .fillMaxWidth(),
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp,
