@@ -115,7 +115,7 @@ private fun NicknameTextField(
     placeholder: String,
 ) {
     Surface(
-        modifier
+        modifier = modifier
             .fillMaxWidth(0.9f)
             .fillMaxHeight(0.15f),
         border = BorderStroke(1.dp, Color.Black),

@@ -17,7 +17,8 @@ import com.example.composetest2.components.*
 */
 
 @Composable
-fun CategoryNickNameListScreen(navController: NavController) {
+fun CategoryNickNameListScreen(category: String?, navController: NavController) {
+    val category = category ?: ""
     Background(R.drawable.view_06_07_bg)
 
     Box(
@@ -30,10 +31,10 @@ fun CategoryNickNameListScreen(navController: NavController) {
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CategoryScreen.route) }
+            onClick = { navController.navigate(Screen.CategoriesScreen.route) }
         )
         Header(
-            "Category name \"Emoji\"",
+            "Category name \"$category\"",
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
@@ -76,7 +77,7 @@ fun CategoryNickNameListScreen(navController: NavController) {
 @Preview
 @Composable
 private fun Preview() {
-    CategoryNickNameListScreen(NavController(LocalContext.current))
+    CategoryNickNameListScreen("category", NavController(LocalContext.current))
 }
 
 

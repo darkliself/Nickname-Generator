@@ -59,7 +59,7 @@ fun MainScreen(navController: NavController) {
                 .fillMaxWidth(0.8f)
                 .align(BiasAlignment(0f, 0.3f)),
             Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = { navController.navigate(Screen.CategoryScreen.route) }
+            onClick = { navController.navigate(Screen.CategoriesScreen.route) }
         )
         IconButton(
             text = stringResource(R.string.view_01_btn_autogenerate),

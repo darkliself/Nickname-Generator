@@ -20,7 +20,20 @@ import com.example.composetest2.components.SquareButton
 
 
 @Composable
-fun CategoryView(navController: NavController) {
+fun CategoryScreen(navController: NavController) {
+    val listOfCategories = listOf(
+        stringResource(id = R.string.view_03_btn_legendary),
+        stringResource(id = R.string.view_03_btn_girls),
+        stringResource(id = R.string.view_03_btn_squard),
+        stringResource(id = R.string.view_03_btn_boys),
+        stringResource(id = R.string.view_03_btn_charm),
+        stringResource(id = R.string.view_03_btn_emoji),
+        stringResource(id = R.string.view_03_btn_indian),
+        stringResource(id = R.string.view_03_btn_space),
+        stringResource(id = R.string.view_03_btn_historical),
+        stringResource(id = R.string.view_03_btn_other)
+    )
+
     Background(R.drawable.view_03_08_bg)
 
     Box(
@@ -44,62 +57,61 @@ fun CategoryView(navController: NavController) {
             stringResource(R.string.view_03_btn_legendary),
             Modifier.align(BiasAlignment(-0.9f, -0.7f)),
             R.drawable.view_03_btn_legendary,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
-
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[0]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_girls),
             Modifier.align(BiasAlignment(0.9f, -0.7f)),
             R.drawable.view_03_btn_girls,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[1]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_squard),
             Modifier.align(BiasAlignment(-0.9f, -0.3f)),
             R.drawable.view_03_btn_squard,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[2]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_boys),
             Modifier.align(BiasAlignment(0.9f, -0.3f)),
             R.drawable.view_03_btn_boys,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[3]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_charm),
             Modifier.align(BiasAlignment(-0.9f, 0.1f)),
             R.drawable.view_03_btn_charm,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[4]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_emoji),
             Modifier.align(BiasAlignment(0.9f, 0.1f)),
             R.drawable.view_03_btn_emoji,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[5]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_indian),
             Modifier.align(BiasAlignment(-0.9f, 0.5f)),
             R.drawable.view_03_btn_indian,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[6]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_space),
             Modifier.align(BiasAlignment(0.9f, 0.5f)),
             R.drawable.view_03_btn_space,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[7]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_historical),
             Modifier.align(BiasAlignment(-0.9f, 0.9f)),
             R.drawable.view_03_btn_historical,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[8]}") }
         )
         SquareButton(
             stringResource(R.string.view_03_btn_other),
             Modifier.align(BiasAlignment(0.9f, 0.9f)),
             R.drawable.view_03_btn_other,
-            onClick = { navController.navigate(Screen.CategoriesNickNameListScreen.route) }
+            onClick = { navController.navigate(Screen.CategoryNickNameListScreen.route + "?category=${listOfCategories[9]}") }
         )
     }
 }
@@ -107,9 +119,14 @@ fun CategoryView(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-    CategoryView(NavController(LocalContext.current))
+    CategoryScreen(NavController(LocalContext.current))
 }
 
 
+
+@Composable
+fun GoTo() {
+
+}
 
 

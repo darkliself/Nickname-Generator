@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -24,7 +25,8 @@ import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
 
 @Composable
-fun ResultScreen(navController: NavController) {
+fun ResultScreen(nickname: String?, navController: NavController) {
+    val nickname = nickname ?: ""
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -56,7 +58,7 @@ fun ResultScreen(navController: NavController) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            TransparentTextField(modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
+            Text(text = nickname.toString(), modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
 
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -102,7 +104,7 @@ fun ResultScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen(NavController(LocalContext.current))
+    ResultScreen("zzzzKillerzzzz", NavController(LocalContext.current))
 }
 
 @Composable

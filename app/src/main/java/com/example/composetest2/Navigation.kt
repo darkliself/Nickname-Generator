@@ -2,7 +2,6 @@ package com.example.composetest2
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,8 +21,8 @@ fun Navigation() {
         composable(route = Screen.CreateNickNameScreen.route) {
             CreateNickNameScreen(navController = navController)
         }
-        composable(route = Screen.CategoryScreen.route) {
-            CategoryView(navController = navController)
+        composable(route = Screen.CategoriesScreen.route) {
+            CategoryScreen(navController = navController)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
             AutogenerateNickname(navController = navController)
@@ -39,6 +38,20 @@ fun Navigation() {
         ) { entry ->
             CustomizeNickNameScreen(
                 nickname = entry.arguments?.getString("nickname"),
+                navController = navController
+            )
+        }
+        composable(
+            route = Screen.CategoryNickNameListScreen.route + "?category={category}",
+            arguments = listOf(
+                navArgument("category") {
+                    type = NavType.StringType
+                    defaultValue = "Emoji"
+                }
+            )
+        ) { entry ->
+            CategoryNickNameListScreen(
+                category = entry.arguments?.getString("category"),
                 navController = navController
             )
         }
@@ -60,11 +73,21 @@ fun Navigation() {
                 navController = navController
             )
         }
-        composable(route = Screen.ResultScreen.route) {
-            ResultScreen(navController = navController)
-        }
         composable(route = Screen.FontStyleScreen.route) {
             FontStyleScreen(navController = navController)
+        }
+        composable(
+            route = Screen.ResultScreen.route + "?nickname={nickname}",
+            arguments = listOf(
+                navArgument("nickname") {
+                    type = NavType.StringType
+                    defaultValue = "Killer"
+                }
+            )) { entry ->
+            ResultScreen(
+                nickname = entry.arguments?.getString("nickname"),
+                navController = navController
+            )
         }
 //        composable(
 //            route = Screen.SecondScreen.route + "?name={name}",

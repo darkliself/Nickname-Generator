@@ -110,7 +110,7 @@ fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
                 .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
-            onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname&?side=right") }
+            onClick = { navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname") }
         )
     }
 }
