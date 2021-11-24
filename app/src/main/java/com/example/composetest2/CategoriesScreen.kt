@@ -122,10 +122,8 @@ fun DefaultPreview2() {
     CategoryScreen(NavController(LocalContext.current))
 }
 
-
-
 @Composable
-fun GoTo() {
+fun ToDo() {
 
 }
 
