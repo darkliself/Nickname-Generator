@@ -1,4 +1,8 @@
 <resources>
+    <string-array name="test">
+        <item>Test</item>
+        <item>Test2</item>
+    </string-array>
     <string name="app_name" translatable="false">ComposeTest2</string>
     <!-- main view screen -->
     <string name="view_01_header">Create\nyour perfect nickname</string>

@@ -1,5 +1,6 @@
 package com.example.composetest2.ui.theme
 
+import android.content.res.Resources
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
@@ -8,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.composetest2.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.composetest2.Screen
@@ -22,6 +24,7 @@ import com.example.composetest2.components.SmallButton
 
 @Composable
 fun MainScreen(navController: NavController) {
+
     Background(image = R.drawable.view_01_bg)
 
     Box(
@@ -35,7 +38,7 @@ fun MainScreen(navController: NavController) {
                 .align(Alignment.CenterEnd)
         )
         Header(
-            stringResource(R.string.view_01_header),
+            stringResource(id = R.string.view_01_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
