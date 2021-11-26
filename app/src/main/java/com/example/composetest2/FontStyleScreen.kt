@@ -2,10 +2,12 @@ package com.example.composetest2
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.Composable
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +21,11 @@ import com.example.composetest2.components.*
  */
 
 @Composable
-fun FontStyleScreen(navController: NavController) {
+fun FontStyleScreen(nickname: String, navController: NavController) {
+
+    var nickname by remember { mutableStateOf(nickname) }
+    val textStyler = TextStyler()
+
     Background(image = R.drawable.view_03_08_bg)
     Box(
         Modifier.fillMaxSize(),
@@ -67,16 +73,23 @@ fun FontStyleScreen(navController: NavController) {
                 .align(BiasAlignment(-0.8f, 0.7f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
-            items(20) { index ->
+            items(textStyler.getAlphabetCount()) { index ->
                 // later will be custom items
-                LazyColumnItem("Item: $index")
+                LazyColumnItem(textStyler.rootToUnicode(nickname, index), onClick = {
+
+                })
             }
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    FontStyleScreen(NavController(LocalContext.current))
+    FontStyleScreen("Killer", NavController(LocalContext.current))
+}
+
+@Composable
+fun CCC() {
+    Text("dfsfdsf")
 }

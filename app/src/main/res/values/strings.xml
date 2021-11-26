@@ -1,7 +1,17 @@
 <resources>
-    <string-array name="test">
+    <!-- i`ll try use it later -->
+    <string-array name="categories">
         <item>Test</item>
-        <item>Test2</item>
+        <item>Legendary</item>
+        <item>Girls</item>
+        <item>Squard</item>
+        <item>Boys</item>
+        <item>Charm</item>
+        <item>Emoji</item>
+        <item>Indian</item>
+        <item>Space</item>
+        <item>Historical</item>
+        <item>Other</item>
     </string-array>
     <string name="app_name" translatable="false">ComposeTest2</string>
     <!-- main view screen -->
@@ -43,5 +53,4 @@
     <string name="view_07_btn_share">Share</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
-
 </resources>

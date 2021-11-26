@@ -73,8 +73,16 @@ fun Navigation() {
                 navController = navController
             )
         }
-        composable(route = Screen.FontStyleScreen.route) {
-            FontStyleScreen(navController = navController)
+        composable(
+            route = Screen.FontStyleScreen.route + "?nickname={nickname}",
+            arguments = listOf(
+                navArgument("nickname") {
+                    type = NavType.StringType
+                    defaultValue = "Killer"
+                })
+        ) { entry ->
+            entry.arguments?.getString("nickname")
+                ?.let { FontStyleScreen(nickname = it, navController = navController) }
         }
         composable(
             route = Screen.ResultScreen.route + "?nickname={nickname}",

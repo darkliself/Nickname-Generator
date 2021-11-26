@@ -90,7 +90,7 @@ fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
-                onClick = { navController.navigate(Screen.FontStyleScreen.route) }
+                onClick = { navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname") }
             )
             // right decoration
             WideButton(
