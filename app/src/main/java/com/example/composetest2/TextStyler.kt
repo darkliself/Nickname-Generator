@@ -17,7 +17,7 @@ class TextStyler(var text: String = "") {
     private var suffix = ""
     private var root = ""
 
-    private val baseAlphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890"
+    private var baseAlphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890"
     private val unicodeAlphabetList = AlphabetList
 
     fun getAlphabetCount(): Int {
@@ -36,6 +36,10 @@ class TextStyler(var text: String = "") {
         root = text
         return switchToUnicode()
     }
+    fun newBaseAlphabet(index: Int) {
+        baseAlphabet = unicodeAlphabetList[index].joinToString("")
+    }
+
     fun addPrefix() {
         prefix += "<"
     }

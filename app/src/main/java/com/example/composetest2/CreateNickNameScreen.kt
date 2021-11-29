@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -58,45 +59,33 @@ fun CreateNickNameScreen(navController: NavController) {
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.85f)
                 .align(BiasAlignment(0f, 0.6f))
+                .clip(RoundedCornerShape(60.dp))
+                .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(60.dp))
+                .background(Color(0xFFE7F2D7)),
         ) {
-            Surface(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxSize(),
-                border = BorderStroke(1.dp, Color.Black),
-                elevation = 8.dp,
-                shape = RoundedCornerShape(60.dp),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color(0xFFE7F2D7))
-                ) {
-                    NicknameTextField(
-                        Modifier.align(BiasAlignment(0f, -0.2f)),
-                        // here must be used nav params
-                        value = nickname,
-                        onValueChange = {
-                            nickname = it
-                        },
-                        placeholder = placeHolder,
-                    )
-                    WideButton(
-                        R.drawable.btn_wide_green,
-                        stringResource(id = R.string.view_02_btn_create),
-                        Modifier
-                            .fillMaxHeight(0.1f)
-                            .align(BiasAlignment(0f, 0.25f)),
-                        onClick = {
-                            if (nickname != "") {
-                                navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname")
-                            } else {
-                                placeHolder = "needed value"
-                            }
-                        }
-                    )
+            NicknameTextField(
+                Modifier.align(BiasAlignment(0f, -0.2f)),
+                // here must be used nav params
+                value = nickname,
+                onValueChange = {
+                    nickname = it
+                },
+                placeholder = placeHolder,
+            )
+            WideButton(
+                R.drawable.btn_wide_green,
+                stringResource(id = R.string.view_02_btn_create),
+                Modifier
+                    .fillMaxHeight(0.1f)
+                    .align(BiasAlignment(0f, 0.25f)),
+                onClick = {
+                    if (nickname != "") {
+                        navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname")
+                    } else {
+                        placeHolder = "needed value"
+                    }
                 }
-            }
+            )
         }
     }
 }

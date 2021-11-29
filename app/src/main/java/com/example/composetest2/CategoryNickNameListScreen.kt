@@ -1,5 +1,6 @@
 package com.example.composetest2
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
@@ -16,6 +17,7 @@ import com.example.composetest2.components.*
     View 06
 */
 
+@ExperimentalAnimationApi
 @Composable
 fun CategoryNickNameListScreen(category: String?, navController: NavController) {
     val category = category ?: ""
@@ -74,6 +76,7 @@ fun CategoryNickNameListScreen(category: String?, navController: NavController) 
     }
 }
 
+@ExperimentalAnimationApi
 @Preview
 @Composable
 private fun Preview() {

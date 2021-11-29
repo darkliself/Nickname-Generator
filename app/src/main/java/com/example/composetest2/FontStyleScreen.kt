@@ -1,13 +1,12 @@
 package com.example.composetest2
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,16 +14,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
 
-
 /*
     View 08
  */
 
+@ExperimentalAnimationApi
 @Composable
 fun FontStyleScreen(nickname: String, navController: NavController) {
-
-    var nickname by remember { mutableStateOf(nickname) }
     val textStyler = TextStyler()
+    val nickname by remember { mutableStateOf(nickname) }
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -74,22 +72,18 @@ fun FontStyleScreen(nickname: String, navController: NavController) {
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
             items(textStyler.getAlphabetCount()) { index ->
-                // later will be custom items
-                LazyColumnItem(textStyler.rootToUnicode(nickname, index), onClick = {
-
+                val newFontNickname = textStyler.rootToUnicode(nickname, index)
+                LazyColumnItem(newFontNickname, onClick = {
+                    navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$newFontNickname")
                 })
             }
         }
     }
 }
 
+@ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
     FontStyleScreen("Killer", NavController(LocalContext.current))
-}
-
-@Composable
-fun CCC() {
-    Text("dfsfdsf")
 }

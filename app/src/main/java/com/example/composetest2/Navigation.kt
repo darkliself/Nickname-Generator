@@ -1,5 +1,6 @@
 package com.example.composetest2
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -10,6 +11,7 @@ import androidx.navigation.navArgument
 import com.example.composetest2.ui.theme.MainScreen
 
 
+@ExperimentalAnimationApi
 @ExperimentalFoundationApi
 @Composable
 fun Navigation() {

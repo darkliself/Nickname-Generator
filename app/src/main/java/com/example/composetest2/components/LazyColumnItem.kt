@@ -1,50 +1,69 @@
 package com.example.composetest2.components
 
 
-import androidx.compose.foundation.focusable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import com.example.composetest2.R
 
+@ExperimentalAnimationApi
 @Composable
 fun LazyColumnItem(text: String, onClick: () -> Unit = {}) {
-    var state by remember { mutableStateOf(false)}
-    val focus = FocusRequester()
+    var state by remember { mutableStateOf(false) }
+    val focus by remember { mutableStateOf(FocusRequester()) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 10.dp, bottom = 10.dp)
             .focusRequester(focus)
             .onFocusChanged { state = it.isFocused }
-            .focusable(),
-            //.clickable { onClick() },
+            .focusable()
+            .clickable { focus.requestFocus() },
         horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = text,
             fontSize = 16.sp,
-            modifier = Modifier,
+            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
         )
-        if (state) {
-            Text("dsfdsfsdfdsf")
+        AnimatedVisibility(
+            visible = state,
+            enter = fadeIn(
+                initialAlpha = 0.4f
+            ),
+            exit = fadeOut(
+                animationSpec = tween(durationMillis = 250)
+            )
+        ) {
+            Image(
+                ImageVector.vectorResource(id = R.drawable.agree_button),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding( end = 20.dp)
+                    .clickable {
+                        onClick()
+                    }
+            )
         }
-//        Image(
-//            ImageVector.vectorResource(id = R.drawable.icon_pencil),
-//            contentDescription = null,
-//            modifier = Modifier
-//                .padding(end = 20.dp)
-//            )
     }
     Divider(
         color = Color(0XFFE7F2D7),
