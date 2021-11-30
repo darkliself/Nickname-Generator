@@ -99,6 +99,11 @@ fun Navigation() {
                 navController = navController
             )
         }
+        composable(
+            route = Screen.TestScreen.route
+        ) {
+            TestScreen()
+        }
 //        composable(
 //            route = Screen.SecondScreen.route + "?name={name}",
 //            arguments = listOf(

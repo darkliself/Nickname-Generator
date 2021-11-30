@@ -87,6 +87,9 @@ fun DecorationScreen(nickname: String?, side: String?, navController: NavControl
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f))
         ) {
+            item {
+                Text("U+2747")
+            }
             items(250) { index ->
                 Text("its $index")
             }
