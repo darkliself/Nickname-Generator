@@ -5,6 +5,7 @@ fun main(args: Array<String>) {
     t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 0)
     t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYy", 1)
     t.rootToUnicode("jghfdjghdf", 1)
+    t.getIdArray("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890")
 }
 
 /*
@@ -16,7 +17,6 @@ class TextStyler(var text: String = "") {
     private var prefix = ""
     private var suffix = ""
     private var root = ""
-
     private var baseAlphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890"
     private val unicodeAlphabetList = AlphabetList
 
@@ -36,16 +36,22 @@ class TextStyler(var text: String = "") {
         root = text
         return switchToUnicode()
     }
-    fun newBaseAlphabet(index: Int) {
-        baseAlphabet = unicodeAlphabetList[index].joinToString("")
+
+    fun getIdArray(inputText: String): Int {
+        inputText.split("").filter { it != "" }
+            .forEach { println("${baseAlphabet.indexOf(it)} + $it") }
+        println(inputText.split("").filter { it != "" })
+        return -1
     }
 
     fun addPrefix() {
         prefix += "<"
     }
+
     fun addSuffix() {
         suffix += ">"
     }
+
     fun switchToUnicode(): String {
         return "$prefix$root$suffix"
     }

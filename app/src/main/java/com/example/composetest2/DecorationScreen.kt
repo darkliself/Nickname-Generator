@@ -48,7 +48,7 @@ fun DecorationScreen(nickname: String, side: String?, navController: NavControll
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
+            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$editNickname") }
         )
         Header(
             "Select $side decoration",

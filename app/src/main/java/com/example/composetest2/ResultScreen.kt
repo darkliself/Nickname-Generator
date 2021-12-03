@@ -66,7 +66,7 @@ fun ResultScreen(nickname: String?, navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.2f)),
-                onClick = { navController.navigate(Screen.MainScreen.route) }
+
             )
             WideButton(
                 R.drawable.btn_wide_green,
@@ -74,7 +74,7 @@ fun ResultScreen(nickname: String?, navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.5f)),
-
+                onClick = { navController.navigate(Screen.MainScreen.route) }
                 )
             Row(
                 Modifier

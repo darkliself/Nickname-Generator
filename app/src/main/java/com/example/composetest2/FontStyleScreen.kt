@@ -35,7 +35,7 @@ fun FontStyleScreen(nickname: String, navController: NavController) {
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
+            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname") }
         )
         Header(
             stringResource(id = R.string.view_08_btn_header),

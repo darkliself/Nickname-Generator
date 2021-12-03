@@ -34,6 +34,7 @@ import com.example.composetest2.components.WideButton
 
 @Composable
 fun CreateNickNameScreen(navController: NavController) {
+    val t  = TextStyler()
     val initText = stringResource(id = R.string.view_02_nickname_placeholder)
     var nickname by remember { mutableStateOf("") }
     var placeHolder by remember { mutableStateOf(initText) }
@@ -80,7 +81,7 @@ fun CreateNickNameScreen(navController: NavController) {
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = {
                     if (nickname != "") {
-                        navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname")
+                        navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=${nickname}")
                     } else {
                         placeHolder = "needed value"
                     }
