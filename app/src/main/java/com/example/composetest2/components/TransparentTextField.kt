@@ -27,18 +27,19 @@ fun TransparentTextField(
     modifier: Modifier = Modifier,
     text: String = "random nickname",
     backgroundColor: Color = Color.Transparent,
-    textFieldModifier: Modifier = Modifier
+    textFieldModifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit = {}
 ) {
-    var mutableText by remember {
-        mutableStateOf(text)
-    }
+//    var mutableText by remember {
+//        mutableStateOf(text)
+//    }
     Box(
         modifier
             .fillMaxWidth(0.9f)
             .fillMaxHeight(0.2f)
     ) {
         TextField(
-            value = mutableText, onValueChange = { mutableText = it },
+            value = text, onValueChange = onValueChange,
             textFieldModifier
                 .align(Alignment.Center)
                 .fillMaxWidth(),

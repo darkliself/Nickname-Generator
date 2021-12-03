@@ -69,11 +69,13 @@ fun Navigation() {
                     defaultValue = "left"
                 }
             )) { entry ->
-            DecorationScreen(
-                nickname = entry.arguments?.getString("nickname"),
-                side = entry.arguments?.getString("side"),
-                navController = navController
-            )
+            entry.arguments?.getString("nickname")?.let {
+                DecorationScreen(
+                    nickname = it,
+                    side = entry.arguments?.getString("side"),
+                    navController = navController
+                )
+            }
         }
         composable(
             route = Screen.FontStyleScreen.route + "?nickname={nickname}",

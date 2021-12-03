@@ -1,47 +1,32 @@
 package com.example.composetest2
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.Layout
-
 
 @Composable
 fun TestScreen() {
 
 }
 
-
-
-@Composable
-fun MyBasicColumn(
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
-) {
-    Layout(
-        modifier = modifier,
-        content = content
-    ) { measurables, constraints ->
-        // Don't constrain child views further, measure them with given constraints
-        // List of measured children
-        val placeables = measurables.map { measurable ->
-            // Measure each children
-            measurable.measure(constraints)
-        }
-
-        // Set the size of the layout as big as it can
-        layout(constraints.maxWidth, constraints.maxHeight) {
-            // Track the y co-ord we have placed children up to
-            var yPosition = 0
-
-            // Place children in the parent layout
-            placeables.forEach { placeable ->
-                // Position item on the screen
-                placeable.placeRelative(x = 0, y = yPosition)
-
-                // Record the y co-ord placed up to
-                yPosition += placeable.height
-            }
-        }
-    }
-}
+//fun main(args: Array<String>) {
+//    val url: URL? = try {
+//        URL("https://developer.android.com/kotlin/")
+//    } catch (e: MalformedURLException) {
+//        // catch invalid url exception
+//
+//        println(e.message)
+//        null
+//    }
+//    val t = lifecycleScope()
+//    val result = lifecycleScope.async(Dispatchers.IO) {
+//        try {
+//            url?.readText()
+//            println(result)
+//        } catch (e: IOException) {
+//            // catch exception while reading it
+//            "Error....\n\n$e"
+//        }
+//    }
+//
+//    println("\uD83D\uDE06")
+//    println("\uD83C\uDF9D")
+//}
