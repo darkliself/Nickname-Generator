@@ -1,5 +1,7 @@
 package com.example.composetest2
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,11 +20,13 @@ import com.example.composetest2.components.*
     View 08
  */
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi
 @Composable
-fun FontStyleScreen(nickname: String, navController: NavController) {
+fun FontStyleScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
     val textStyler = TextStyler()
-    val nickname by remember { mutableStateOf(nickname) }
+    val nickname by remember { mutableStateOf(nickname?: "") }
+    val alphabetIndex = alphabetIndex ?: 0
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -71,19 +75,30 @@ fun FontStyleScreen(nickname: String, navController: NavController) {
                 .align(BiasAlignment(-0.8f, 0.7f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
+            var baseNickname = ""
+            // in case if chars not in standard code
+            textStyler.splitByCodePoint(nickname).forEach { elem ->
+                if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
+                    baseNickname += textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
+                } else {
+                    baseNickname += elem
+                }
+            }
+
             items(textStyler.getAlphabetCount()) { index ->
-                val newFontNickname = textStyler.rootToUnicode(nickname, index)
-                LazyColumnItem(newFontNickname, onClick = {
-                    navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$newFontNickname")
+                val nick = textStyler.rootToUnicode(baseNickname, index)
+                LazyColumnItem(nick, onClick = {
+                    navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nick/alphabetIndex=$index")
                 })
             }
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    FontStyleScreen("Killer", NavController(LocalContext.current))
+    FontStyleScreen("Killer", 0, NavController(LocalContext.current))
 }

@@ -1,15 +1,30 @@
 package com.example.composetest2
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
+
+@RequiresApi(Build.VERSION_CODES.N)
 fun main(args: Array<String>) {
     val t = TextStyler("s")
-    t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 0)
-    t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYy", 1)
+    val z = t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 1)
     t.rootToUnicode("jghfdjghdf", 1)
-    t.getIdArray("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890")
+
+    println(t.getCharIndex("s", 0))
+
+    fun splitByCodePoint(str: String): Array<String> {
+        val codepoints = str.codePoints().toArray()
+        return Array(codepoints.size) { index ->
+            String(codepoints, index, 1)
+        }
+    }
+
 }
 
 /*
     Main class where all logic
+    For now its all for tests
  */
 
 class TextStyler(var text: String = "") {
@@ -37,19 +52,21 @@ class TextStyler(var text: String = "") {
         return switchToUnicode()
     }
 
-    fun getIdArray(inputText: String): Int {
-        inputText.split("").filter { it != "" }
-            .forEach { println("${baseAlphabet.indexOf(it)} + $it") }
-        println(inputText.split("").filter { it != "" })
-        return -1
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun splitByCodePoint(str: String): Array<String> {
+        val codepoints = str.codePoints().toArray()
+        return Array(codepoints.size) { index ->
+            String(codepoints, index, 1)
+        }
     }
 
-    fun addPrefix() {
-        prefix += "<"
+    fun getBaseChar(index: Int): String {
+        return baseAlphabet[index].toString()
     }
 
-    fun addSuffix() {
-        suffix += ">"
+    fun getCharIndex(char: String, alphabetIndex: Int): Int {
+        return unicodeAlphabetList[alphabetIndex].indexOf(char)
     }
 
     fun switchToUnicode(): String {

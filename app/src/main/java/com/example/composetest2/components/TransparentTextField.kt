@@ -11,6 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -30,15 +34,13 @@ fun TransparentTextField(
     textFieldModifier: Modifier = Modifier,
     onValueChange: (String) -> Unit = {}
 ) {
-//    var mutableText by remember {
-//        mutableStateOf(text)
-//    }
     Box(
         modifier
             .fillMaxWidth(0.9f)
             .fillMaxHeight(0.2f)
     ) {
         TextField(
+            // text
             value = text, onValueChange = onValueChange,
             textFieldModifier
                 .align(Alignment.Center)

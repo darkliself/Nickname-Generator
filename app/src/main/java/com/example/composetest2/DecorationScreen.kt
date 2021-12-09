@@ -2,7 +2,6 @@ package com.example.composetest2
 
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -31,10 +30,10 @@ import com.example.composetest2.components.*
 
 @ExperimentalFoundationApi
 @Composable
-fun DecorationScreen(nickname: String, side: String?, navController: NavController) {
+fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navController: NavController) {
     // just testing here
     val nickname = nickname
-    var editNickname by remember{ mutableStateOf(nickname)}
+    var editNickname by remember{ mutableStateOf(nickname ?: "")}
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -48,7 +47,7 @@ fun DecorationScreen(nickname: String, side: String?, navController: NavControll
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$editNickname") }
+            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$editNickname/alphabet=$alphabetIndex") }
         )
         Header(
             "Select $side decoration",
@@ -66,7 +65,9 @@ fun DecorationScreen(nickname: String, side: String?, navController: NavControll
                 .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp))
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White,
-            onValueChange = { it -> editNickname = it }
+
+            onValueChange = { it ->
+                editNickname = it }
         )
         // Filter buttons
         Row(
@@ -119,6 +120,6 @@ fun DecorationScreen(nickname: String, side: String?, navController: NavControll
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen("", "left", NavController(LocalContext.current))
+    DecorationScreen("", "left", 0, NavController(LocalContext.current))
 }
 

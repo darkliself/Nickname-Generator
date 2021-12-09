@@ -1,5 +1,7 @@
 package com.example.composetest2
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
@@ -11,6 +13,7 @@ import androidx.navigation.navArgument
 import com.example.composetest2.ui.theme.MainScreen
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
 @Composable
@@ -30,16 +33,21 @@ fun Navigation() {
             AutogenerateNickname(navController = navController)
         }
         composable(
-            route = Screen.CustomizeNickNameScreen.route + "?nickname={nickname}",
+            route = Screen.CustomizeNickNameScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
             arguments = listOf(
                 navArgument("nickname") {
                     type = NavType.StringType
                     defaultValue = "DefaultVal"
+                },
+                navArgument("alphabetIndex") {
+                    type = NavType.IntType
+                    defaultValue = 0
                 }
             )
         ) { entry ->
             CustomizeNickNameScreen(
                 nickname = entry.arguments?.getString("nickname"),
+                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
                 navController = navController
             )
         }
@@ -58,7 +66,7 @@ fun Navigation() {
             )
         }
         composable(
-            route = Screen.DecorationScreen.route + "?nickname={nickname}/side={side}",
+            route = Screen.DecorationScreen.route + "?nickname={nickname}/side={side}/alphabetIndex={alphabetIndex}",
             arguments = listOf(
                 navArgument("nickname") {
                     type = NavType.StringType
@@ -67,26 +75,38 @@ fun Navigation() {
                 navArgument("side") {
                     type = NavType.StringType
                     defaultValue = "left"
+                },
+                navArgument("alphabetIndex") {
+                    type = NavType.IntType
+                    defaultValue = 0
                 }
             )) { entry ->
-            entry.arguments?.getString("nickname")?.let {
-                DecorationScreen(
-                    nickname = it,
-                    side = entry.arguments?.getString("side"),
-                    navController = navController
-                )
-            }
+
+            DecorationScreen(
+                nickname = entry.arguments?.getString("nickname"),
+                side = entry.arguments?.getString("side"),
+                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
+                navController = navController
+            )
+
         }
         composable(
-            route = Screen.FontStyleScreen.route + "?nickname={nickname}",
+            route = Screen.FontStyleScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
             arguments = listOf(
                 navArgument("nickname") {
                     type = NavType.StringType
                     defaultValue = "Killer"
+                },
+                navArgument("alphabetIndex") {
+                    type = NavType.IntType
+                    defaultValue = 0
                 })
         ) { entry ->
-            entry.arguments?.getString("nickname")
-                ?.let { FontStyleScreen(nickname = it, navController = navController) }
+            FontStyleScreen(
+                nickname = entry.arguments?.getString("nickname"),
+                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
+                navController = navController
+            )
         }
         composable(
             route = Screen.ResultScreen.route + "?nickname={nickname}",

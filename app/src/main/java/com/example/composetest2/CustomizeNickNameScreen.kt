@@ -29,8 +29,9 @@ import com.example.composetest2.components.WideButton
 */
 
 @Composable
-fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
+fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
     val nickname = nickname ?: ""
+    val alphabetIndex = alphabetIndex ?: 0
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -61,7 +62,7 @@ fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
             IconFace(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
             //TransparentTextField(Modifier.align(BiasAlignment(0f, 0f)))
             Text(
-                text = nickname,
+                text = "$nickname $alphabetIndex",
                 Modifier
                     .fillMaxWidth(0.6f)
                     .align(BiasAlignment(1f, -0.75f)),
@@ -90,7 +91,7 @@ fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
-                onClick = { navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname") }
+                onClick = { navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
             )
             // right decoration
             WideButton(
@@ -118,7 +119,7 @@ fun CustomizeNickNameScreen(nickname: String?, navController: NavController) {
 @Preview
 @Composable
 private fun Preview() {
-    CustomizeNickNameScreen("", NavController(LocalContext.current))
+    CustomizeNickNameScreen("", 0, NavController(LocalContext.current))
 }
 
 @Composable
