@@ -62,7 +62,7 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
             IconFace(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
             //TransparentTextField(Modifier.align(BiasAlignment(0f, 0f)))
             Text(
-                text = "$nickname $alphabetIndex",
+                text = nickname,
                 Modifier
                     .fillMaxWidth(0.6f)
                     .align(BiasAlignment(1f, -0.75f)),
@@ -82,7 +82,7 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, -0.27f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=left") }
+                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=left/alphabetIndex=$alphabetIndex") }
             )
             // font style decoration
             WideButton(
@@ -100,7 +100,7 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.77f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=right") }
+                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=right/alphabetIndex=$alphabetIndex") }
             )
         }
         WideButton(
