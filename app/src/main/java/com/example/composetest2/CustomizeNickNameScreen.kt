@@ -41,7 +41,15 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
-            image = R.drawable.arrow_left_icon
+            image = R.drawable.arrow_left_icon,
+            onClick = {
+                navController.backQueue.forEach {
+                    println(it.viewModelStore)
+                }
+
+
+                println(navController.graph.displayName)
+            }
         )
         Header(
             stringResource(id = R.string.view_05_header),
@@ -111,7 +119,7 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
-            onClick = { navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname") }
+            onClick = { navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
         )
     }
 }

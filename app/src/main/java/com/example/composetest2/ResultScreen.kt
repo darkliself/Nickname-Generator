@@ -3,6 +3,7 @@ package com.example.composetest2
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -25,19 +26,24 @@ import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
 
 @Composable
-fun ResultScreen(nickname: String?, navController: NavController) {
+fun ResultScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
     val nickname = nickname ?: ""
+    val alphabetIndex = alphabetIndex ?: 0
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
     ) {
-        // header components
         SmallButton(
             modifier = Modifier
                 .align(BiasAlignment(0f, -1f))
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.CenterStart),
+            image = R.drawable.arrow_left_icon,
+            onClick = {
+                navController
+                    .navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+            }
         )
         Header(
             stringResource(id = R.string.view_07_header),
@@ -46,6 +52,14 @@ fun ResultScreen(nickname: String?, navController: NavController) {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
+        SmallButton(
+            modifier = Modifier
+                .align(BiasAlignment(0f, -1f))
+                .fillMaxHeight(0.1f),
+            iconModifier = Modifier
+                .align(Alignment.CenterEnd)
+        )
+
         // surface with all main elements
         Box(
             modifier = Modifier
@@ -67,7 +81,7 @@ fun ResultScreen(nickname: String?, navController: NavController) {
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.2f)),
 
-            )
+                )
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_07_btn_try_again),
@@ -75,7 +89,7 @@ fun ResultScreen(nickname: String?, navController: NavController) {
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = { navController.navigate(Screen.MainScreen.route) }
-                )
+            )
             Row(
                 Modifier
                     .fillMaxHeight(0.1f)
@@ -104,7 +118,7 @@ fun ResultScreen(nickname: String?, navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen("zzzzKillerzzzz", NavController(LocalContext.current))
+    ResultScreen("zzzzKillerzzzz", 0, NavController(LocalContext.current))
 }
 
 @Composable

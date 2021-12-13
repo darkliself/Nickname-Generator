@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -77,7 +78,7 @@ fun CategoryNickNameListScreen(category: String?, navController: NavController) 
 }
 
 @ExperimentalAnimationApi
-@Preview
+@Preview (showBackground = true)
 @Composable
 private fun Preview() {
     CategoryNickNameListScreen("category", NavController(LocalContext.current))

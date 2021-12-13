@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -19,6 +20,10 @@ import com.example.composetest2.ui.theme.MainScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    Scaffold() {
+        
+    }
+    
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
@@ -109,15 +114,20 @@ fun Navigation() {
             )
         }
         composable(
-            route = Screen.ResultScreen.route + "?nickname={nickname}",
+            route = Screen.ResultScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
             arguments = listOf(
                 navArgument("nickname") {
                     type = NavType.StringType
                     defaultValue = "Killer"
+                },
+                navArgument("alphabetIndex") {
+                    type = NavType.IntType
+                    defaultValue = 0
                 }
             )) { entry ->
             ResultScreen(
                 nickname = entry.arguments?.getString("nickname"),
+                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
                 navController = navController
             )
         }
