@@ -1,5 +1,6 @@
 package com.example.composetest2
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
@@ -30,6 +32,10 @@ import com.example.composetest2.components.WideButton
 
 @Composable
 fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
+    BackHandler() {
+        navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+    }
+    navController.enableOnBackPressed(true)
     val nickname = nickname ?: ""
     val alphabetIndex = alphabetIndex ?: 0
     Box(
@@ -43,12 +49,6 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
-                navController.backQueue.forEach {
-                    println(it.viewModelStore)
-                }
-
-
-                println(navController.graph.displayName)
             }
         )
         Header(

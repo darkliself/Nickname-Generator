@@ -1,6 +1,5 @@
 package com.example.composetest2.ui.theme
 
-import android.content.res.Resources
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
@@ -9,9 +8,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.composetest2.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import com.example.composetest2.ParcelizeData
 import com.example.composetest2.Screen
 import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
@@ -62,7 +61,7 @@ fun MainScreen(navController: NavController) {
                 .fillMaxWidth(0.8f)
                 .align(BiasAlignment(0f, 0.3f)),
             Modifier.align(BiasAlignment(0f, -0.05f)),
-            onClick = { navController.navigate(Screen.CategoriesScreen.route) }
+            onClick = { navController.navigate(Screen.CategoriesScreen.route + "?parcelizeData=${ParcelizeData("123", 1, "left")}") }
         )
         IconButton(
             text = stringResource(R.string.view_01_btn_autogenerate),
