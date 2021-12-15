@@ -19,7 +19,7 @@ import com.example.composetest2.components.SquareButton
 */
 
 @Composable
-fun CategoryScreen(navController: NavController, parcelizeData: ParcelizeData?) {
+fun CategoryScreen(navController: NavController) {
     Background(R.drawable.view_03_08_bg)
 
     Box(Modifier.fillMaxSize()) {
@@ -44,7 +44,7 @@ fun CategoryScreen(navController: NavController, parcelizeData: ParcelizeData?) 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-    CategoryScreen(NavController(LocalContext.current), ParcelizeData("1", 1, ""))
+    CategoryScreen(NavController(LocalContext.current))
 }
 
 @Composable

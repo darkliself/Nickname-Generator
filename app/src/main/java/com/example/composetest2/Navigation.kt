@@ -34,16 +34,8 @@ fun Navigation() {
             ) {
             CreateNickNameScreen(navController = navController)
         }
-        composable(route = Screen.CategoriesScreen.route + "?parcelizeData={parcelizeData}",
-            arguments = listOf(
-                navArgument("parcelizeData") {
-                    type = NavType.ParcelableType(
-                        type = ParcelizeData::class.java
-                    )
-                }
-            )
-            ) { entry ->
-            CategoryScreen(navController = navController, entry.arguments?.getParcelable("parcelizeData"))
+        composable(route = Screen.CategoriesScreen.route) {
+            CategoryScreen(navController = navController)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
             AutogenerateNickname(navController = navController)
