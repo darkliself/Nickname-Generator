@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-class ParcelizeData(
+data class ScreenData(
     val rootNode: String,
     val alphabetIndex: Int,
     val side: String

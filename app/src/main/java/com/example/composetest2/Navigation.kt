@@ -29,13 +29,12 @@ fun Navigation() {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }
-        composable(
-            route = Screen.CreateNickNameScreen.route,
-            ) {
+        composable(route = Screen.CreateNickNameScreen.route) {
             CreateNickNameScreen(navController = navController)
         }
         composable(route = Screen.CategoriesScreen.route) {
-            CategoryScreen(navController = navController)
+            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            CategoryScreen(navController = navController, data)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
             AutogenerateNickname(navController = navController)

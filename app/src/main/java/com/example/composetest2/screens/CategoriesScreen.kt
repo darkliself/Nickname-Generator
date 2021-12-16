@@ -1,6 +1,7 @@
 package com.example.composetest2
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -19,9 +20,11 @@ import com.example.composetest2.components.SquareButton
 */
 
 @Composable
-fun CategoryScreen(navController: NavController) {
+fun CategoryScreen(navController: NavController, data: ScreenData?) {
     Background(R.drawable.view_03_08_bg)
-
+    if (data != null) {
+        Text(data.rootNode)
+    }
     Box(Modifier.fillMaxSize()) {
         SmallButton(
             modifier = Modifier
@@ -44,7 +47,7 @@ fun CategoryScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-    CategoryScreen(NavController(LocalContext.current))
+    CategoryScreen(NavController(LocalContext.current), ScreenData("213", 1, "left"))
 }
 
 @Composable
