@@ -40,22 +40,12 @@ fun Navigation() {
             AutogenerateNickname(navController = navController)
         }
         composable(
-            route = Screen.CustomizeNickNameScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
-            arguments = listOf(
-                navArgument("nickname") {
-                    type = NavType.StringType
-                    defaultValue = "DefaultVal"
-                },
-                navArgument("alphabetIndex") {
-                    type = NavType.IntType
-                    defaultValue = 0
-                }
-            )
-        ) { entry ->
+            route = Screen.CustomizeNickNameScreen.route + "?data={data}"
+        ) {
+            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CustomizeNickNameScreen(
-                nickname = entry.arguments?.getString("nickname"),
-                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
-                navController = navController
+                navController = navController,
+                data
             )
         }
         composable(
@@ -87,13 +77,11 @@ fun Navigation() {
                     type = NavType.IntType
                     defaultValue = 0
                 }
-            )) { entry ->
-
+            )) {
+            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             DecorationScreen(
-                nickname = entry.arguments?.getString("nickname"),
-                side = entry.arguments?.getString("side"),
-                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
-                navController = navController
+                navController = navController,
+                data = data
             )
 
         }

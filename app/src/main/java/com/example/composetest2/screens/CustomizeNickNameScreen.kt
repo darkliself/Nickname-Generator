@@ -31,13 +31,14 @@ import com.example.composetest2.components.WideButton
 */
 
 @Composable
-fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
+fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
+    val data = data ?: ScreenData("empty", rootNode = "unknown")
     BackHandler() {
-        navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+        navController.navigate(Screen.FontStyleScreen.route + "?nickname=${data.nickname}/alphabetIndex=${data.alphabetIndex}")
     }
     navController.enableOnBackPressed(true)
-    val nickname = nickname ?: ""
-    val alphabetIndex = alphabetIndex ?: 0
+    val nickname = data.nickname
+    val alphabetIndex = data.alphabetIndex
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -90,7 +91,11 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, -0.27f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=left/alphabetIndex=$alphabetIndex") }
+                onClick = {
+                    data.side = "left"
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    navController.navigate(Screen.DecorationScreen.route)
+                }
             )
             // font style decoration
             WideButton(
@@ -108,7 +113,11 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.77f)),
-                onClick = { navController.navigate(Screen.DecorationScreen.route + "?nickname=$nickname/side=right/alphabetIndex=$alphabetIndex") }
+                onClick = {
+                    data.side = "right"
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    navController.navigate(Screen.DecorationScreen.route)
+                }
             )
         }
         WideButton(
@@ -127,7 +136,7 @@ fun CustomizeNickNameScreen(nickname: String?, alphabetIndex: Int?, navControlle
 @Preview
 @Composable
 private fun Preview() {
-    CustomizeNickNameScreen("", 0, NavController(LocalContext.current))
+    CustomizeNickNameScreen( NavController(LocalContext.current), null)
 }
 
 @Composable

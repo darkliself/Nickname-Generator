@@ -30,10 +30,11 @@ import com.example.composetest2.components.*
 
 @ExperimentalFoundationApi
 @Composable
-fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navController: NavController) {
+fun DecorationScreen(navController: NavController, data: ScreenData?) {
+    val data = data ?: ScreenData("error", "")
     // just testing here
-    val nickname = nickname
-    var editNickname by remember{ mutableStateOf(nickname ?: "")}
+    val nickname = data.nickname
+    var editNickname by remember { mutableStateOf(nickname) }
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -47,10 +48,14 @@ fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navC
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$editNickname/alphabetIndex=$alphabetIndex") }
+
+            onClick = {
+                data.nickname = editNickname
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                navController.navigate(Screen.CustomizeNickNameScreen.route) }
         )
         Header(
-            "Select $side decoration",
+            "Select ${data.side} decoration",
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
@@ -67,7 +72,8 @@ fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navC
             backgroundColor = Color.White,
 
             onValueChange = { it ->
-                editNickname = it }
+                editNickname = it
+            }
         )
         // Filter buttons
         Row(
@@ -101,7 +107,7 @@ fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navC
                         .padding(bottom = 10.dp)
                         .height(25.dp)
                         .clickable {
-                            if (side == "left") {
+                            if (data.side == "left") {
                                 editNickname = "😆$editNickname"
                             } else {
                                 editNickname = "$editNickname\uD83D\uDE06"
@@ -120,6 +126,6 @@ fun DecorationScreen(nickname: String?, side: String?, alphabetIndex: Int?, navC
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen("", "left", 0, NavController(LocalContext.current))
+    DecorationScreen(NavController(LocalContext.current), null)
 }
 

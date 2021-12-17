@@ -76,7 +76,13 @@ fun AutogenerateNickname(navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.5f)),
-                onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route) }
+                onClick = {
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData(
+                        nickname = "Randome Nickanme",
+                        rootNode = Screen.CustomizeNickNameScreen.route,
+                    ))
+                    navController.navigate(Screen.CustomizeNickNameScreen.route)
+                }
             )
         }
     }

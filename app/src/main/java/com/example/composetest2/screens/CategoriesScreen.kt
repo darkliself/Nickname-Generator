@@ -47,7 +47,7 @@ fun CategoryScreen(navController: NavController, data: ScreenData?) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview2() {
-    CategoryScreen(NavController(LocalContext.current), ScreenData("213", 1, "left"))
+    CategoryScreen(NavController(LocalContext.current), ScreenData("213", "left"))
 }
 
 @Composable

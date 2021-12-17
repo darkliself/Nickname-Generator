@@ -62,7 +62,7 @@ fun MainScreen(navController: NavController) {
                 .align(BiasAlignment(0f, 0.3f)),
             Modifier.align(BiasAlignment(0f, -0.05f)),
             onClick = {
-                navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData("main", 0, "left"))
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData("main", "left"))
                 navController.navigate(Screen.CategoriesScreen.route)
             }
         )
