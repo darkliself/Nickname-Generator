@@ -33,9 +33,9 @@ import com.example.composetest2.components.WideButton
 @Composable
 fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
     val data = data ?: ScreenData("empty", rootNode = "unknown")
-    BackHandler() {
-        navController.navigate(Screen.FontStyleScreen.route + "?nickname=${data.nickname}/alphabetIndex=${data.alphabetIndex}")
-    }
+//    BackHandler() {
+//        navController.navigate(Screen.FontStyleScreen.route + "?nickname=${data.nickname}/alphabetIndex=${data.alphabetIndex}")
+//    }
     navController.enableOnBackPressed(true)
     val nickname = data.nickname
     val alphabetIndex = data.alphabetIndex
@@ -49,8 +49,7 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = {
-            }
+            onClick = { navController.navigate(data.rootNode) }
         )
         Header(
             stringResource(id = R.string.view_05_header),
@@ -108,7 +107,8 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                     data.nickname = nickname
                     data.alphabetIndex = alphabetIndex
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                    navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
+                    navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+                }
             )
             // right decoration
             WideButton(
@@ -136,7 +136,8 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                 data.nickname = nickname
                 data.alphabetIndex = alphabetIndex
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
+                navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+            }
         )
     }
 }
@@ -144,7 +145,7 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
 @Preview
 @Composable
 private fun Preview() {
-    CustomizeNickNameScreen( NavController(LocalContext.current), null)
+    CustomizeNickNameScreen(NavController(LocalContext.current), null)
 }
 
 @Composable
