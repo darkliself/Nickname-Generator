@@ -26,9 +26,7 @@ import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
 
 @Composable
-fun ResultScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
-    val nickname = nickname ?: ""
-    val alphabetIndex = alphabetIndex ?: 0
+fun ResultScreen(navController: NavController, data: ScreenData) {
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -41,8 +39,9 @@ fun ResultScreen(nickname: String?, alphabetIndex: Int?, navController: NavContr
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController
-                    .navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+                    .navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
         Header(
@@ -72,7 +71,7 @@ fun ResultScreen(nickname: String?, alphabetIndex: Int?, navController: NavContr
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            Text(text = nickname.toString(), modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
+            Text(text = data.nickname, modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
 
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -118,7 +117,7 @@ fun ResultScreen(nickname: String?, alphabetIndex: Int?, navController: NavContr
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen("zzzzKillerzzzz", 0, NavController(LocalContext.current))
+    ResultScreen( NavController(LocalContext.current), ScreenData("Nick", "Root", 0))
 }
 
 @Composable

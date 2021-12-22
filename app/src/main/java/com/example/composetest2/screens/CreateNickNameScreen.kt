@@ -80,7 +80,9 @@ fun CreateNickNameScreen(navController: NavController) {
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = {
                     if (nickname != "") {
-                        navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=${nickname}/alphabetIndex=0")
+                        val data = ScreenData(nickname, Screen.CreateNickNameScreen.route, 0)
+                        navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                        navController.navigate(Screen.CustomizeNickNameScreen.route)
                     } else {
                         placeHolder = "needed value"
                     }

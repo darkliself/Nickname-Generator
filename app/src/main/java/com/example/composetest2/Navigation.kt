@@ -33,7 +33,8 @@ fun Navigation() {
             CreateNickNameScreen(navController = navController)
         }
         composable(route = Screen.CategoriesScreen.route) {
-            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            val data =
+                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CategoryScreen(navController = navController, data)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
@@ -42,7 +43,8 @@ fun Navigation() {
         composable(
             route = Screen.CustomizeNickNameScreen.route + "?data={data}"
         ) {
-            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            val data =
+                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CustomizeNickNameScreen(
                 navController = navController,
                 data
@@ -78,11 +80,14 @@ fun Navigation() {
                     defaultValue = 0
                 }
             )) {
-            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
-            DecorationScreen(
-                navController = navController,
-                data = data
-            )
+            val data =
+                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            if (data != null) {
+                DecorationScreen(
+                    navController = navController,
+                    data = data
+                )
+            }
 
         }
         composable(
@@ -97,11 +102,14 @@ fun Navigation() {
                     defaultValue = 0
                 })
         ) { entry ->
-            FontStyleScreen(
-                nickname = entry.arguments?.getString("nickname"),
-                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
-                navController = navController
-            )
+            val data =
+                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            if (data != null) {
+                FontStyleScreen(
+                    navController = navController,
+                    data = data,
+                )
+            }
         }
         composable(
             route = Screen.ResultScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
@@ -115,11 +123,13 @@ fun Navigation() {
                     defaultValue = 0
                 }
             )) { entry ->
-            ResultScreen(
-                nickname = entry.arguments?.getString("nickname"),
-                alphabetIndex = entry.arguments?.getInt("alphabetIndex"),
-                navController = navController
-            )
+            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            if (data != null) {
+                ResultScreen(
+                    navController = navController,
+                    data = data
+                )
+            }
         }
         composable(
             route = Screen.TestScreen.route

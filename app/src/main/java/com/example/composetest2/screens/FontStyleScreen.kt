@@ -23,10 +23,12 @@ import com.example.composetest2.components.*
 @RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi
 @Composable
-fun FontStyleScreen(nickname: String?, alphabetIndex: Int?, navController: NavController) {
+fun FontStyleScreen(navController: NavController, data: ScreenData) {
+    var data = data
     val textStyler = TextStyler()
-    val nickname by remember { mutableStateOf(nickname?: "") }
-    val alphabetIndex = alphabetIndex ?: 0
+    // val nickname by remember { mutableStateOf(data.nickname) }
+    val nickname = data.nickname
+    val alphabetIndex = data.alphabetIndex
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -39,7 +41,12 @@ fun FontStyleScreen(nickname: String?, alphabetIndex: Int?, navController: NavCo
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
+            onClick = {
+                data.nickname = nickname
+                data.alphabetIndex = alphabetIndex
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                navController.navigate(Screen.CustomizeNickNameScreen.route)
+            }
         )
         Header(
             stringResource(id = R.string.view_08_btn_header),
@@ -78,17 +85,20 @@ fun FontStyleScreen(nickname: String?, alphabetIndex: Int?, navController: NavCo
             var baseNickname = ""
             // in case if chars not in standard code
             textStyler.splitByCodePoint(nickname).forEach { elem ->
-                if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
-                    baseNickname += textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
+                baseNickname += if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
+                    textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
                 } else {
-                    baseNickname += elem
+                    elem
                 }
             }
 
             items(textStyler.getAlphabetCount()) { index ->
                 val nick = textStyler.rootToUnicode(baseNickname, index)
                 LazyColumnItem(nick, onClick = {
-                    navController.navigate(Screen.CustomizeNickNameScreen.route + "?nickname=$nick/alphabetIndex=$index")
+                    data.nickname = nick
+                    data.alphabetIndex = index
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    navController.navigate(Screen.CustomizeNickNameScreen.route)
                 })
             }
         }
@@ -100,5 +110,5 @@ fun FontStyleScreen(nickname: String?, alphabetIndex: Int?, navController: NavCo
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    FontStyleScreen("Killer", 0, NavController(LocalContext.current))
+    FontStyleScreen(NavController(LocalContext.current), ScreenData("name", "root", 0))
 }

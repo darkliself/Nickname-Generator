@@ -30,11 +30,10 @@ import com.example.composetest2.components.*
 
 @ExperimentalFoundationApi
 @Composable
-fun DecorationScreen(navController: NavController, data: ScreenData?) {
-    val data = data ?: ScreenData("error", "")
+fun DecorationScreen(navController: NavController, data: ScreenData) {
+    val data = data
     // just testing here
-    val nickname = data.nickname
-    var editNickname by remember { mutableStateOf(nickname) }
+    var editNickname by remember { mutableStateOf(data.nickname) }
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -126,6 +125,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData?) {
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen(NavController(LocalContext.current), null)
+    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", 0))
 }
 

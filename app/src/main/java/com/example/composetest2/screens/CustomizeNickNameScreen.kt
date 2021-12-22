@@ -104,7 +104,11 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                 Modifier
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
-                onClick = { navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
+                onClick = {
+                    data.nickname = nickname
+                    data.alphabetIndex = alphabetIndex
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
             )
             // right decoration
             WideButton(
@@ -128,7 +132,11 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                 .fillMaxHeight(0.15f)
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
-            onClick = { navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
+            onClick = {
+                data.nickname = nickname
+                data.alphabetIndex = alphabetIndex
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex") }
         )
     }
 }
