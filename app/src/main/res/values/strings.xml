@@ -51,6 +51,8 @@
     <string name="view_07_btn_try_again">Try again</string>
     <string name="view_07_btn_copy">Copy</string>
     <string name="view_07_btn_share">Share</string>
+    <string name="view_07_share_text">Share to</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
+
 </resources>

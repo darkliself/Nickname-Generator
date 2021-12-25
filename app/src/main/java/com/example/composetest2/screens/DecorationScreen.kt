@@ -94,27 +94,29 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
         LazyVerticalGrid(
-            cells = GridCells.Fixed(6),
+            cells = GridCells.Fixed(4),
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f))
         ) {
-            items(250) { index ->
+
+            val decoration = if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
+            items(decoration.count()) { index ->
                 Card(
                     Modifier
                         .padding(bottom = 10.dp)
-                        .height(25.dp)
+                        .height(35.dp)
                         .clickable {
-                            if (data.side == "left") {
-                                editNickname = "😆$editNickname"
+                            editNickname = if (data.side == DecorationSide.LEFT) {
+                                "${decoration[index]}$editNickname"
                             } else {
-                                editNickname = "$editNickname\uD83D\uDE06"
+                                "$editNickname${decoration[index]}"
                             }
 
                         }
                 ) {
-                    Text("\uD83D\uDE06", textAlign = TextAlign.Center)
+                    Text(decoration[index], textAlign = TextAlign.Center)
                 }
             }
         }

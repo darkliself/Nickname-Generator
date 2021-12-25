@@ -1,9 +1,8 @@
 package com.example.composetest2
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -73,8 +72,11 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                 text = nickname,
                 Modifier
                     .fillMaxWidth(0.6f)
-                    .align(BiasAlignment(1f, -0.75f)),
-                fontSize = 18.sp
+                    .align(BiasAlignment(1f, -0.75f))
+                    .padding(end = 10.dp)
+                    .horizontalScroll(rememberScrollState(nickname.length / 2)),
+                // fontSize = 18.sp,
+                maxLines = 1
             )
             Text(
                 text = "Length: ${nickname.length}",
@@ -91,7 +93,7 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, -0.27f)),
                 onClick = {
-                    data.side = "left"
+                    data.side = DecorationSide.LEFT
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.DecorationScreen.route)
                 }
@@ -118,7 +120,7 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.77f)),
                 onClick = {
-                    data.side = "right"
+                    data.side = DecorationSide.RIGHT
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.DecorationScreen.route)
                 }

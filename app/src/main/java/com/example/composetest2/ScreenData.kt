@@ -9,7 +9,12 @@ data class ScreenData(
     var nickname: String = "Default",
     val rootNode: String,
     var alphabetIndex: Int = 0,
-    var side: String = "left"
+    var side: DecorationSide = DecorationSide.LEFT
 ) : Parcelable
 
+
+
+enum class DecorationSide() {
+    LEFT, RIGHT
+}
 

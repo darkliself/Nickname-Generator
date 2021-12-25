@@ -1,9 +1,6 @@
 package com.example.composetest2
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -22,11 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
-import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.components.WideButton
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import androidx.compose.foundation.*
+import androidx.compose.ui.text.style.TextAlign
+
 
 @Composable
 fun ResultScreen(navController: NavController, data: ScreenData) {
+    val context = LocalContext.current
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -71,7 +74,14 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            Text(text = data.nickname, modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
+            Text(
+                text = data.nickname,
+                modifier = Modifier.fillMaxWidth(0.9f)
+                    .align(BiasAlignment(0f, -0.1f))
+                    .verticalScroll(rememberScrollState(data.nickname.length / 2)),
+                maxLines = 1,
+                textAlign = TextAlign.Center
+            )
 
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -100,14 +110,28 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     stringResource(R.string.view_07_btn_copy),
                     Modifier
                         .fillMaxWidth(0.5f)
-                        .fillMaxHeight()
+                        .fillMaxHeight(),
+                    onClick = {
+                        val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                        val clip = ClipData.newPlainText(null, data.nickname)
+                        clipboard.setPrimaryClip(clip)
+                    }
                 )
                 WideButton(
                     R.drawable.view_07_btn_share,
                     stringResource(R.string.view_07_btn_share),
                     Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight()
+                        .fillMaxHeight(),
+                    onClick = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, data.nickname)
+                            type = "text/plain"
+                        }
+                        val shareIntent = Intent.createChooser(sendIntent , context.getString(R.string.view_07_btn_share))
+                        context.startActivity(shareIntent)
+                    }
                 )
             }
         }

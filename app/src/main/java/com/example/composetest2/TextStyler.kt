@@ -35,6 +35,7 @@ class TextStyler(var text: String = "") {
     private var baseAlphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890"
     private val unicodeAlphabetList = AlphabetList
 
+
     fun getAlphabetCount(): Int {
         return AlphabetList.count()
     }
