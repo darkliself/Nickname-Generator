@@ -47,7 +47,7 @@ fun TransparentTextField(
                 .fillMaxWidth(),
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
-                fontSize = 18.sp,
+                // fontSize = 18.sp,
                 fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
                 fontWeight = FontWeight.W900,
             ),

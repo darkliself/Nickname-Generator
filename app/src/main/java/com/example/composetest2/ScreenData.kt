@@ -14,7 +14,4 @@ data class ScreenData(
 
 
 
-enum class DecorationSide() {
-    LEFT, RIGHT
-}
 

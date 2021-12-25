@@ -25,6 +25,11 @@ val DecorationRight = listOf<String>(
 
 //val t = "\uFEFF"
 
+enum class DecorationSide() {
+    LEFT, RIGHT
+}
+
+
 
 
 

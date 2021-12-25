@@ -18,10 +18,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
+import java.util.*
 
 /*
     View 07
@@ -54,7 +56,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 navController.navigate(Screen.CustomizeNickNameScreen.route) }
         )
         Header(
-            "Select ${data.side} decoration",
+            "Select ${data.side.toString().lowercase()} decoration",
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
