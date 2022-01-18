@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets
 fun main(args: Array<String>) {
     val t = TextStyler("s")
     val z = t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 1)
-    t.rootToUnicode("jghfdjghdf", 1)
+    t.rootToUnicode("Random Nickname", 1)
 
     println(t.getCharIndex("s", 0))
 
@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
             String(codepoints, index, 1)
         }
     }
-
+    t.splitByCodePoint("Random Nickname")
 }
 
 /*

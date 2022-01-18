@@ -109,7 +109,8 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData?) {
                     data.nickname = nickname
                     data.alphabetIndex = alphabetIndex
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                    navController.navigate(Screen.FontStyleScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+                    navController.navigate(Screen.FontStyleScreen.route)
+                        //+ "?nickname=$nickname/alphabetIndex=$alphabetIndex")
                 }
             )
             // right decoration

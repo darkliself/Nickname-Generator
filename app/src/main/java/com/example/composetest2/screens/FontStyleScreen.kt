@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -29,6 +30,13 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     // val nickname by remember { mutableStateOf(data.nickname) }
     val nickname = data.nickname
     val alphabetIndex = data.alphabetIndex
+
+    if (nickname != "") {
+        println(nickname)
+    } else {
+        println("textStyler")
+    }
+
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -83,6 +91,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
             var baseNickname = ""
+
             // in case if chars not in standard code
             textStyler.splitByCodePoint(nickname).forEach { elem ->
                 baseNickname += if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {

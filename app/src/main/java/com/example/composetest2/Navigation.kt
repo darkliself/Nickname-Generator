@@ -35,19 +35,19 @@ fun Navigation() {
         composable(route = Screen.CategoriesScreen.route) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
-            CategoryScreen(navController = navController, data)
+            CategoryScreen(navController = navController, data = data)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
             AutogenerateNickname(navController = navController)
         }
         composable(
-            route = Screen.CustomizeNickNameScreen.route + "?data={data}"
+            route = Screen.CustomizeNickNameScreen.route
         ) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CustomizeNickNameScreen(
                 navController = navController,
-                data
+                data = data
             )
         }
         composable(
@@ -65,20 +65,9 @@ fun Navigation() {
             )
         }
         composable(
-            route = Screen.DecorationScreen.route + "?nickname={nickname}/side={side}/alphabetIndex={alphabetIndex}",
+            route = Screen.DecorationScreen.route,
             arguments = listOf(
-                navArgument("nickname") {
-                    type = NavType.StringType
-                    defaultValue = "Killer"
-                },
-                navArgument("side") {
-                    type = NavType.StringType
-                    defaultValue = "left"
-                },
-                navArgument("alphabetIndex") {
-                    type = NavType.IntType
-                    defaultValue = 0
-                }
+
             )) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
@@ -91,16 +80,16 @@ fun Navigation() {
 
         }
         composable(
-            route = Screen.FontStyleScreen.route + "?nickname={nickname}/alphabetIndex={alphabetIndex}",
-            arguments = listOf(
-                navArgument("nickname") {
-                    type = NavType.StringType
-                    defaultValue = "Killer"
-                },
-                navArgument("alphabetIndex") {
-                    type = NavType.IntType
-                    defaultValue = 0
-                })
+            route = Screen.FontStyleScreen.route, //+ "?nickname={nickname}/alphabetIndex={alphabetIndex}",
+//            arguments = listOf(
+//                navArgument("nickname") {
+//                    type = NavType.StringType
+//                    defaultValue = "Killer"
+//                },
+//                navArgument("alphabetIndex") {
+//                    type = NavType.IntType
+//                    defaultValue = 0
+//                })
         ) { entry ->
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
@@ -123,7 +112,8 @@ fun Navigation() {
                     defaultValue = 0
                 }
             )) { entry ->
-            val data = navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            val data =
+                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             if (data != null) {
                 ResultScreen(
                     navController = navController,
