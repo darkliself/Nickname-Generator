@@ -1,4 +1,4 @@
-package com.example.composetest2
+package com.example.composetest2.logic
 
 import android.annotation.SuppressLint
 

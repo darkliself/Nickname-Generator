@@ -1,6 +1,7 @@
 package com.example.composetest2
 
 import android.os.Parcelable
+import com.example.composetest2.logic.DecorationSide
 import kotlinx.parcelize.Parcelize
 
 

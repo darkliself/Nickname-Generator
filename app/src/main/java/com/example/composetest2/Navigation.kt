@@ -21,9 +21,6 @@ import kotlinx.parcelize.Parcelize
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    Scaffold() {
-
-    }
 
     NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
@@ -33,8 +30,8 @@ fun Navigation() {
             CreateNickNameScreen(navController = navController)
         }
         composable(route = Screen.CategoriesScreen.route) {
-            val data =
-                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            val data = navController
+                .previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CategoryScreen(navController = navController, data = data)
         }
         composable(route = Screen.AutogenerateNicknameScreen.route) {
@@ -43,8 +40,8 @@ fun Navigation() {
         composable(
             route = Screen.CustomizeNickNameScreen.route
         ) {
-            val data =
-                navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
+            val data = navController
+                .previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             CustomizeNickNameScreen(
                 navController = navController,
                 data = data
@@ -68,7 +65,8 @@ fun Navigation() {
             route = Screen.DecorationScreen.route,
             arguments = listOf(
 
-            )) {
+            )
+        ) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             if (data != null) {
