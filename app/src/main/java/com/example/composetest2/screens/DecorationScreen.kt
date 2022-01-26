@@ -23,6 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
+import com.example.composetest2.logic.DecorationLeft
+import com.example.composetest2.logic.DecorationRight
+import com.example.composetest2.logic.DecorationSide
 import java.util.*
 
 /*

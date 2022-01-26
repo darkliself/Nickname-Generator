@@ -4,17 +4,19 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.composetest2.screens.CreateNickNameScreen
+import com.example.composetest2.screens.CustomizeNickNameScreen
 import com.example.composetest2.ui.theme.MainScreen
-import kotlinx.parcelize.Parcelize
 
 
+@ExperimentalComposeUiApi
 @RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
@@ -42,10 +44,12 @@ fun Navigation() {
         ) {
             val data = navController
                 .previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
-            CustomizeNickNameScreen(
-                navController = navController,
-                data = data
-            )
+            if (data != null) {
+                CustomizeNickNameScreen(
+                    navController = navController,
+                    data = data
+                )
+            }
         }
         composable(
             route = Screen.CategoryNickNameListScreen.route + "?category={category}",
@@ -88,7 +92,7 @@ fun Navigation() {
 //                    type = NavType.IntType
 //                    defaultValue = 0
 //                })
-        ) { entry ->
+        ) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             if (data != null) {
@@ -109,7 +113,7 @@ fun Navigation() {
                     type = NavType.IntType
                     defaultValue = 0
                 }
-            )) { entry ->
+            )) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
             if (data != null) {

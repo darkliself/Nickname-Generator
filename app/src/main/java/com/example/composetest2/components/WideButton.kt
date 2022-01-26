@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composetest2.R
 import com.example.composetest2.Screen
-import com.example.composetest2.TextStyler
 
 @Composable
 fun WideButton(

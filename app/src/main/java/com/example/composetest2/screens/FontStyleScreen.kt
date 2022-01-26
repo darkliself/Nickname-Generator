@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
+import com.example.composetest2.logic.TextStyler
 
 /*
     View 08
@@ -36,7 +37,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     } else {
         println("textStyler")
     }
-
 
     Background(image = R.drawable.view_03_08_bg)
     Box(

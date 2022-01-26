@@ -1,18 +1,21 @@
-package com.example.composetest2
+package com.example.composetest2.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -22,21 +25,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.composetest2.R
+import com.example.composetest2.Screen
+import com.example.composetest2.ScreenData
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
-
 
 /*
     View 02
 */
 
-
+@ExperimentalComposeUiApi
 @Composable
 fun CreateNickNameScreen(navController: NavController) {
     val initText = stringResource(id = R.string.view_02_nickname_placeholder)
     var nickname by remember { mutableStateOf("") }
     var placeHolder by remember { mutableStateOf(initText) }
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -71,6 +78,17 @@ fun CreateNickNameScreen(navController: NavController) {
                     nickname = it
                 },
                 placeholder = placeHolder,
+                keyboardActions = KeyboardActions( onDone = {
+                    if (nickname != "") {
+                        keyboardController?.hide()
+                        val data = ScreenData(nickname, Screen.CreateNickNameScreen.route)
+                        navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                        navController.navigate(Screen.CustomizeNickNameScreen.route)
+                    } else {
+                        placeHolder = "needed value"
+                    }
+                }),
+                keyboardOptions = KeyboardOptions()
             )
             WideButton(
                 R.drawable.btn_wide_green,
@@ -92,18 +110,22 @@ fun CreateNickNameScreen(navController: NavController) {
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview3() {
     CreateNickNameScreen(NavController(LocalContext.current))
 }
 
+@ExperimentalComposeUiApi
 @Composable
 private fun NicknameTextField(
     modifier: Modifier = Modifier,
     value: String = "",
     onValueChange: (String) -> Unit,
     placeholder: String,
+    keyboardActions: KeyboardActions,
+    keyboardOptions: KeyboardOptions
 ) {
     Surface(
         modifier = modifier
@@ -136,13 +158,15 @@ private fun NicknameTextField(
                 placeholder = {
                     Text(
                         text = placeholder,
-                        //stringResource(R.string.view_02_nickname_placeholder),
+                        // stringResource(R.string.view_02_nickname_placeholder),
                         Modifier
                             .fillMaxWidth()
                             .align(Alignment.Center), textAlign = TextAlign.Center
                     )
                 },
-                singleLine = true
+                singleLine = true,
+                keyboardActions = keyboardActions,
+                keyboardOptions = keyboardOptions,
             )
         }
     }
