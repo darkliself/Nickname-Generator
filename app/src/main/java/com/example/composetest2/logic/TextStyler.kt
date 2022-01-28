@@ -53,7 +53,7 @@ class TextStyler(var text: String = "") {
         return switchToUnicode()
     }
 
-
+    // codepiont mb dont work with lower android API versions/ must be rebuild using suffix and prefix
     @RequiresApi(Build.VERSION_CODES.N)
     fun splitByCodePoint(str: String): Array<String> {
         val codepoints = str.codePoints().toArray()
