@@ -38,7 +38,9 @@ import java.util.*
 fun DecorationScreen(navController: NavController, data: ScreenData) {
     val data = data
     // just testing here
-    var editNickname by remember { mutableStateOf(data.nickname) }
+    var nickname by remember { mutableStateOf(data.nickname) }
+    var decoration by remember { mutableStateOf("") }
+    var textArea by remember { mutableStateOf(nickname) }
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -54,9 +56,10 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
 
             onClick = {
-                data.nickname = editNickname
+                data.nickname = nickname
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController.navigate(Screen.CustomizeNickNameScreen.route) }
+                navController.navigate(Screen.CustomizeNickNameScreen.route)
+            }
         )
         Header(
             "Select ${data.side.toString().lowercase()} decoration",
@@ -66,7 +69,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -1f))
         )
         TransparentTextField(
-            text = editNickname,
+            text = nickname,
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
@@ -76,7 +79,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             backgroundColor = Color.White,
 
             onValueChange = { it ->
-                editNickname = it
+                textArea = it
             }
         )
         // Filter buttons
@@ -106,17 +109,18 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, 1f))
         ) {
 
-            val decoration = if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
+            val decoration =
+                if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
             items(decoration.count()) { index ->
                 Card(
                     Modifier
                         .padding(bottom = 10.dp)
                         .height(35.dp)
                         .clickable {
-                            editNickname = if (data.side == DecorationSide.LEFT) {
-                                "${decoration[index]}$editNickname"
+                            textArea = if (data.side == DecorationSide.LEFT) {
+                                "${decoration[index]}$nickname"
                             } else {
-                                "$editNickname${decoration[index]}"
+                                "$nickname${decoration[index]}"
                             }
 
                         }

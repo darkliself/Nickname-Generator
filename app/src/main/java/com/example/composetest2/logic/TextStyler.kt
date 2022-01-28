@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
             String(codepoints, index, 1)
         }
     }
-    t.splitByCodePoint("Random Nickname")
+    println(t.splitByCodePoint("Random Nickname"))
 }
 
 /*
