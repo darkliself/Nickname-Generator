@@ -33,7 +33,7 @@ import com.example.composetest2.logic.DecorationSide
 fun CustomizeNickNameScreen(navController: NavController, data: ScreenData) {
     val data = data
     navController.enableOnBackPressed(true)
-    val nickname = data.nickname
+    val nickname = "${data.prefix}${data.root}${data.suffix}"
     val alphabetIndex = data.alphabetIndex
     Box(
         Modifier.fillMaxSize()

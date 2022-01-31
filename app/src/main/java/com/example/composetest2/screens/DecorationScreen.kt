@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -26,7 +25,6 @@ import com.example.composetest2.components.*
 import com.example.composetest2.logic.DecorationLeft
 import com.example.composetest2.logic.DecorationRight
 import com.example.composetest2.logic.DecorationSide
-import java.util.*
 
 /*
     View 07
@@ -38,9 +36,11 @@ import java.util.*
 fun DecorationScreen(navController: NavController, data: ScreenData) {
     val data = data
     // just testing here
-    var nickname by remember { mutableStateOf(data.nickname) }
+    var nicknameRoot by remember { mutableStateOf(data.root) }
+    var prefix by remember { mutableStateOf(data.prefix) }
+    var suffix by remember { mutableStateOf(data.suffix) }
     var decoration by remember { mutableStateOf("") }
-    var textArea by remember { mutableStateOf(nickname) }
+    var textArea by remember { mutableStateOf("$prefix$nicknameRoot$suffix") }
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -56,7 +56,9 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
 
             onClick = {
-                data.nickname = nickname
+                data.root = nicknameRoot
+                data.prefix = prefix
+                data.suffix = suffix
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
@@ -69,7 +71,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -1f))
         )
         TransparentTextField(
-            text = nickname,
+            text = textArea,
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
@@ -78,9 +80,9 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White,
 
-            onValueChange = { it ->
-                textArea = it
-            }
+//            onValueChange = { it ->
+//                textArea = it
+//            }
         )
         // Filter buttons
         Row(
@@ -118,9 +120,9 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                         .height(35.dp)
                         .clickable {
                             textArea = if (data.side == DecorationSide.LEFT) {
-                                "${decoration[index]}$nickname"
+                                "${decoration[index]}$nicknameRoot"
                             } else {
-                                "$nickname${decoration[index]}"
+                                "$nicknameRoot${decoration[index]}"
                             }
 
                         }
@@ -136,6 +138,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
 @Preview
 @Composable
 private fun Preview() {
-    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", 0))
+    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", alphabetIndex = 0))
 }
 

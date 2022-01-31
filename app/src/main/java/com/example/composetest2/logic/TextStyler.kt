@@ -11,6 +11,7 @@ fun main(args: Array<String>) {
     val z = t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 1)
     t.rootToUnicode("Random Nickname", 1)
 
+
     println(t.getCharIndex("s", 0))
 
     fun splitByCodePoint(str: String): Array<String> {
@@ -35,7 +36,6 @@ class TextStyler(var text: String = "") {
     private var baseAlphabet = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890"
     private val unicodeAlphabetList = AlphabetList
 
-
     fun getAlphabetCount(): Int {
         return AlphabetList.count()
     }
@@ -52,8 +52,9 @@ class TextStyler(var text: String = "") {
         root = text
         return switchToUnicode()
     }
+
     /**
-    // codepiont mb dont work with lower android API versions/ must be rebuild using suffix and prefix
+    // codepoint mb don't work with lower android API versions/ must be rebuild using suffix and prefix
      */
     @RequiresApi(Build.VERSION_CODES.N)
     fun splitByCodePoint(str: String): Array<String> {
@@ -69,6 +70,22 @@ class TextStyler(var text: String = "") {
 
     fun getCharIndex(char: String, alphabetIndex: Int): Int {
         return unicodeAlphabetList[alphabetIndex].indexOf(char)
+    }
+
+    fun getPrefix(): String {
+        return prefix
+    }
+
+    fun setPrefix(value: String) {
+        prefix = value
+    }
+
+    fun getSuffix(): String {
+        return suffix
+    }
+
+    fun setSuffix(value: String) {
+        suffix = value
     }
 
     fun switchToUnicode(): String {

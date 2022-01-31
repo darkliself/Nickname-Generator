@@ -50,7 +50,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
-                data.nickname = nickname
+                data.root = nickname
                 data.alphabetIndex = alphabetIndex
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
@@ -104,7 +104,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             items(textStyler.getAlphabetCount()) { index ->
                 val nick = textStyler.rootToUnicode(baseNickname, index)
                 LazyColumnItem(nick, onClick = {
-                    data.nickname = nick
+                    data.root = nick
                     data.alphabetIndex = index
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.CustomizeNickNameScreen.route)
@@ -119,5 +119,5 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    FontStyleScreen(NavController(LocalContext.current), ScreenData("name", "root", 0))
+    FontStyleScreen(NavController(LocalContext.current), ScreenData("name", "root", alphabetIndex = 0))
 }

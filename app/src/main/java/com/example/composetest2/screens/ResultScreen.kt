@@ -141,7 +141,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen( NavController(LocalContext.current), ScreenData("Nick", "Root", 0))
+    ResultScreen( NavController(LocalContext.current), ScreenData("Nick", "Root", alphabetIndex = 0))
 }
 
 @Composable

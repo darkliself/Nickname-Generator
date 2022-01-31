@@ -78,10 +78,10 @@ fun CreateNickNameScreen(navController: NavController) {
                     nickname = it
                 },
                 placeholder = placeHolder,
-                keyboardActions = KeyboardActions( onDone = {
+                keyboardActions = KeyboardActions(onDone = {
                     if (nickname != "") {
                         keyboardController?.hide()
-                        val data = ScreenData(nickname, Screen.CreateNickNameScreen.route)
+                        val data = ScreenData(root = nickname, rootNode = Screen.CreateNickNameScreen.route)
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                         navController.navigate(Screen.CustomizeNickNameScreen.route)
                     } else {
@@ -98,7 +98,10 @@ fun CreateNickNameScreen(navController: NavController) {
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = {
                     if (nickname != "") {
-                        val data = ScreenData(nickname, Screen.CreateNickNameScreen.route)
+                        val data = ScreenData(
+                            root = nickname,
+                            rootNode = Screen.CreateNickNameScreen.route
+                        )
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                         navController.navigate(Screen.CustomizeNickNameScreen.route)
                     } else {
