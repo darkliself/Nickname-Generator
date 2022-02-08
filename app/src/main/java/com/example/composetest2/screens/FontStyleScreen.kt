@@ -3,13 +3,17 @@ package com.example.composetest2
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +33,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     var data = data
     val textStyler = TextStyler()
     // val nickname by remember { mutableStateOf(data.nickname) }
-    val nickname = data.nickname
+    val nickname = data.root
     val alphabetIndex = data.alphabetIndex
 
     if (nickname != "") {
@@ -63,12 +67,24 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
+        //Add here
+        TransparentTextField(
+            text = "${data.prefix}${data.root}${data.suffix}",
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .fillMaxHeight(0.1f)
+                .clip(RoundedCornerShape(30.dp))
+                .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp))
+                .align(BiasAlignment(0f, -0.8f)),
+            backgroundColor = Color.White,
+            readOnly = true
+        )
         // Filter buttons
         Row(
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.07f)
-                .align(BiasAlignment(0f, -0.8f))
+                .align(BiasAlignment(0f, -0.6f))
         ) {
             Spacer(modifier = Modifier.fillMaxWidth(0.05f))
 
@@ -87,7 +103,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.8f)
                 .padding(start = 20.dp)
-                .align(BiasAlignment(-0.8f, 0.7f)),
+                .align(BiasAlignment(-0.8f, 1.6f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
             var baseNickname = ""

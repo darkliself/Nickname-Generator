@@ -32,7 +32,8 @@ fun TransparentTextField(
     text: String = "random nickname",
     backgroundColor: Color = Color.Transparent,
     textFieldModifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit = {}
+    onValueChange: (String) -> Unit = {},
+    readOnly: Boolean = false
 ) {
     Box(
         modifier
@@ -57,6 +58,7 @@ fun TransparentTextField(
                 unfocusedIndicatorColor = backgroundColor,
             ),
             singleLine = true,
+            readOnly = readOnly
         )
     }
 }

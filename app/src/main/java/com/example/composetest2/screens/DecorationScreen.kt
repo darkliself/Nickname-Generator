@@ -4,6 +4,7 @@ package com.example.composetest2
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -15,6 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -71,7 +75,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -1f))
         )
         TransparentTextField(
-            text = textArea,
+            text = "$prefix$nicknameRoot$suffix",
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
@@ -110,21 +114,26 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f))
         ) {
-
             val decoration =
                 if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
             items(decoration.count()) { index ->
+                var state by remember { mutableStateOf(false) }
+                val focus by remember { mutableStateOf(FocusRequester()) }
                 Card(
                     Modifier
                         .padding(bottom = 10.dp)
                         .height(35.dp)
+                        .focusRequester(focus)
+                        .onFocusChanged { state = it.isFocused }
+                        .focusable()
                         .clickable {
                             textArea = if (data.side == DecorationSide.LEFT) {
-                                "${decoration[index]}$nicknameRoot"
+                                prefix = decoration[index]
+                                "${decoration[index]}$nicknameRoot$suffix"
                             } else {
-                                "$nicknameRoot${decoration[index]}"
+                                suffix = decoration[index]
+                                "$prefix$nicknameRoot${decoration[index]}"
                             }
-
                         }
                 ) {
                     Text(decoration[index], textAlign = TextAlign.Center)
@@ -135,7 +144,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
 }
 
 @ExperimentalFoundationApi
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun Preview() {
     DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", alphabetIndex = 0))
