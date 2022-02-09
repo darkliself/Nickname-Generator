@@ -24,17 +24,20 @@ import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.logic.DecorationSide
+import com.example.composetest2.logic.TextStyler
 
 /*
     View 05
 */
 
 @Composable
-fun CustomizeNickNameScreen(navController: NavController, data: ScreenData) {
-    val data = data
+fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
+    val textStyler = TextStyler()
+    val data = _data
     navController.enableOnBackPressed(true)
-    val nickname = "${data.prefix}${data.root}${data.suffix}"
     val alphabetIndex = data.alphabetIndex
+    val nickname = "${data.prefix}${textStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)}${data.suffix}"
+
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -136,7 +139,7 @@ fun CustomizeNickNameScreen(navController: NavController, data: ScreenData) {
                 data.nickname = nickname
                 data.alphabetIndex = alphabetIndex
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController.navigate(Screen.ResultScreen.route + "?nickname=$nickname/alphabetIndex=$alphabetIndex")
+                navController.navigate(Screen.ResultScreen.route)
             }
         )
     }

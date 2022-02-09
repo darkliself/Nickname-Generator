@@ -1,6 +1,9 @@
 package com.example.composetest2.ui.theme
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -16,11 +19,14 @@ import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.IconButton
 import com.example.composetest2.components.SmallButton
+import com.example.composetest2.logic.TextStyler
+import java.nio.charset.StandardCharsets
 
 /*
     View 01
 */
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun MainScreen(navController: NavController) {
 
@@ -79,6 +85,7 @@ fun MainScreen(navController: NavController) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {

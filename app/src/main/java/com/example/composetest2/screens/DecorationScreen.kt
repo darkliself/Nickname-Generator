@@ -1,10 +1,7 @@
 package com.example.composetest2
 
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -18,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -29,6 +27,7 @@ import com.example.composetest2.components.*
 import com.example.composetest2.logic.DecorationLeft
 import com.example.composetest2.logic.DecorationRight
 import com.example.composetest2.logic.DecorationSide
+import com.example.composetest2.logic.TextStyler
 
 /*
     View 07
@@ -39,11 +38,19 @@ import com.example.composetest2.logic.DecorationSide
 @Composable
 fun DecorationScreen(navController: NavController, data: ScreenData) {
     val data = data
-    // just testing here
-    var nicknameRoot by remember { mutableStateOf(data.root) }
+    val textStyler = TextStyler()
+
+    var nicknameRoot by remember {
+        mutableStateOf(
+            textStyler.rebuildToString(
+                data.rootAsCodeList,
+                data.alphabetIndex
+            )
+        )
+    }
     var prefix by remember { mutableStateOf(data.prefix) }
     var suffix by remember { mutableStateOf(data.suffix) }
-    var decoration by remember { mutableStateOf("") }
+    var state by remember { mutableStateOf(false) }
     var textArea by remember { mutableStateOf("$prefix$nicknameRoot$suffix") }
 
     Background(image = R.drawable.view_06_07_bg)
@@ -58,7 +65,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
-
             onClick = {
                 data.root = nicknameRoot
                 data.prefix = prefix
@@ -83,10 +89,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp))
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White,
-
-//            onValueChange = { it ->
-//                textArea = it
-//            }
         )
         // Filter buttons
         Row(
@@ -117,27 +119,62 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             val decoration =
                 if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
             items(decoration.count()) { index ->
-                var state by remember { mutableStateOf(false) }
-                val focus by remember { mutableStateOf(FocusRequester()) }
-                Card(
-                    Modifier
-                        .padding(bottom = 10.dp)
-                        .height(35.dp)
-                        .focusRequester(focus)
-                        .onFocusChanged { state = it.isFocused }
-                        .focusable()
-                        .clickable {
-                            textArea = if (data.side == DecorationSide.LEFT) {
-                                prefix = decoration[index]
-                                "${decoration[index]}$nicknameRoot$suffix"
-                            } else {
-                                suffix = decoration[index]
-                                "$prefix$nicknameRoot${decoration[index]}"
-                            }
-                        }
-                ) {
-                    Text(decoration[index], textAlign = TextAlign.Center)
+
+                state = if (data.side == DecorationSide.LEFT) {
+                    decoration[index] == prefix
+                } else {
+                    decoration[index] == suffix
                 }
+                DecorationScreenItem(
+                    text = decoration[index],
+                    onClick = {
+                        textArea = if (data.side == DecorationSide.LEFT) {
+                            prefix = decoration[index]
+                            "${decoration[index]}$nicknameRoot$suffix"
+                        } else {
+                            suffix = decoration[index]
+                            "$prefix$nicknameRoot${decoration[index]}"
+                        }
+                    },
+                    color = if (data.side == DecorationSide.LEFT) {
+                        if (decoration[index] == prefix) {
+                            Color.Blue
+                        } else {
+                            Color.White
+                        }
+
+                    } else {
+                        if (decoration[index] == suffix) {
+                            Color.Blue
+                        } else {
+                            Color.White
+                        }
+                    }
+
+                )
+
+
+//                var state by remember { mutableStateOf(false) }
+//                val focus by remember { mutableStateOf(FocusRequester()) }
+//                Card(
+//                    Modifier
+//                        .padding(bottom = 10.dp)
+//                        .height(35.dp)
+//                        .focusRequester(focus)
+//                        .onFocusChanged { state = it.isFocused }
+//                        .focusable()
+//                        .clickable {
+//                            textArea = if (data.side == DecorationSide.LEFT) {
+//                                prefix = decoration[index]
+//                                "${decoration[index]}$nicknameRoot$suffix"
+//                            } else {
+//                                suffix = decoration[index]
+//                                "$prefix$nicknameRoot${decoration[index]}"
+//                            }
+//                        }
+//                ) {
+//                    Text(decoration[index], textAlign = TextAlign.Center)
+//                }
             }
         }
     }
@@ -150,3 +187,35 @@ private fun Preview() {
     DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", alphabetIndex = 0))
 }
 
+
+@Composable
+fun DecorationScreenItem(
+    onClick: () -> Unit,
+    text: String,
+    color: Color,
+) {
+    // var initState by remember { mutableStateOf(isFocused) }
+    val focus by remember { mutableStateOf(FocusRequester()) }
+    var color by remember { mutableStateOf(color) }
+    Card(
+        backgroundColor = color,
+        modifier = Modifier
+            .padding(bottom = 10.dp)
+            .height(35.dp)
+            .focusRequester(focus)
+            .onFocusChanged {
+                if (color == Color.Blue) {
+                } else {
+                    color = Color.White
+                }
+            }
+
+            .focusable()
+            .clickable {
+                focus.requestFocus()
+                onClick()
+            },
+    ) {
+        Text(text, textAlign = TextAlign.Center)
+    }
+}

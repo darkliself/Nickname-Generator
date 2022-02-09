@@ -7,7 +7,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -30,17 +29,9 @@ import com.example.composetest2.logic.TextStyler
 @ExperimentalAnimationApi
 @Composable
 fun FontStyleScreen(navController: NavController, data: ScreenData) {
-    var data = data
     val textStyler = TextStyler()
-    // val nickname by remember { mutableStateOf(data.nickname) }
-    val nickname = data.root
     val alphabetIndex = data.alphabetIndex
-
-    if (nickname != "") {
-        println(nickname)
-    } else {
-        println("textStyler")
-    }
+    val nickname = textStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -54,7 +45,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
-                data.root = nickname
+                data.rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, alphabetIndex)
                 data.alphabetIndex = alphabetIndex
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
@@ -69,7 +60,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
         )
         //Add here
         TransparentTextField(
-            text = "${data.prefix}${data.root}${data.suffix}",
+            text = "${data.prefix}${nickname}${data.suffix}",
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
@@ -106,25 +97,26 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(-0.8f, 1.6f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
-            var baseNickname = ""
+//            var baseNickname = ""
 
             // in case if chars not in standard code
-            textStyler.splitByCodePoint(nickname).forEach { elem ->
-                baseNickname += if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
-                    textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
-                } else {
-                    elem
-                }
-            }
+//            textStyler.splitByCodePoint(nickname).forEach { elem ->
+//                baseNickname += if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
+//                    textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
+//                } else {
+//                    elem
+//                }
+//            }
 
             items(textStyler.getAlphabetCount()) { index ->
-                val nick = textStyler.rootToUnicode(baseNickname, index)
-                LazyColumnItem(nick, onClick = {
-                    data.root = nick
-                    data.alphabetIndex = index
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                    navController.navigate(Screen.CustomizeNickNameScreen.route)
-                })
+                val nick = textStyler.rebuildToString(data.rootAsCodeList, index)
+                LazyColumnItem(
+                    nick,
+                    onClick = {
+                        data.alphabetIndex = index
+                        navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                        navController.navigate(Screen.CustomizeNickNameScreen.route)
+                    })
             }
         }
     }
@@ -135,5 +127,8 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    FontStyleScreen(NavController(LocalContext.current), ScreenData("name", "root", alphabetIndex = 0))
+    FontStyleScreen(
+        NavController(LocalContext.current),
+        ScreenData("name", "root", alphabetIndex = 0)
+    )
 }

@@ -22,6 +22,7 @@ import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.TransparentTextField
+import com.example.composetest2.logic.TextStyler
 
 /*
     View 05
@@ -30,6 +31,7 @@ import com.example.composetest2.components.TransparentTextField
 
 @Composable
 fun AutogenerateNickname(navController: NavController) {
+    val textStyler = TextStyler()
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -78,7 +80,7 @@ fun AutogenerateNickname(navController: NavController) {
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = {
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData(
-                        root = "RandomNickname",
+                        rootAsCodeList = textStyler.splitToArrayByIndexes("RandomNickname", 0),
                         rootNode = Screen.AutogenerateNicknameScreen.route,
                     ))
                     navController.navigate(Screen.CustomizeNickNameScreen.route)
