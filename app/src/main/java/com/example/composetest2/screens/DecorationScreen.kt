@@ -13,10 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.focusTarget
-import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.focus.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -115,6 +112,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f))
+
         ) {
             val decoration =
                 if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
@@ -136,45 +134,8 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                             "$prefix$nicknameRoot${decoration[index]}"
                         }
                     },
-                    color = if (data.side == DecorationSide.LEFT) {
-                        if (decoration[index] == prefix) {
-                            Color.Blue
-                        } else {
-                            Color.White
-                        }
-
-                    } else {
-                        if (decoration[index] == suffix) {
-                            Color.Blue
-                        } else {
-                            Color.White
-                        }
-                    }
 
                 )
-
-
-//                var state by remember { mutableStateOf(false) }
-//                val focus by remember { mutableStateOf(FocusRequester()) }
-//                Card(
-//                    Modifier
-//                        .padding(bottom = 10.dp)
-//                        .height(35.dp)
-//                        .focusRequester(focus)
-//                        .onFocusChanged { state = it.isFocused }
-//                        .focusable()
-//                        .clickable {
-//                            textArea = if (data.side == DecorationSide.LEFT) {
-//                                prefix = decoration[index]
-//                                "${decoration[index]}$nicknameRoot$suffix"
-//                            } else {
-//                                suffix = decoration[index]
-//                                "$prefix$nicknameRoot${decoration[index]}"
-//                            }
-//                        }
-//                ) {
-//                    Text(decoration[index], textAlign = TextAlign.Center)
-//                }
             }
         }
     }
@@ -192,11 +153,10 @@ private fun Preview() {
 fun DecorationScreenItem(
     onClick: () -> Unit,
     text: String,
-    color: Color,
 ) {
     // var initState by remember { mutableStateOf(isFocused) }
     val focus by remember { mutableStateOf(FocusRequester()) }
-    var color by remember { mutableStateOf(color) }
+    var color by remember { mutableStateOf(Color.White) }
     Card(
         backgroundColor = color,
         modifier = Modifier
@@ -204,13 +164,11 @@ fun DecorationScreenItem(
             .height(35.dp)
             .focusRequester(focus)
             .onFocusChanged {
-                if (color == Color.Blue) {
-                } else {
-                    color = Color.White
-                }
+                focus.captureFocus()
+                color = if (it.isFocused) Color.Green else Color.White
             }
-
             .focusable()
+            .onFocusEvent { color =  Color.Green }
             .clickable {
                 focus.requestFocus()
                 onClick()
