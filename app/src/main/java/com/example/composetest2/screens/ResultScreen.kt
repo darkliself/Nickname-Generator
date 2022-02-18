@@ -24,12 +24,17 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.*
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.style.TextAlign
+import com.example.composetest2.repository.NicknameRepository
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun ResultScreen(navController: NavController, data: ScreenData) {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val repository = NicknameRepository(context)
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -76,7 +81,8 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 
             Text(
                 text = data.nickname,
-                modifier = Modifier.fillMaxWidth(0.9f)
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
                     .align(BiasAlignment(0f, -0.1f))
                     .verticalScroll(rememberScrollState(data.nickname.length / 2)),
                 maxLines = 1,
@@ -89,7 +95,18 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 Modifier
                     .fillMaxHeight(0.15f)
                     .align(BiasAlignment(0f, 0.2f)),
-
+                onClick = {
+                    scope.launch {
+                        if (data.nickname != "") {
+                            repository.save(data.nickname, data.nickname)
+                        } else {
+                            repository.save(data.root, data.root)
+                        }
+                    }
+                    scope.launch {
+                        println(repository.readAll())
+                    }
+                }
                 )
             WideButton(
                 R.drawable.btn_wide_green,
