@@ -12,11 +12,7 @@ import kotlinx.coroutines.flow.first
 class NicknameRepository(val context: Context) {
 
     private val Context.dataStore by preferencesDataStore(name = "nickname")
-    private val count: Int = TODO()
 
-    companion object {
-
-    }
 
     suspend fun save(key:String, value: String) {
         context.dataStore.edit {

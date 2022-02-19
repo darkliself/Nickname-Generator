@@ -34,7 +34,6 @@ import com.example.composetest2.logic.TextStyler
 @ExperimentalFoundationApi
 @Composable
 fun DecorationScreen(navController: NavController, data: ScreenData) {
-    val data = data
     val textStyler = TextStyler()
 
     var nicknameRoot by remember {
@@ -134,7 +133,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                             "$prefix$nicknameRoot${decoration[index]}"
                         }
                     },
-
                 )
             }
         }
@@ -164,11 +162,13 @@ fun DecorationScreenItem(
             .height(35.dp)
             .focusRequester(focus)
             .onFocusChanged {
-                focus.captureFocus()
                 color = if (it.isFocused) Color.Green else Color.White
             }
+            /**
+                onFocusEvent can help you with Valera`s notes
+             */
+            // .onFocusEvent { color =  Color.Green }
             .focusable()
-            .onFocusEvent { color =  Color.Green }
             .clickable {
                 focus.requestFocus()
                 onClick()
