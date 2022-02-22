@@ -36,7 +36,7 @@ import com.example.composetest2.logic.TextStyler
 fun DecorationScreen(navController: NavController, data: ScreenData) {
     val textStyler = TextStyler()
 
-    var nicknameRoot by remember {
+    val nicknameRoot by remember {
         mutableStateOf(
             textStyler.rebuildToString(
                 data.rootAsCodeList,
@@ -145,7 +145,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
 private fun Preview() {
     DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", alphabetIndex = 0))
 }
-
 
 @Composable
 fun DecorationScreenItem(

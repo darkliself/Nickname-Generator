@@ -1,5 +1,6 @@
 package com.example.composetest2.viewmodel
 
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composetest2.repository.NicknameRepository
@@ -18,7 +19,7 @@ class NicknameViewModel(
         repository.save(key, value)
     }
 
-    suspend fun readAll() {
-        repository.readAll()
+    suspend fun readAll(): Map<Preferences.Key<*>, Any> {
+        return repository.readAll()
     }
 }

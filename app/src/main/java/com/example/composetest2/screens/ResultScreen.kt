@@ -26,7 +26,9 @@ import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.ViewModel
 import com.example.composetest2.repository.NicknameRepository
+import com.example.composetest2.viewmodel.NicknameViewModel
 import kotlinx.coroutines.launch
 
 
@@ -34,7 +36,7 @@ import kotlinx.coroutines.launch
 fun ResultScreen(navController: NavController, data: ScreenData) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val repository = NicknameRepository(context)
+    val repository = NicknameViewModel(NicknameRepository(context = context))
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -64,7 +66,12 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -1f))
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.CenterEnd),
+            onClick = {
+                scope.launch {
+                    println(repository.readAll())
+                }
+            }
         )
 
         // surface with all main elements
@@ -88,7 +95,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 maxLines = 1,
                 textAlign = TextAlign.Center
             )
-
+            // save button
             WideButton(
                 R.drawable.btn_wide_pink,
                 stringResource(R.string.view_07_btn_save),
@@ -98,9 +105,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 onClick = {
                     scope.launch {
                         if (data.nickname != "") {
-                            repository.save(data.nickname, data.nickname)
+                            repository.saveNickname(data.nickname, data.nickname)
                         } else {
-                            repository.save(data.root, data.root)
+                            repository.saveNickname(data.root, data.root)
                         }
                     }
                     scope.launch {
