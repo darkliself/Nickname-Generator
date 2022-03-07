@@ -16,7 +16,7 @@ class NicknameViewModel(
     }
 
     suspend fun saveNickname(key: String, value: String) {
-        repository.save(key, value)
+        repository.save("item" + repository.count(), value)
     }
 
     suspend fun readAll(): Map<Preferences.Key<*>, Any> {

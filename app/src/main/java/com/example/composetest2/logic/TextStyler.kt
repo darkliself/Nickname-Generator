@@ -69,7 +69,6 @@ class TextStyler(var text: String = "") {
 
     fun splitToArrayByIndexes(input: String, alphabetIndex: Int): List<String> {
         val result = mutableListOf<String>()
-
         input.forEach {
             val str = it.toString()
             if (unicodeAlphabetList[alphabetIndex].indexOf(str) > -1) {

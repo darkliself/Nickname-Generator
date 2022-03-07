@@ -71,6 +71,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 scope.launch {
                     println(repository.readAll())
                 }
+                scope.launch {
+                    println(repository)
+                }
             }
         )
 
