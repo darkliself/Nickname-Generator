@@ -26,7 +26,6 @@ import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.ViewModel
 import com.example.composetest2.repository.NicknameRepository
 import com.example.composetest2.viewmodel.NicknameViewModel
 import kotlinx.coroutines.launch
@@ -60,6 +59,11 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
+                .clickable {
+                    scope.launch {
+                        repository.clearRepo()
+                    }
+                }
         )
         SmallButton(
             modifier = Modifier
@@ -108,9 +112,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 onClick = {
                     scope.launch {
                         if (data.nickname != "") {
-                            repository.saveNickname(data.nickname, data.nickname)
+                            repository.saveNickname(data.nickname)
                         } else {
-                            repository.saveNickname(data.root, data.root)
+                            repository.saveNickname(data.root)
                         }
                     }
                     scope.launch {

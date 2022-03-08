@@ -15,7 +15,6 @@ class NicknameRepository(val context: Context) {
 
     companion object SingletonRepo {
         private val Context.dataStore by preferencesDataStore(name = "nickname")
-
     }
 
     suspend fun save(key:String, value: String) {
@@ -27,6 +26,12 @@ class NicknameRepository(val context: Context) {
     suspend fun delete(key: String) {
         context.dataStore.edit {
             it.remove(stringPreferencesKey(key))
+        }
+    }
+
+    suspend fun deleteAll() {
+        context.dataStore.edit {
+            it.clear()
         }
     }
 

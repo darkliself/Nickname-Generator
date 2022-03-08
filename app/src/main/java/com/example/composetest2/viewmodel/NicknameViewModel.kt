@@ -15,11 +15,15 @@ class NicknameViewModel(
         }
     }
 
-    suspend fun saveNickname(key: String, value: String) {
+    suspend fun saveNickname(value: String) {
         repository.save("item" + repository.count(), value)
     }
 
     suspend fun readAll(): Map<Preferences.Key<*>, Any> {
         return repository.readAll()
+    }
+
+    suspend fun clearRepo() {
+        repository.deleteAll()
     }
 }
