@@ -16,7 +16,9 @@ class NicknameViewModel(
     }
 
     suspend fun saveNickname(value: String) {
-        repository.save("item" + repository.count(), value)
+        if(!repository.readAll().containsValue(value)) {
+            repository.save("item" + repository.count(), value)
+        }
     }
 
     suspend fun readAll(): Map<Preferences.Key<*>, Any> {
@@ -26,4 +28,5 @@ class NicknameViewModel(
     suspend fun clearRepo() {
         repository.deleteAll()
     }
+
 }
