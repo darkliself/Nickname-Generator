@@ -20,15 +20,14 @@ import com.example.composetest2.R
 
 @Composable
 fun SmallButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier.size(35.dp, 35.dp),
     @DrawableRes image: Int = R.drawable.btn_menu,
     onClick: () -> Unit = { println("clicked") }
 ) {
     Box(
-        modifier
-            .fillMaxHeight(0.2f)
-            .fillMaxWidth(0.9f)
+        modifier = modifier.fillMaxHeight(0.2f)
+            .fillMaxWidth(0.9f),
     ) {
         Image(
             ImageVector.vectorResource(image),

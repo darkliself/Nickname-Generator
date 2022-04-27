@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.composetest2.screens.CreateNickNameScreen
 import com.example.composetest2.screens.CustomizeNickNameScreen
+import com.example.composetest2.screens.SavedNicknamesScreen
 import com.example.composetest2.ui.theme.MainScreen
 
 
@@ -24,7 +25,7 @@ import com.example.composetest2.ui.theme.MainScreen
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.SavedNicknamesScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }
@@ -128,6 +129,12 @@ fun Navigation() {
         ) {
             TestScreen()
         }
+         composable(
+            route = Screen.SavedNicknamesScreen.route
+        ) {
+             SavedNicknamesScreen(navController = navController)
+        }
+
 //        composable(
 //            route = Screen.SecondScreen.route + "?name={name}",
 //            arguments = listOf(

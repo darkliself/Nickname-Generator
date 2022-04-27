@@ -85,6 +85,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp))
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White,
+            readOnly = true
         )
         // Filter buttons
         Row(

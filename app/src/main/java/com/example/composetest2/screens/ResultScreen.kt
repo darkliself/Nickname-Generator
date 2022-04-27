@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 fun ResultScreen(navController: NavController, data: ScreenData) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val repository = NicknameViewModel(NicknameRepository(context = context))
+    val repository = NicknameViewModel(context)
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -121,7 +121,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                         println(repository.readAll())
                     }
                 }
-                )
+            )
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_07_btn_try_again),
@@ -143,7 +143,8 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                         .fillMaxWidth(0.5f)
                         .fillMaxHeight(),
                     onClick = {
-                        val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                        val clipboard =
+                            context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                         val clip = ClipData.newPlainText(null, data.nickname)
                         clipboard.setPrimaryClip(clip)
                     }
@@ -160,7 +161,10 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                             putExtra(Intent.EXTRA_TEXT, data.nickname)
                             type = "text/plain"
                         }
-                        val shareIntent = Intent.createChooser(sendIntent , context.getString(R.string.view_07_btn_share))
+                        val shareIntent = Intent.createChooser(
+                            sendIntent,
+                            context.getString(R.string.view_07_btn_share)
+                        )
                         context.startActivity(shareIntent)
                     }
                 )
@@ -172,7 +176,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen( NavController(LocalContext.current), ScreenData("Nick", "Root", alphabetIndex = 0))
+    ResultScreen(NavController(LocalContext.current), ScreenData("Nick", "Root", alphabetIndex = 0))
 }
 
 @Composable

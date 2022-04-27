@@ -58,7 +58,7 @@ fun TransparentTextField(
                 unfocusedIndicatorColor = backgroundColor,
             ),
             singleLine = true,
-            readOnly = readOnly
+            readOnly = readOnly,
         )
     }
 }

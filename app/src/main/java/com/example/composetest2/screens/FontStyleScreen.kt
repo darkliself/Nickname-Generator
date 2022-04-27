@@ -111,7 +111,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             items(textStyler.getAlphabetCount()) { index ->
                 val nick = textStyler.rebuildToString(data.rootAsCodeList, index)
                 LazyColumnItem(
-                    nick,
+                    text = nick,
                     onClick = {
                         data.alphabetIndex = index
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)

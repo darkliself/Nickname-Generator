@@ -1,21 +1,23 @@
 package com.example.composetest2.repository
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
-class NicknameRepository(val context: Context) {
 
-//    private val Context.dataStore by preferencesDataStore(name = "nickname")
+private val Context.dataStore by preferencesDataStore(name = "nickname")
 
-    companion object SingletonRepo {
-        private val Context.dataStore by preferencesDataStore(name = "nickname")
-    }
+class NicknameRepository @Inject constructor(
+    @ApplicationContext private val context: Context) {
 
     suspend fun save(key:String, value: String) {
         context.dataStore.edit {
@@ -35,8 +37,12 @@ class NicknameRepository(val context: Context) {
         }
     }
 
-    suspend fun readAll(): Map<Preferences.Key<*>, Any> {
-        return context.dataStore.data.first().asMap()
+    suspend fun getAll(): Map<String, String> {
+        val result = mutableMapOf<String, String>()
+        context.dataStore.data.first().asMap().forEach { (key, value) ->
+            result[key.name] = value.toString()
+        }
+        return result
     }
 
     suspend fun count(): Int {

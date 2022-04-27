@@ -43,6 +43,5 @@ fun NickCreator(
         typography = Typography,
         shapes = Shapes,
         content = content,
-
     )
 }

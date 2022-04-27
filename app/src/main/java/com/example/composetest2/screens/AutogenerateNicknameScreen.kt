@@ -23,6 +23,9 @@ import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.logic.boysNamesList
+import com.example.composetest2.logic.getRandomNick
+import kotlin.random.Random
 
 /*
     View 05
@@ -31,6 +34,7 @@ import com.example.composetest2.logic.TextStyler
 
 @Composable
 fun AutogenerateNickname(navController: NavController) {
+    var nickname by remember { mutableStateOf(getRandomNick())}
     val textStyler = TextStyler()
     Box(
         Modifier.fillMaxSize(),
@@ -63,7 +67,7 @@ fun AutogenerateNickname(navController: NavController) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            TransparentTextField(modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
+            TransparentTextField(text = nickname, modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
 
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -71,6 +75,9 @@ fun AutogenerateNickname(navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.2f)),
+                onClick =  {
+                    nickname = getRandomNick()
+                }
             )
             WideButton(
                 R.drawable.btn_wide_green,
@@ -80,7 +87,7 @@ fun AutogenerateNickname(navController: NavController) {
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = {
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData(
-                        rootAsCodeList = textStyler.splitToArrayByIndexes("RandomNickname", 0),
+                        rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, 0),
                         rootNode = Screen.AutogenerateNicknameScreen.route,
                     ))
                     navController.navigate(Screen.CustomizeNickNameScreen.route)
