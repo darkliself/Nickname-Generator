@@ -5,10 +5,8 @@ import androidx.annotation.RequiresApi
 
 @RequiresApi(Build.VERSION_CODES.N)
 fun main(args: Array<String>) {
-    val t = TextStyler("s")
 //    val z = t.rootToUnicode("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890", 1)
 //    t.rootToUnicode("Random Nickname", 1)
-
 
 //    println(t.getCharIndex("s", 0))
 
@@ -20,10 +18,10 @@ fun main(args: Array<String>) {
     }
 //    println(t.splitByCodePoint("Random Nickname"))
 
-    val z1 = t.splitToArrayByIndexes("ARandom Hello!", 0)
+    val z1 = TextStyler.splitToArrayByIndexes("ARandom Hello!", 0)
     println(z1)
-    println(t.rebuildToString(z1, 0))
-    println(t.rebuildToString(z1, 1))
+    println(TextStyler.rebuildToString(z1, 0))
+    println(TextStyler.rebuildToString(z1, 1))
 }
 
 /*
@@ -31,7 +29,7 @@ fun main(args: Array<String>) {
     For now its all for tests
  */
 
-class TextStyler(var text: String = "") {
+object TextStyler {
     private var result = ""
     private var prefix = ""
     private var suffix = ""

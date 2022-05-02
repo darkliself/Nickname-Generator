@@ -14,6 +14,7 @@ import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.SquareButton
+import com.example.composetest2.model.screendata.ScreenData
 
 /*
     View 03
@@ -22,9 +23,7 @@ import com.example.composetest2.components.SquareButton
 @Composable
 fun CategoryScreen(navController: NavController, data: ScreenData?) {
     Background(R.drawable.view_03_08_bg)
-    if (data != null) {
-        Text(data.rootNode)
-    }
+
     Box(Modifier.fillMaxSize()) {
         SmallButton(
             modifier = Modifier
@@ -44,11 +43,11 @@ fun CategoryScreen(navController: NavController, data: ScreenData?) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    CategoryScreen(NavController(LocalContext.current), ScreenData("213", "left"))
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview2() {
+//    CategoryScreen(NavController(LocalContext.current), ScreenData("213", "left", rootNode = ""))
+//}
 
 @Composable
 private fun CategoriesListButtons(navController: NavController) {

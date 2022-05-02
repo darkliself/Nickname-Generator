@@ -25,6 +25,7 @@ import com.example.composetest2.logic.DecorationLeft
 import com.example.composetest2.logic.DecorationRight
 import com.example.composetest2.logic.DecorationSide
 import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.model.screendata.ScreenData
 
 /*
     View 07
@@ -34,11 +35,10 @@ import com.example.composetest2.logic.TextStyler
 @ExperimentalFoundationApi
 @Composable
 fun DecorationScreen(navController: NavController, data: ScreenData) {
-    val textStyler = TextStyler()
 
     val nicknameRoot by remember {
         mutableStateOf(
-            textStyler.rebuildToString(
+            TextStyler.rebuildToString(
                 data.rootAsCodeList,
                 data.alphabetIndex
             )
@@ -140,12 +140,12 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     }
 }
 
-@ExperimentalFoundationApi
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", "", alphabetIndex = 0))
-}
+//@ExperimentalFoundationApi
+//@Preview(showBackground = true)
+//@Composable
+//private fun Preview() {
+//    DecorationScreen(NavController(LocalContext.current), ScreeData("Some", rootNode = "", alphabetIndex = 0))
+//}
 
 @Composable
 fun DecorationScreenItem(

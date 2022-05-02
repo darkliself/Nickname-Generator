@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.composetest2.model.nickname.NicknameData
+import com.example.composetest2.model.screendata.ScreenData
 import com.example.composetest2.screens.CreateNickNameScreen
 import com.example.composetest2.screens.CustomizeNickNameScreen
 import com.example.composetest2.screens.SavedNicknamesScreen
@@ -25,7 +27,7 @@ import com.example.composetest2.ui.theme.MainScreen
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Screen.SavedNicknamesScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.MainScreen.route) {
         composable(route = Screen.MainScreen.route) {
             MainScreen(navController = navController)
         }

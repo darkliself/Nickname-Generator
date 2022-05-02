@@ -19,7 +19,7 @@ import com.example.composetest2.components.*
 
 @ExperimentalAnimationApi
 @Composable
-fun CategoryNickNameListScreen(category: String?, navController: NavController) {
+fun CategoryNickNameListScreen(navController: NavController, category: String?) {
     val category = category ?: ""
     Background(R.drawable.view_06_07_bg)
 
@@ -76,11 +76,11 @@ fun CategoryNickNameListScreen(category: String?, navController: NavController) 
     }
 }
 
-@ExperimentalAnimationApi
-@Preview (showBackground = true)
-@Composable
-private fun Preview() {
-    CategoryNickNameListScreen("category", NavController(LocalContext.current))
-}
+//@ExperimentalAnimationApi
+//@Preview (showBackground = true)
+//@Composable
+//private fun Preview() {
+//    CategoryNickNameListScreen("category", NavController(LocalContext.current))
+//}
 
 

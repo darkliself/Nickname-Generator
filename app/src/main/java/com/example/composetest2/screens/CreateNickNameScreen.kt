@@ -27,11 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.composetest2.R
 import com.example.composetest2.Screen
-import com.example.composetest2.ScreenData
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.model.screendata.ScreenData
 
 /*
     View 02
@@ -40,7 +40,6 @@ import com.example.composetest2.logic.TextStyler
 @ExperimentalComposeUiApi
 @Composable
 fun CreateNickNameScreen(navController: NavController) {
-    val textStyler = TextStyler()
     val initText = stringResource(id = R.string.view_02_nickname_placeholder)
     var nickname by remember { mutableStateOf("") }
     var placeHolder by remember { mutableStateOf(initText) }
@@ -54,7 +53,10 @@ fun CreateNickNameScreen(navController: NavController) {
                 .align(BiasAlignment(0f, -1f))
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.CenterEnd),
+            onClick = {
+                navController.navigate(Screen.SavedNicknamesScreen.route)
+            }
         )
         Header(
             stringResource(id = R.string.view_02_header),
@@ -83,7 +85,7 @@ fun CreateNickNameScreen(navController: NavController) {
                 keyboardActions = KeyboardActions(onDone = {
                     if (nickname != "") {
                         keyboardController?.hide()
-                        val data = ScreenData(rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, 0), rootNode = Screen.CreateNickNameScreen.route)
+                        val data = ScreenData(rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0), rootNode = Screen.CreateNickNameScreen.route)
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                         navController.navigate(Screen.CustomizeNickNameScreen.route)
                     } else {
@@ -101,7 +103,7 @@ fun CreateNickNameScreen(navController: NavController) {
                 onClick = {
                     if (nickname != "") {
                         val data = ScreenData(
-                            rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, 0),
+                            rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0),
                             rootNode = Screen.CreateNickNameScreen.route
                         )
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)

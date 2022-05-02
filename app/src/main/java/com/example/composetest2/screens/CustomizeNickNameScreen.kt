@@ -11,20 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.R
 import com.example.composetest2.Screen
-import com.example.composetest2.ScreenData
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.logic.DecorationSide
 import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.model.screendata.ScreenData
+
 
 /*
     View 05
@@ -32,11 +31,10 @@ import com.example.composetest2.logic.TextStyler
 
 @Composable
 fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
-    val textStyler = TextStyler()
     val data = _data
     navController.enableOnBackPressed(true)
     val alphabetIndex = data.alphabetIndex
-    val nickname = "${data.prefix}${textStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)}${data.suffix}"
+    val nickname = "${data.prefix}${TextStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)}${data.suffix}"
 
     Box(
         Modifier.fillMaxSize()
@@ -145,11 +143,11 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
     }
 }
 
-@Preview
-@Composable
-private fun Preview() {
-    CustomizeNickNameScreen(NavController(LocalContext.current), ScreenData("some", ""))
-}
+//@Preview
+//@Composable
+//private fun Preview() {
+//    CustomizeNickNameScreen(NavController(LocalContext.current), ScreenData("some", "", rootNode = ""))
+//}
 
 @Composable
 private fun IconFace(modifier: Modifier) {

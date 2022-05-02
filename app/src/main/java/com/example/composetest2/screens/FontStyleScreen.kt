@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
 import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.model.nickname.NicknameData
+import com.example.composetest2.model.screendata.ScreenData
 
 /*
     View 08
@@ -29,9 +31,8 @@ import com.example.composetest2.logic.TextStyler
 @ExperimentalAnimationApi
 @Composable
 fun FontStyleScreen(navController: NavController, data: ScreenData) {
-    val textStyler = TextStyler()
     val alphabetIndex = data.alphabetIndex
-    val nickname = textStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)
+    val nickname = TextStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)
 
     Background(image = R.drawable.view_03_08_bg)
     Box(
@@ -45,7 +46,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(Alignment.CenterStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
-                data.rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, alphabetIndex)
+                data.rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, alphabetIndex)
                 data.alphabetIndex = alphabetIndex
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
@@ -108,8 +109,8 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
 //                }
 //            }
 
-            items(textStyler.getAlphabetCount()) { index ->
-                val nick = textStyler.rebuildToString(data.rootAsCodeList, index)
+            items(TextStyler.getAlphabetCount()) { index ->
+                val nick = TextStyler.rebuildToString(data.rootAsCodeList, index)
                 LazyColumnItem(
                     text = nick,
                     onClick = {
@@ -129,6 +130,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
 private fun Preview() {
     FontStyleScreen(
         NavController(LocalContext.current),
-        ScreenData("name", "root", alphabetIndex = 0)
+        ScreenData("name", rootNode = "root", alphabetIndex = 0)
     )
 }

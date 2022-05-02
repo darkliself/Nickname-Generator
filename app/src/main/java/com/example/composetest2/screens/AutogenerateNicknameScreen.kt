@@ -25,6 +25,7 @@ import com.example.composetest2.components.TransparentTextField
 import com.example.composetest2.logic.TextStyler
 import com.example.composetest2.logic.boysNamesList
 import com.example.composetest2.logic.getRandomNick
+import com.example.composetest2.model.screendata.ScreenData
 import kotlin.random.Random
 
 /*
@@ -35,7 +36,6 @@ import kotlin.random.Random
 @Composable
 fun AutogenerateNickname(navController: NavController) {
     var nickname by remember { mutableStateOf(getRandomNick())}
-    val textStyler = TextStyler()
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -87,7 +87,7 @@ fun AutogenerateNickname(navController: NavController) {
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = {
                     navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData(
-                        rootAsCodeList = textStyler.splitToArrayByIndexes(nickname, 0),
+                        rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0),
                         rootNode = Screen.AutogenerateNicknameScreen.route,
                     ))
                     navController.navigate(Screen.CustomizeNickNameScreen.route)
@@ -97,11 +97,11 @@ fun AutogenerateNickname(navController: NavController) {
     }
 }
 
-@Preview
-@Composable
-private fun defPreview() {
-    AutogenerateNickname(NavController(LocalContext.current))
-}
+//@Preview
+//@Composable
+//private fun defPreview() {
+//    AutogenerateNickname(NavController(LocalContext.current))
+//}
 
 @Composable
 private fun ImageBox(modifier: Modifier = Modifier) {

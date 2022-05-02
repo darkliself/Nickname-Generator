@@ -3,7 +3,6 @@ package com.example.composetest2.ui.theme
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -13,14 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.example.composetest2.ScreenData
 import com.example.composetest2.Screen
 import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.IconButton
 import com.example.composetest2.components.SmallButton
-import com.example.composetest2.logic.TextStyler
-import java.nio.charset.StandardCharsets
+import com.example.composetest2.model.screendata.ScreenData
 
 /*
     View 01
@@ -40,7 +37,10 @@ fun MainScreen(navController: NavController) {
                 .align(BiasAlignment(0f, -1f))
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.CenterEnd),
+            onClick = {
+                navController.navigate(Screen.SavedNicknamesScreen.route)
+            }
         )
         Header(
             stringResource(id = R.string.view_01_header),

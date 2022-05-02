@@ -36,6 +36,7 @@ fun LazyColumnItem(
     var state by remember { mutableStateOf(false) }
     val focus by remember { mutableStateOf(FocusRequester()) }
     var isNotDeleted by remember { mutableStateOf(true) }
+    var arrangement by remember { mutableStateOf(Arrangement.End) }
 
     AnimatedVisibility(
         modifier = modifier
@@ -80,13 +81,14 @@ fun LazyColumnItem(
                 )
 
             ) {
+
                 Row(
                     modifier = Modifier
                         .width(90.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = arrangement
                 ) {
-
                     if (removeOnClick != null) {
+                        arrangement = Arrangement.SpaceBetween
                         Image(
                             ImageVector.vectorResource(id = R.drawable.btn_remove),
                             contentDescription = null,

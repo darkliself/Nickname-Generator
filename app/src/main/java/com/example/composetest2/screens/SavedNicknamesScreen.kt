@@ -2,7 +2,6 @@ package com.example.composetest2.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
@@ -10,16 +9,16 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.R
 import com.example.composetest2.Screen
 import com.example.composetest2.components.*
+import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.model.nickname.NicknameData
+import com.example.composetest2.model.screendata.ScreenData
 import com.example.composetest2.viewmodel.NicknameViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,21 +28,16 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SavedNicknamesScreen(navController: NavController) {
+
     val repo = NicknameViewModel(LocalContext.current)
-
     val scope = rememberCoroutineScope()
+    var result by remember { mutableStateOf(mutableMapOf<String, NicknameData>()) }
 
-    var result by remember { mutableStateOf(mutableMapOf<String, String>()) }
     scope.launch {
-        if (repo.isNotEmpty()) {
-            result = repo.readAll().toMutableMap()
-        } else {
-
-        }
+        if (repo.readFromProto().isNotEmpty()) result = repo.readFromProto().toMutableMap()
     }
 
     Background(image = R.drawable.view_03_08_bg)
-
 
     Column {
         Box(
@@ -59,7 +53,7 @@ fun SavedNicknamesScreen(navController: NavController) {
                 iconModifier = Modifier.align(Alignment.Center),
                 image = R.drawable.arrow_left_icon,
                 onClick = {
-
+                    navController.popBackStack()
                 }
             )
             Header(
@@ -73,10 +67,17 @@ fun SavedNicknamesScreen(navController: NavController) {
 
                 scope.launch {
                     repeat(20) {
-                        repo.saveNickname("fhgjdhgjdfhggfdjgfdsf$it")
+                        repo.saveToProto(
+                            NicknameData(
+                                prefix = "XX",
+                                suffix = "XX",
+                                rootAsCodeList = TextStyler.splitToArrayByIndexes("djhgjfdhgjhdf$it", 0),
+                                alphabetIndex = it,
+                            )
+                        )
 
                     }
-                    result = repo.readAll().toMutableMap()
+                    result = repo.readFromProto().toMutableMap()
                 }
             }
         ) {
@@ -85,7 +86,7 @@ fun SavedNicknamesScreen(navController: NavController) {
         Button(
             onClick = {
                 scope.launch {
-                    repo.clearRepo()
+                    repo.clearProtoStore()
                     result = mutableMapOf()
                 }
             }
@@ -98,25 +99,26 @@ fun SavedNicknamesScreen(navController: NavController) {
             LazyColumn(
                 Modifier.fillMaxSize(),
             ) {
-                item(
-                ) {
-//                    Button() {
-//
-//                    }
-                }
                 result.forEach { (key, value) ->
                     item() {
                         LazyColumnItem(
                             modifier = Modifier.padding(start = 20.dp),
-                            text = value,
+                            text = "${value.prefix}${TextStyler.rebuildToString(value.rootAsCodeList, 0)}${value.suffix} ${value.alphabetIndex} $key",
                             onClick = {
-                                // navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                                val tmp = TextStyler.splitToArrayByIndexes(value.rootAsCodeList.joinToString(""), 0)
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "data",
+                                    ScreenData(
+                                        rootAsCodeList = tmp,
+                                        rootNode = Screen.SavedNicknamesScreen.route
+                                    )
+                                )
                                 navController.navigate(Screen.CustomizeNickNameScreen.route)
                             },
                             removeOnClick = {
                                 scope.launch {
                                     result.remove(key)
-                                    repo.delete(key)
+                                    repo.removeFromProto(key)
                                     if (!repo.isNotEmpty()) {
                                         navController.navigate(Screen.SavedNicknamesScreen.route)
                                     }
@@ -128,18 +130,18 @@ fun SavedNicknamesScreen(navController: NavController) {
             }
 
         } else {
-            var mutable by remember { mutableStateOf(false)}
+            var mutable by remember { mutableStateOf(false) }
             scope.launch {
                 delay(200)
                 mutable = true
             }
-           if (mutable) {
-               Text("Your storage is empty")
-           } else {
-               CircularProgressIndicator(
-                   modifier = Modifier.fillMaxSize()
-               )
-           }
+            if (mutable) {
+                Text("Your storage is empty")
+            } else {
+                CircularProgressIndicator(
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
         }
     }
 }

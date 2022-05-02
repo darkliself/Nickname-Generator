@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.composetest2.model.nickname.NicknameData
 import com.example.composetest2.repository.NicknameRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -26,6 +27,28 @@ class NicknameViewModel @Inject constructor(
 //            state = result
         }
     }
+
+    // proto store
+
+    suspend fun saveToProto(nickname: NicknameData) {
+        if (!repository.containsInStore(nickname.hashCode().toString())) {
+            val tmpCopy = repository.readFromProto().toMutableMap()
+            repository.saveToProto(nickname.hashCode().toString(), nickname)
+        }
+    }
+
+    suspend fun readFromProto(): Map<String, NicknameData> {
+        return repository.readFromProto()
+    }
+
+    suspend fun removeFromProto(key: String) {
+        repository.removeFromProto(key)
+    }
+
+    suspend fun clearProtoStore() {
+        repository.clearProtoStore()
+    }
+
 
     suspend fun saveNickname(value: String) {
         if (!repository.getAll().values.any { it == value }) {

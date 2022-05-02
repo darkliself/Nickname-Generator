@@ -26,7 +26,8 @@ import android.content.Context.CLIPBOARD_SERVICE
 import androidx.compose.foundation.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.style.TextAlign
-import com.example.composetest2.repository.NicknameRepository
+import com.example.composetest2.model.nickname.NicknameData
+import com.example.composetest2.model.screendata.ScreenData
 import com.example.composetest2.viewmodel.NicknameViewModel
 import kotlinx.coroutines.launch
 
@@ -42,7 +43,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterStart),
@@ -59,6 +60,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
                 .clickable {
                     scope.launch {
                         repository.clearRepo()
@@ -67,17 +69,18 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
         )
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
                 .fillMaxHeight(0.1f),
             iconModifier = Modifier
                 .align(Alignment.CenterEnd),
             onClick = {
                 scope.launch {
-                    println(repository.readAll())
+                    println(repository.readFromProto())
                 }
                 scope.launch {
                     println(repository)
                 }
+                navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
 
@@ -112,7 +115,12 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 onClick = {
                     scope.launch {
                         if (data.nickname != "") {
-                            repository.saveNickname(data.nickname)
+                            repository.saveToProto(NicknameData(
+                                prefix = data.prefix,
+                                suffix = data.suffix,
+                                rootAsCodeList = data.rootAsCodeList,
+                                alphabetIndex = data.alphabetIndex
+                            ) )
                         } else {
                             repository.saveNickname(data.root)
                         }
@@ -176,7 +184,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen(NavController(LocalContext.current), ScreenData("Nick", "Root", alphabetIndex = 0))
+    ResultScreen(NavController(LocalContext.current), ScreenData("Nick", rootNode = "Root", alphabetIndex = 0))
 }
 
 @Composable
