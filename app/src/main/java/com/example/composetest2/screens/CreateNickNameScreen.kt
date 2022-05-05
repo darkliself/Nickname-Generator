@@ -26,11 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.composetest2.R
-import com.example.composetest2.Screen
+import com.example.composetest2.navigation.Screen
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
-import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.util.TextStyler
 import com.example.composetest2.model.screendata.ScreenData
 
 /*
@@ -50,21 +50,22 @@ fun CreateNickNameScreen(navController: NavController) {
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
+                .align(Alignment.TopEnd),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd),
+                .align(Alignment.Center),
             onClick = {
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
+
         Header(
             stringResource(id = R.string.view_02_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
         )
+
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
@@ -85,7 +86,12 @@ fun CreateNickNameScreen(navController: NavController) {
                 keyboardActions = KeyboardActions(onDone = {
                     if (nickname != "") {
                         keyboardController?.hide()
-                        val data = ScreenData(rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0), rootNode = Screen.CreateNickNameScreen.route)
+                        val data = ScreenData(
+                            rootAsCodeList = TextStyler.splitToArrayByIndexes(
+                                nickname,
+                                0
+                            ), rootNode = Screen.CreateNickNameScreen.route
+                        )
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                         navController.navigate(Screen.CustomizeNickNameScreen.route)
                     } else {

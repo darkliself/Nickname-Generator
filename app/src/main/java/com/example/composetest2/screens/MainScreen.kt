@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.example.composetest2.Screen
+import com.example.composetest2.navigation.Screen
 import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.IconButton
@@ -26,22 +26,21 @@ import com.example.composetest2.model.screendata.ScreenData
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun MainScreen(navController: NavController) {
-
     Background(image = R.drawable.view_01_bg)
 
     Box(
         Modifier.fillMaxSize(),
     ) {
+
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopEnd)
                 .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterEnd),
             onClick = {
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
+
         Header(
             stringResource(id = R.string.view_01_header),
             modifier = Modifier
@@ -49,6 +48,7 @@ fun MainScreen(navController: NavController) {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -0.65f))
         )
+
         IconButton(
             stringResource(R.string.view_01_btn_create),
             R.drawable.view_01_btn_create,
@@ -59,6 +59,7 @@ fun MainScreen(navController: NavController) {
             Modifier.align(BiasAlignment(0.1f, -0.05f)),
             onClick = { navController.navigate(Screen.CreateNickNameScreen.route) }
         )
+
         IconButton(
             stringResource(R.string.view_01_btn_category),
             R.drawable.view_01_btn_choose_cat,
@@ -72,6 +73,7 @@ fun MainScreen(navController: NavController) {
                 navController.navigate(Screen.CategoriesScreen.route)
             }
         )
+
         IconButton(
             text = stringResource(R.string.view_01_btn_autogenerate),
             image = R.drawable.view_01_btn_autogenerate,

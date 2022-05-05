@@ -21,11 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
-import com.example.composetest2.logic.DecorationLeft
-import com.example.composetest2.logic.DecorationRight
-import com.example.composetest2.logic.DecorationSide
-import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.util.DecorationLeft
+import com.example.composetest2.util.DecorationRight
+import com.example.composetest2.util.DecorationSide
+import com.example.composetest2.util.TextStyler
 import com.example.composetest2.model.screendata.ScreenData
+import com.example.composetest2.navigation.Screen
 
 /*
     View 07
@@ -35,7 +36,6 @@ import com.example.composetest2.model.screendata.ScreenData
 @ExperimentalFoundationApi
 @Composable
 fun DecorationScreen(navController: NavController, data: ScreenData) {
-
     val nicknameRoot by remember {
         mutableStateOf(
             TextStyler.rebuildToString(
@@ -56,10 +56,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterStart),
+                .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
                 data.root = nicknameRoot
@@ -69,13 +66,12 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
+
         Header(
-            "Select ${data.side.toString().lowercase()} decoration",
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+            text = "Select ${data.side.toString().lowercase()} decoration",
+            modifier = Modifier.align(Alignment.TopCenter)
         )
+
         TransparentTextField(
             text = "$prefix$nicknameRoot$suffix",
             modifier = Modifier
@@ -87,6 +83,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             backgroundColor = Color.White,
             readOnly = true
         )
+
         // Filter buttons
         Row(
             Modifier
@@ -94,18 +91,19 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.07f)
                 .align(BiasAlignment(0f, -0.55f))
         ) {
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("ALL", onClick = { println("ALL") })
 
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("NEW", onClick = { println("NEW") })
 
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
+
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             Modifier
@@ -117,12 +115,12 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             val decoration =
                 if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
             items(decoration.count()) { index ->
-
                 state = if (data.side == DecorationSide.LEFT) {
                     decoration[index] == prefix
                 } else {
                     decoration[index] == suffix
                 }
+
                 DecorationScreenItem(
                     text = decoration[index],
                     onClick = {
@@ -140,12 +138,12 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     }
 }
 
-//@ExperimentalFoundationApi
-//@Preview(showBackground = true)
-//@Composable
-//private fun Preview() {
-//    DecorationScreen(NavController(LocalContext.current), ScreeData("Some", rootNode = "", alphabetIndex = 0))
-//}
+@ExperimentalFoundationApi
+@Preview(showBackground = true)
+@Composable
+private fun Preview() {
+    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", rootNode = "", alphabetIndex = 0))
+}
 
 @Composable
 fun DecorationScreenItem(
@@ -164,10 +162,6 @@ fun DecorationScreenItem(
             .onFocusChanged {
                 color = if (it.isFocused) Color.Green else Color.White
             }
-            /**
-                onFocusEvent can help you with Valera`s notes
-             */
-            // .onFocusEvent { color =  Color.Green }
             .focusable()
             .clickable {
                 focus.requestFocus()

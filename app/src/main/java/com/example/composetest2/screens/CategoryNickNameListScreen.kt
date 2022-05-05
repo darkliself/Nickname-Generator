@@ -7,11 +7,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
+import com.example.composetest2.navigation.Screen
 
 /*
     View 06
@@ -28,10 +27,7 @@ fun CategoryNickNameListScreen(navController: NavController, category: String?) 
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterStart),
+                .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
             onClick = { navController.navigate(Screen.CategoriesScreen.route) }
         )
@@ -40,7 +36,7 @@ fun CategoryNickNameListScreen(navController: NavController, category: String?) 
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
         )
         // Filter buttons
         Row(
@@ -49,15 +45,15 @@ fun CategoryNickNameListScreen(navController: NavController, category: String?) 
                 .fillMaxHeight(0.07f)
                 .align(BiasAlignment(0f, -0.8f))
         ) {
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("ALL", onClick = { println("ALL") })
 
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("NEW", onClick = { println("NEW") })
 
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
 
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }

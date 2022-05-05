@@ -22,11 +22,10 @@ import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.TransparentTextField
-import com.example.composetest2.logic.TextStyler
-import com.example.composetest2.logic.boysNamesList
-import com.example.composetest2.logic.getRandomNick
+import com.example.composetest2.util.TextStyler
+import com.example.composetest2.util.getRandomNick
 import com.example.composetest2.model.screendata.ScreenData
-import kotlin.random.Random
+import com.example.composetest2.navigation.Screen
 
 /*
     View 05
@@ -35,7 +34,8 @@ import kotlin.random.Random
 
 @Composable
 fun AutogenerateNickname(navController: NavController) {
-    var nickname by remember { mutableStateOf(getRandomNick())}
+    var nickname by remember { mutableStateOf(getRandomNick()) }
+
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
@@ -43,18 +43,17 @@ fun AutogenerateNickname(navController: NavController) {
         // header components
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.TopEnd)
         )
+
         Header(
             stringResource(id = R.string.view_04_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
         )
+
         // surface with all main elements
         Box(
             modifier = Modifier
@@ -67,7 +66,10 @@ fun AutogenerateNickname(navController: NavController) {
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
 
-            TransparentTextField(text = nickname, modifier = Modifier.align(BiasAlignment(0f, -0.1f)))
+            TransparentTextField(
+                text = nickname,
+                modifier = Modifier.align(BiasAlignment(0f, -0.1f))
+            )
 
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -75,10 +77,11 @@ fun AutogenerateNickname(navController: NavController) {
                 Modifier
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.2f)),
-                onClick =  {
+                onClick = {
                     nickname = getRandomNick()
                 }
             )
+
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_04_btn_customise),
@@ -86,10 +89,12 @@ fun AutogenerateNickname(navController: NavController) {
                     .fillMaxHeight(0.1f)
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = {
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", ScreenData(
-                        rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0),
-                        rootNode = Screen.AutogenerateNicknameScreen.route,
-                    ))
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        "data", ScreenData(
+                            rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, 0),
+                            rootNode = Screen.AutogenerateNicknameScreen.route,
+                        )
+                    )
                     navController.navigate(Screen.CustomizeNickNameScreen.route)
                 }
             )
@@ -97,11 +102,11 @@ fun AutogenerateNickname(navController: NavController) {
     }
 }
 
-//@Preview
-//@Composable
-//private fun defPreview() {
-//    AutogenerateNickname(NavController(LocalContext.current))
-//}
+@Preview(showBackground = true)
+@Composable
+private fun defPreview() {
+    AutogenerateNickname(NavController(LocalContext.current))
+}
 
 @Composable
 private fun ImageBox(modifier: Modifier = Modifier) {

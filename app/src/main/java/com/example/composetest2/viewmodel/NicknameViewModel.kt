@@ -29,7 +29,6 @@ class NicknameViewModel @Inject constructor(
     }
 
     // proto store
-
     suspend fun saveToProto(nickname: NicknameData) {
         if (!repository.containsInStore(nickname.hashCode().toString())) {
             val tmpCopy = repository.readFromProto().toMutableMap()
@@ -47,28 +46,5 @@ class NicknameViewModel @Inject constructor(
 
     suspend fun clearProtoStore() {
         repository.clearProtoStore()
-    }
-
-
-    suspend fun saveNickname(value: String) {
-        if (!repository.getAll().values.any { it == value }) {
-            repository.save(value.hashCode().toString(), value)
-        }
-    }
-
-    suspend fun delete(key: String) {
-        repository.delete(key)
-    }
-
-    suspend fun readAll(): Map<String, String> {
-        return repository.getAll()
-    }
-
-    suspend fun clearRepo() {
-        repository.deleteAll()
-    }
-
-    suspend fun isNotEmpty(): Boolean {
-        return repository.count() > 0
     }
 }

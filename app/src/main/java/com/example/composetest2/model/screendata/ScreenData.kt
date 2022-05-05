@@ -1,10 +1,8 @@
 package com.example.composetest2.model.screendata
 
 import android.os.Parcelable
-import android.provider.ContactsContract
-import com.example.composetest2.logic.DecorationSide
+import com.example.composetest2.util.DecorationSide
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
 
 @Parcelize

@@ -1,6 +1,5 @@
-package com.example.composetest2.logic
+package com.example.composetest2.util
 
-import android.annotation.SuppressLint
 import kotlin.random.Random
 
 val AlphabetList = listOf<List<String>>(

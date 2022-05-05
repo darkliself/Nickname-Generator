@@ -2,6 +2,7 @@ package com.example.composetest2.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,17 +18,17 @@ import com.example.composetest2.R
 
 
 @Composable
-fun Header(text: String, modifier: Modifier = Modifier) {
+fun Header(text: String, modifier: Modifier = Modifier, contentAlignment: Alignment = Alignment.Center) {
     Box(
         modifier
-            .fillMaxHeight(0.1f)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+            .fillMaxSize(0.8f)
+            .fillMaxHeight(0.1f),
+        contentAlignment = contentAlignment
     ) {
         Text(
             text = text,
             textAlign = TextAlign.Center,
-            fontSize = 20.sp,
+            fontSize = 16.sp,
             fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
             fontWeight = FontWeight.W900,
         )

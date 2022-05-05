@@ -19,9 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.*
-import com.example.composetest2.logic.TextStyler
-import com.example.composetest2.model.nickname.NicknameData
+import com.example.composetest2.util.TextStyler
 import com.example.composetest2.model.screendata.ScreenData
+import com.example.composetest2.navigation.Screen
 
 /*
     View 08
@@ -35,15 +35,13 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     val nickname = TextStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)
 
     Background(image = R.drawable.view_03_08_bg)
+
     Box(
         Modifier.fillMaxSize(),
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterStart),
+                .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
                 data.rootAsCodeList = TextStyler.splitToArrayByIndexes(nickname, alphabetIndex)
@@ -52,6 +50,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
+
         Header(
             stringResource(id = R.string.view_08_btn_header),
             modifier = Modifier
@@ -59,6 +58,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -1f))
         )
+
         //Add here
         TransparentTextField(
             text = "${data.prefix}${nickname}${data.suffix}",
@@ -71,6 +71,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             backgroundColor = Color.White,
             readOnly = true
         )
+
         // Filter buttons
         Row(
             Modifier
@@ -90,6 +91,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
 
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
+
         LazyColumn(
             Modifier
                 .fillMaxWidth()
@@ -98,17 +100,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(-0.8f, 1.6f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
-//            var baseNickname = ""
-
-            // in case if chars not in standard code
-//            textStyler.splitByCodePoint(nickname).forEach { elem ->
-//                baseNickname += if (textStyler.getCharIndex(elem, alphabetIndex) != -1) {
-//                    textStyler.getBaseChar(textStyler.getCharIndex(elem, alphabetIndex))
-//                } else {
-//                    elem
-//                }
-//            }
-
             items(TextStyler.getAlphabetCount()) { index ->
                 val nick = TextStyler.rebuildToString(data.rootAsCodeList, index)
                 LazyColumnItem(

@@ -1,20 +1,18 @@
 package com.example.composetest2
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.composetest2.components.Background
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.SquareButton
 import com.example.composetest2.model.screendata.ScreenData
+import com.example.composetest2.navigation.Screen
 
 /*
     View 03
@@ -27,17 +25,14 @@ fun CategoryScreen(navController: NavController, data: ScreenData?) {
     Box(Modifier.fillMaxSize()) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterEnd)
+                .align(Alignment.TopEnd),
         )
         Header(
             stringResource(R.string.view_03_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
         )
         CategoriesListButtons(navController = navController)
     }

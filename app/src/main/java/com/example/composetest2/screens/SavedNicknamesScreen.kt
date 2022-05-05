@@ -11,12 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.R
-import com.example.composetest2.Screen
+import com.example.composetest2.navigation.Screen
 import com.example.composetest2.components.*
-import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.util.TextStyler
 import com.example.composetest2.model.nickname.NicknameData
 import com.example.composetest2.model.screendata.ScreenData
 import com.example.composetest2.viewmodel.NicknameViewModel
@@ -28,7 +29,6 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SavedNicknamesScreen(navController: NavController) {
-
     val repo = NicknameViewModel(LocalContext.current)
     val scope = rememberCoroutineScope()
     var result by remember { mutableStateOf(mutableMapOf<String, NicknameData>()) }
@@ -39,43 +39,45 @@ fun SavedNicknamesScreen(navController: NavController) {
 
     Background(image = R.drawable.view_03_08_bg)
 
-    Column {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-        ) {
-            SmallButton(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(0.1f),
-                //  .border(2.dp, Color.Black),
-                iconModifier = Modifier.align(Alignment.Center),
-                image = R.drawable.arrow_left_icon,
-                onClick = {
-                    navController.popBackStack()
-                }
-            )
-            Header(
-                "Saved",// stringResource(id = R.string.view_08_btn_header),
-                modifier = Modifier
-                    .fillMaxSize()
-            )
-        }
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.1f),
+    ) {
+        SmallButton(
+            modifier = Modifier.fillMaxHeight(),
+            image = R.drawable.arrow_left_icon,
+            onClick = {
+                navController.popBackStack()
+            }
+        )
+
+        Header(
+            "Saved",// stringResource(id = R.string.view_08_btn_header),
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
+    }
+
+    Column(
+        Modifier.fillMaxWidth()
+    ) {
+        Spacer(Modifier.fillMaxHeight(0.1f))
+
         Button(
             onClick = {
-
                 scope.launch {
                     repeat(20) {
                         repo.saveToProto(
                             NicknameData(
                                 prefix = "XX",
                                 suffix = "XX",
-                                rootAsCodeList = TextStyler.splitToArrayByIndexes("djhgjfdhgjhdf$it", 0),
+                                rootAsCodeList = TextStyler.splitToArrayByIndexes(
+                                    "djhgjfdhgjhdf$it",
+                                    0
+                                ),
                                 alphabetIndex = it,
                             )
                         )
-
                     }
                     result = repo.readFromProto().toMutableMap()
                 }
@@ -83,6 +85,7 @@ fun SavedNicknamesScreen(navController: NavController) {
         ) {
             Text("add items")
         }
+
         Button(
             onClick = {
                 scope.launch {
@@ -94,7 +97,6 @@ fun SavedNicknamesScreen(navController: NavController) {
             Text("Dell all")
         }
 
-
         if (result.any()) {
             LazyColumn(
                 Modifier.fillMaxSize(),
@@ -103,9 +105,16 @@ fun SavedNicknamesScreen(navController: NavController) {
                     item() {
                         LazyColumnItem(
                             modifier = Modifier.padding(start = 20.dp),
-                            text = "${value.prefix}${TextStyler.rebuildToString(value.rootAsCodeList, 0)}${value.suffix} ${value.alphabetIndex} $key",
+                            text = "${value.prefix}${
+                                TextStyler.rebuildToString(
+                                    value.rootAsCodeList,
+                                    0
+                                )
+                            }${value.suffix} ${value.alphabetIndex} $key",
                             onClick = {
-                                val tmp = TextStyler.splitToArrayByIndexes(value.rootAsCodeList.joinToString(""), 0)
+                                val tmp = TextStyler.splitToArrayByIndexes(
+                                    value.rootAsCodeList.joinToString(""), 0
+                                )
                                 navController.currentBackStackEntry?.savedStateHandle?.set(
                                     "data",
                                     ScreenData(
@@ -119,16 +128,12 @@ fun SavedNicknamesScreen(navController: NavController) {
                                 scope.launch {
                                     result.remove(key)
                                     repo.removeFromProto(key)
-                                    if (!repo.isNotEmpty()) {
-                                        navController.navigate(Screen.SavedNicknamesScreen.route)
-                                    }
                                 }
                             }
                         )
                     }
                 }
             }
-
         } else {
             var mutable by remember { mutableStateOf(false) }
             scope.launch {
@@ -144,5 +149,11 @@ fun SavedNicknamesScreen(navController: NavController) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun Preview() {
+    SavedNicknamesScreen(navController = NavController(LocalContext.current))
 }
 

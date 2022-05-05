@@ -1,10 +1,16 @@
 package com.example.composetest2
 
+import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -14,39 +20,34 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context.CLIPBOARD_SERVICE
-import androidx.compose.foundation.*
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.text.style.TextAlign
 import com.example.composetest2.model.nickname.NicknameData
 import com.example.composetest2.model.screendata.ScreenData
+import com.example.composetest2.navigation.Screen
 import com.example.composetest2.viewmodel.NicknameViewModel
 import kotlinx.coroutines.launch
 
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun ResultScreen(navController: NavController, data: ScreenData) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val repository = NicknameViewModel(context)
+
     Box(
         Modifier.fillMaxSize(),
         Alignment.Center
     ) {
         SmallButton(
             modifier = Modifier
-                .align(Alignment.TopCenter)
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterStart),
+                .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
@@ -54,32 +55,19 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     .navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
+
         Header(
             stringResource(id = R.string.view_07_header),
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
-                .align(Alignment.TopCenter)
-                .clickable {
-                    scope.launch {
-                        repository.clearRepo()
-                    }
-                }
+            modifier = Modifier.align(Alignment.TopCenter)
         )
+
+        // storage
         SmallButton(
             modifier = Modifier
-                .align(Alignment.TopCenter)
-                .fillMaxHeight(0.1f),
+                .align(Alignment.TopEnd),
             iconModifier = Modifier
-                .align(Alignment.CenterEnd),
+                .align(Alignment.Center),
             onClick = {
-                scope.launch {
-                    println(repository.readFromProto())
-                }
-                scope.launch {
-                    println(repository)
-                }
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
@@ -105,6 +93,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 maxLines = 1,
                 textAlign = TextAlign.Center
             )
+
             // save button
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -115,21 +104,19 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 onClick = {
                     scope.launch {
                         if (data.nickname != "") {
-                            repository.saveToProto(NicknameData(
-                                prefix = data.prefix,
-                                suffix = data.suffix,
-                                rootAsCodeList = data.rootAsCodeList,
-                                alphabetIndex = data.alphabetIndex
-                            ) )
-                        } else {
-                            repository.saveNickname(data.root)
+                            repository.saveToProto(
+                                NicknameData(
+                                    prefix = data.prefix,
+                                    suffix = data.suffix,
+                                    rootAsCodeList = data.rootAsCodeList,
+                                    alphabetIndex = data.alphabetIndex
+                                )
+                            )
                         }
-                    }
-                    scope.launch {
-                        println(repository.readAll())
                     }
                 }
             )
+
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_07_btn_try_again),
@@ -138,6 +125,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = { navController.navigate(Screen.MainScreen.route) }
             )
+
             Row(
                 Modifier
                     .fillMaxHeight(0.1f)
@@ -157,6 +145,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                         clipboard.setPrimaryClip(clip)
                     }
                 )
+
                 WideButton(
                     R.drawable.view_07_btn_share,
                     stringResource(R.string.view_07_btn_share),
@@ -184,7 +173,10 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    ResultScreen(NavController(LocalContext.current), ScreenData("Nick", rootNode = "Root", alphabetIndex = 0))
+    ResultScreen(
+        NavController(LocalContext.current),
+        ScreenData("Nick", rootNode = "Root", alphabetIndex = 0)
+    )
 }
 
 @Composable

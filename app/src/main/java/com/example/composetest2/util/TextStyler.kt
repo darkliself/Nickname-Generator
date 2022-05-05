@@ -1,4 +1,4 @@
-package com.example.composetest2.logic
+package com.example.composetest2.util
 
 import android.os.Build
 import androidx.annotation.RequiresApi

@@ -57,36 +57,4 @@ class NicknameRepository @Inject constructor(
             it.copy(list = tmp)
         }
     }
-
-    // preferences
-
-    suspend fun save(key:String, value: String) {
-        context.dataStore.edit {
-            it[stringPreferencesKey(key)] = value
-        }
-    }
-
-    suspend fun delete(key: String) {
-        context.dataStore.edit {
-            it.remove(stringPreferencesKey(key))
-        }
-    }
-
-    suspend fun deleteAll() {
-        context.dataStore.edit {
-            it.clear()
-        }
-    }
-
-    suspend fun getAll(): Map<String, String> {
-        val result = mutableMapOf<String, String>()
-        context.dataStore.data.first().asMap().forEach { (key, value) ->
-            result[key.name] = value.toString()
-        }
-        return result
-    }
-
-    suspend fun count(): Int {
-        return context.dataStore.data.first().asMap().count()
-    }
 }

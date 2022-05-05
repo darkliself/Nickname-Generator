@@ -11,18 +11,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composetest2.R
-import com.example.composetest2.Screen
+import com.example.composetest2.navigation.Screen
 import com.example.composetest2.components.Header
 import com.example.composetest2.components.SmallButton
 import com.example.composetest2.components.WideButton
-import com.example.composetest2.logic.DecorationSide
-import com.example.composetest2.logic.TextStyler
+import com.example.composetest2.loadInterstitial
+import com.example.composetest2.util.DecorationSide
+import com.example.composetest2.util.TextStyler
 import com.example.composetest2.model.screendata.ScreenData
+import com.example.composetest2.showInterstitial
 
 
 /*
@@ -30,30 +34,32 @@ import com.example.composetest2.model.screendata.ScreenData
 */
 
 @Composable
-fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
-    val data = _data
+fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData) {
     navController.enableOnBackPressed(true)
-    val alphabetIndex = data.alphabetIndex
-    val nickname = "${data.prefix}${TextStyler.rebuildToString(data.rootAsCodeList, alphabetIndex)}${data.suffix}"
+    val context = LocalContext.current
+    val alphabetIndex = screenData.alphabetIndex
+    val nickname = "${screenData.prefix}${
+        TextStyler.rebuildToString(
+            screenData.rootAsCodeList,
+            alphabetIndex
+        )
+    }${screenData.suffix}"
 
     Box(
         Modifier.fillMaxSize()
     ) {
         SmallButton(
             modifier = Modifier
-                .align(BiasAlignment(0f, -1f))
-                .fillMaxHeight(0.1f),
-            iconModifier = Modifier
-                .align(Alignment.CenterStart),
+                .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(data.rootNode) }
+            onClick = { navController.navigate(screenData.rootNode) }
         )
         Header(
             stringResource(id = R.string.view_05_header),
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -1f))
+                .align(Alignment.TopCenter)
         )
         Box(
             modifier = Modifier
@@ -64,8 +70,7 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
                 .border(1.dp, Color.Black, shape = RoundedCornerShape(60.dp))
                 .background(Color(0xFFE7F2D7))
         ) {
-            IconFace(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
-            //TransparentTextField(Modifier.align(BiasAlignment(0f, 0f)))
+            IconAvatar(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
             Text(
                 text = nickname,
                 Modifier
@@ -91,8 +96,8 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, -0.27f)),
                 onClick = {
-                    data.side = DecorationSide.LEFT
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    screenData.side = DecorationSide.LEFT
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
                     navController.navigate(Screen.DecorationScreen.route)
                 }
             )
@@ -104,11 +109,10 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = {
-                    data.nickname = nickname
-                    data.alphabetIndex = alphabetIndex
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    screenData.nickname = nickname
+                    screenData.alphabetIndex = alphabetIndex
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
                     navController.navigate(Screen.FontStyleScreen.route)
-                        //+ "?nickname=$nickname/alphabetIndex=$alphabetIndex")
                 }
             )
             // right decoration
@@ -119,8 +123,8 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.77f)),
                 onClick = {
-                    data.side = DecorationSide.RIGHT
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                    screenData.side = DecorationSide.RIGHT
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
                     navController.navigate(Screen.DecorationScreen.route)
                 }
             )
@@ -134,23 +138,26 @@ fun CustomizeNickNameScreen(navController: NavController, _data: ScreenData) {
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
             onClick = {
-                data.nickname = nickname
-                data.alphabetIndex = alphabetIndex
-                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+                screenData.nickname = nickname
+                screenData.alphabetIndex = alphabetIndex
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
+                // loading ads
+                loadInterstitial(context)
+                showInterstitial(context)
                 navController.navigate(Screen.ResultScreen.route)
             }
         )
     }
 }
 
-//@Preview
-//@Composable
-//private fun Preview() {
-//    CustomizeNickNameScreen(NavController(LocalContext.current), ScreenData("some", "", rootNode = ""))
-//}
+@Preview(showBackground = true)
+@Composable
+private fun Preview() {
+    CustomizeNickNameScreen(NavController(LocalContext.current), ScreenData("some", rootNode = ""))
+}
 
 @Composable
-private fun IconFace(modifier: Modifier) {
+private fun IconAvatar(modifier: Modifier) {
     Image(
         ImageVector.vectorResource(id = R.drawable.view_05_customize_icon),
         null,
