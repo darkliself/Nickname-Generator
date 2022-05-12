@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -26,13 +25,12 @@ import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalAnimationApi::class)
-@SuppressLint("CoroutineCreationDuringComposition")
+@SuppressLint("CoroutineCreationDuringComposition", "UnrememberedMutableState")
 @Composable
 fun SavedNicknamesScreen(navController: NavController) {
     val repo = NicknameViewModel(LocalContext.current)
     val scope = rememberCoroutineScope()
     var result by remember { mutableStateOf(mutableMapOf<String, NicknameData>()) }
-
     scope.launch {
         if (repo.readFromProto().isNotEmpty()) result = repo.readFromProto().toMutableMap()
     }
@@ -63,73 +61,41 @@ fun SavedNicknamesScreen(navController: NavController) {
     ) {
         Spacer(Modifier.fillMaxHeight(0.1f))
 
-        Button(
-            onClick = {
-                scope.launch {
-                    repeat(20) {
-                        repo.saveToProto(
-                            NicknameData(
-                                prefix = "XX",
-                                suffix = "XX",
-                                rootAsCodeList = TextStyler.splitToArrayByIndexes(
-                                    "djhgjfdhgjhdf$it",
-                                    0
-                                ),
-                                alphabetIndex = it,
-                            )
-                        )
-                    }
-                    result = repo.readFromProto().toMutableMap()
-                }
-            }
-        ) {
-            Text("add items")
-        }
-
-        Button(
-            onClick = {
-                scope.launch {
-                    repo.clearProtoStore()
-                    result = mutableMapOf()
-                }
-            }
-        ) {
-            Text("Dell all")
-        }
-
         if (result.any()) {
             LazyColumn(
                 Modifier.fillMaxSize(),
             ) {
+                var index = 0
                 result.forEach { (key, value) ->
                     item() {
-                        LazyColumnItem(
+                        LazyColumnItem2(
                             modifier = Modifier.padding(start = 20.dp),
                             text = "${value.prefix}${
                                 TextStyler.rebuildToString(
                                     value.rootAsCodeList,
-                                    0
+                                    value.alphabetIndex
                                 )
-                            }${value.suffix} ${value.alphabetIndex} $key",
-                            onClick = {
-                                val tmp = TextStyler.splitToArrayByIndexes(
-                                    value.rootAsCodeList.joinToString(""), 0
-                                )
+                            }${value.suffix}",
+                            onIconClick = {
                                 navController.currentBackStackEntry?.savedStateHandle?.set(
                                     "data",
                                     ScreenData(
-                                        rootAsCodeList = tmp,
+                                        prefix = value.prefix,
+                                        suffix = value.suffix,
+                                        rootAsCodeList = value.rootAsCodeList,
+                                        alphabetIndex = value.alphabetIndex,
                                         rootNode = Screen.SavedNicknamesScreen.route
                                     )
                                 )
                                 navController.navigate(Screen.CustomizeNickNameScreen.route)
                             },
-                            removeOnClick = {
+                            onRemoveIconClick = {
                                 scope.launch {
                                     result.remove(key)
                                     repo.removeFromProto(key)
                                 }
-                            }
+                            },
+                            selected = true
                         )
                     }
                 }
@@ -143,9 +109,11 @@ fun SavedNicknamesScreen(navController: NavController) {
             if (mutable) {
                 Text("Your storage is empty")
             } else {
-                CircularProgressIndicator(
-                    modifier = Modifier.fillMaxSize()
-                )
+                Box(Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.fillMaxSize().align(Alignment.Center)
+                    )
+                }
             }
         }
     }

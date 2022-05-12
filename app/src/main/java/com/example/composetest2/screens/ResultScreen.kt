@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -112,6 +113,11 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                                     alphabetIndex = data.alphabetIndex
                                 )
                             )
+                            Toast.makeText(
+                                context,
+                                "Saved",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

@@ -33,9 +33,6 @@ fun SmallButton(
             .fillMaxWidth(0.15f)
             .fillMaxHeight(0.1f)
             .clickable { onClick() }
-            .border(2.dp, Color.Black)
-//            .fillMaxHeight(0.2f)
-//            .fillMaxWidth(0.9f),
     ) {
         Image(
             ImageVector.vectorResource(image),

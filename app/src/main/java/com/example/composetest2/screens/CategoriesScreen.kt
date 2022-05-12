@@ -26,6 +26,7 @@ fun CategoryScreen(navController: NavController, data: ScreenData?) {
         SmallButton(
             modifier = Modifier
                 .align(Alignment.TopEnd),
+            onClick = { navController.navigate(Screen.SavedNicknamesScreen.route) }
         )
         Header(
             stringResource(R.string.view_03_header),

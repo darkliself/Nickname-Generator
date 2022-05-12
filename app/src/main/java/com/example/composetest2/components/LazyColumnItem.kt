@@ -1,6 +1,7 @@
 package com.example.composetest2.components
 
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -10,7 +11,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Divider
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +31,8 @@ fun LazyColumnItem(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit = {},
-    removeOnClick: (() -> Unit)? = null
+    onIconClick: () -> Unit = {},
+    onRemoveIconClick: (() -> Unit)? = null,
 ) {
     var state by remember { mutableStateOf(false) }
     val focus by remember { mutableStateOf(FocusRequester()) }
@@ -48,15 +49,19 @@ fun LazyColumnItem(
         exit = fadeOut(
             animationSpec = tween(durationMillis = 250)
         )
-
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focus)
-                .onFocusChanged { state = it.isFocused }
+                .onFocusChanged {
+                    state = it.isFocused
+                }
                 .focusable()
-                .clickable { focus.requestFocus() },
+                .clickable {
+                    focus.requestFocus()
+                    onClick()
+                },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -79,15 +84,13 @@ fun LazyColumnItem(
                 exit = fadeOut(
                     animationSpec = tween(durationMillis = 250)
                 )
-
             ) {
-
                 Row(
                     modifier = Modifier
                         .width(90.dp),
                     horizontalArrangement = arrangement
                 ) {
-                    if (removeOnClick != null) {
+                    if (onRemoveIconClick != null) {
                         arrangement = Arrangement.SpaceBetween
                         Image(
                             ImageVector.vectorResource(id = R.drawable.btn_remove),
@@ -96,7 +99,7 @@ fun LazyColumnItem(
                                 .size(30.dp)
                                 // .padding()
                                 .clickable {
-                                    removeOnClick()
+                                    onRemoveIconClick()
                                     isNotDeleted = false
                                 }
                         )
@@ -107,7 +110,7 @@ fun LazyColumnItem(
                         modifier = Modifier
                             .size(30.dp)
                             .clickable {
-                                onClick()
+                                onIconClick()
                             }
                     )
                 }
@@ -118,4 +121,99 @@ fun LazyColumnItem(
             thickness = 1.dp,
         )
     }
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun LazyColumnItem2(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit = {},
+    onIconClick: () -> Unit = {},
+    onRemoveIconClick: (() -> Unit)? = null,
+    selected: Boolean = false
+) {
+    var isNotDeleted by remember { mutableStateOf(true) }
+    var arrangement by remember { mutableStateOf(Arrangement.End) }
+
+    AnimatedVisibility(
+        modifier = modifier
+            .fillMaxWidth(),
+        visible = isNotDeleted,
+        enter = fadeIn(
+            initialAlpha = 0.4f
+        ),
+        exit = fadeOut(
+            animationSpec = tween(durationMillis = 250)
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onClick()
+                },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            BasicTextField(
+                value = text,
+                onValueChange = {},
+                modifier = Modifier
+                    .padding(top = 10.dp, bottom = 10.dp)
+                    .fillMaxWidth(0.7f),
+                textStyle = TextStyle(fontSize = 16.sp),
+                singleLine = true,
+                enabled = false
+            )
+            AnimatedVisibility(
+                modifier = Modifier.padding(end = 20.dp),
+                visible = selected,
+                enter = fadeIn(
+                    initialAlpha = 0.4f
+                ),
+                exit = fadeOut(
+                    animationSpec = tween(durationMillis = 250)
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .width(90.dp),
+                    horizontalArrangement = arrangement
+                ) {
+                    if (onRemoveIconClick != null) {
+                        arrangement = Arrangement.SpaceBetween
+                        Image(
+                            ImageVector.vectorResource(id = R.drawable.btn_remove),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(30.dp)
+                                // .padding()
+                                .clickable {
+                                    onRemoveIconClick()
+                                    isNotDeleted = false
+                                }
+                        )
+                    }
+                    Image(
+                        ImageVector.vectorResource(id = R.drawable.btn_agree),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clickable {
+                                onIconClick()
+                            }
+                    )
+                }
+            }
+        }
+        Divider(
+            color = Color(0XFFE7F2D7),
+            thickness = 1.dp,
+        )
+    }
+}
+
+fun test(state: Int): Boolean {
+    return state >= 0
 }

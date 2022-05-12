@@ -1,6 +1,8 @@
 package com.example.composetest2
 
 
+import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -46,8 +48,18 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     }
     var prefix by remember { mutableStateOf(data.prefix) }
     var suffix by remember { mutableStateOf(data.suffix) }
-    var state by remember { mutableStateOf(false) }
     var textArea by remember { mutableStateOf("$prefix$nicknameRoot$suffix") }
+
+    val decoration = if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
+    val isItemSelected by remember { mutableStateOf(mutableListOf<Color>()) }
+    repeat(decoration.count()) {
+        isItemSelected.add(Color.White)
+    }
+
+    BackHandler() {
+        navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
+        navController.navigate(Screen.CustomizeNickNameScreen.route)
+    }
 
     Background(image = R.drawable.view_06_07_bg)
 
@@ -59,19 +71,14 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
             onClick = {
-                data.root = nicknameRoot
-                data.prefix = prefix
-                data.suffix = suffix
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
-
         Header(
             text = "Select ${data.side.toString().lowercase()} decoration",
             modifier = Modifier.align(Alignment.TopCenter)
         )
-
         TransparentTextField(
             text = "$prefix$nicknameRoot$suffix",
             modifier = Modifier
@@ -83,7 +90,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             backgroundColor = Color.White,
             readOnly = true
         )
-
         // Filter buttons
         Row(
             Modifier
@@ -92,18 +98,12 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -0.55f))
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("ALL", onClick = { println("ALL") })
-
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("NEW", onClick = { println("NEW") })
-
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
-
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             Modifier
@@ -112,15 +112,8 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, 1f))
 
         ) {
-            val decoration =
-                if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
-            items(decoration.count()) { index ->
-                state = if (data.side == DecorationSide.LEFT) {
-                    decoration[index] == prefix
-                } else {
-                    decoration[index] == suffix
-                }
 
+            items(decoration.count()) { index ->
                 DecorationScreenItem(
                     text = decoration[index],
                     onClick = {
@@ -131,7 +124,21 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                             suffix = decoration[index]
                             "$prefix$nicknameRoot${decoration[index]}"
                         }
+                        // write data
+                        data.root = nicknameRoot
+                        data.prefix = prefix
+                        data.suffix = suffix
+                        // highlight item
+                        val iterator = isItemSelected.listIterator()
+                        while (iterator.hasNext()) {
+                            if (iterator.next() == Color.Green) {
+                                iterator.set(Color.White)
+                            }
+                        }
+                        isItemSelected[index] = Color.Green
+
                     },
+                    colored = isItemSelected[index]
                 )
             }
         }
@@ -142,29 +149,24 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    DecorationScreen(NavController(LocalContext.current), ScreenData("Some", rootNode = "", alphabetIndex = 0))
+    DecorationScreen(
+        NavController(LocalContext.current),
+        ScreenData("Some", rootNode = "", alphabetIndex = 0)
+    )
 }
 
 @Composable
 fun DecorationScreenItem(
     onClick: () -> Unit,
     text: String,
+    colored: Color
 ) {
-    // var initState by remember { mutableStateOf(isFocused) }
-    val focus by remember { mutableStateOf(FocusRequester()) }
-    var color by remember { mutableStateOf(Color.White) }
     Card(
-        backgroundColor = color,
+        backgroundColor = colored,
         modifier = Modifier
             .padding(bottom = 10.dp)
             .height(35.dp)
-            .focusRequester(focus)
-            .onFocusChanged {
-                color = if (it.isFocused) Color.Green else Color.White
-            }
-            .focusable()
             .clickable {
-                focus.requestFocus()
                 onClick()
             },
     ) {
