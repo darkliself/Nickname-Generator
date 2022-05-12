@@ -49,13 +49,11 @@ fun SavedNicknamesScreen(navController: NavController) {
                 navController.popBackStack()
             }
         )
-
         Header(
             "Saved",// stringResource(id = R.string.view_08_btn_header),
             modifier = Modifier.align(Alignment.TopCenter)
         )
     }
-
     Column(
         Modifier.fillMaxWidth()
     ) {

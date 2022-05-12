@@ -57,7 +57,6 @@ fun CreateNickNameScreen(navController: NavController) {
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
-
         Header(
             stringResource(id = R.string.view_02_header),
             modifier = Modifier
@@ -65,7 +64,6 @@ fun CreateNickNameScreen(navController: NavController) {
                 .fillMaxHeight(0.1f)
                 .align(Alignment.TopCenter)
         )
-
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.9f)

@@ -49,7 +49,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     var prefix by remember { mutableStateOf(data.prefix) }
     var suffix by remember { mutableStateOf(data.suffix) }
     var textArea by remember { mutableStateOf("$prefix$nicknameRoot$suffix") }
-
     val decoration = if (data.side == DecorationSide.LEFT) DecorationLeft else DecorationRight
     val isItemSelected by remember { mutableStateOf(mutableListOf<Color>()) }
     repeat(decoration.count()) {
@@ -110,9 +109,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f))
-
         ) {
-
             items(decoration.count()) { index ->
                 DecorationScreenItem(
                     text = decoration[index],
@@ -136,7 +133,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                             }
                         }
                         isItemSelected[index] = Color.Green
-
                     },
                     colored = isItemSelected[index]
                 )

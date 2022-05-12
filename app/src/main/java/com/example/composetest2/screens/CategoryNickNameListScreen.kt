@@ -46,15 +46,10 @@ fun CategoryNickNameListScreen(navController: NavController, category: String?) 
                 .align(BiasAlignment(0f, -0.8f))
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("ALL", onClick = { println("ALL") })
-
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("NEW", onClick = { println("NEW") })
-
             Spacer(modifier = Modifier.width(10.dp))
-
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
         LazyColumn(

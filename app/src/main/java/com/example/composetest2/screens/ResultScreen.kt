@@ -56,12 +56,10 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     .navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
-
         Header(
             stringResource(id = R.string.view_07_header),
             modifier = Modifier.align(Alignment.TopCenter)
         )
-
         // storage
         SmallButton(
             modifier = Modifier
@@ -72,7 +70,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
-
         // surface with all main elements
         Box(
             modifier = Modifier
@@ -84,7 +81,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .background(Color(0xFFFFEFEB))
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
-
             Text(
                 text = data.nickname,
                 modifier = Modifier
@@ -94,7 +90,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 maxLines = 1,
                 textAlign = TextAlign.Center
             )
-
             // save button
             WideButton(
                 R.drawable.btn_wide_pink,
@@ -122,7 +117,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     }
                 }
             )
-
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_07_btn_try_again),
@@ -131,7 +125,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     .align(BiasAlignment(0f, 0.5f)),
                 onClick = { navController.navigate(Screen.MainScreen.route) }
             )
-
             Row(
                 Modifier
                     .fillMaxHeight(0.1f)
@@ -151,7 +144,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                         clipboard.setPrimaryClip(clip)
                     }
                 )
-
                 WideButton(
                     R.drawable.view_07_btn_share,
                     stringResource(R.string.view_07_btn_share),

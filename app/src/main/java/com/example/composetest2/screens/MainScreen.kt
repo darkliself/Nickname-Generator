@@ -31,7 +31,6 @@ fun MainScreen(navController: NavController) {
     Box(
         Modifier.fillMaxSize(),
     ) {
-
         SmallButton(
             modifier = Modifier
                 .align(Alignment.TopEnd)
@@ -40,7 +39,6 @@ fun MainScreen(navController: NavController) {
                 navController.navigate(Screen.SavedNicknamesScreen.route)
             }
         )
-
         Header(
             stringResource(id = R.string.view_01_header),
             modifier = Modifier
@@ -48,7 +46,6 @@ fun MainScreen(navController: NavController) {
                 .fillMaxHeight(0.1f)
                 .align(BiasAlignment(0f, -0.65f))
         )
-
         IconButton(
             stringResource(R.string.view_01_btn_create),
             R.drawable.view_01_btn_create,
@@ -59,7 +56,6 @@ fun MainScreen(navController: NavController) {
             Modifier.align(BiasAlignment(0.1f, -0.05f)),
             onClick = { navController.navigate(Screen.CreateNickNameScreen.route) }
         )
-
         IconButton(
             stringResource(R.string.view_01_btn_category),
             R.drawable.view_01_btn_choose_cat,
@@ -73,7 +69,6 @@ fun MainScreen(navController: NavController) {
                 navController.navigate(Screen.CategoriesScreen.route)
             }
         )
-
         IconButton(
             text = stringResource(R.string.view_01_btn_autogenerate),
             image = R.drawable.view_01_btn_autogenerate,

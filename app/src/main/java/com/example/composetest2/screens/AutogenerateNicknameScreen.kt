@@ -43,9 +43,11 @@ fun AutogenerateNickname(navController: NavController) {
         // header components
         SmallButton(
             modifier = Modifier
-                .align(Alignment.TopEnd)
+                .align(Alignment.TopEnd),
+            onClick = {
+                navController.navigate(Screen.SavedNicknamesScreen.route)
+            }
         )
-
         Header(
             stringResource(id = R.string.view_04_header),
             modifier = Modifier
@@ -53,7 +55,6 @@ fun AutogenerateNickname(navController: NavController) {
                 .fillMaxHeight(0.1f)
                 .align(Alignment.TopCenter)
         )
-
         // surface with all main elements
         Box(
             modifier = Modifier
@@ -65,12 +66,10 @@ fun AutogenerateNickname(navController: NavController) {
                 .background(Color(0xFFFFEFEB))
         ) {
             ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
-
             TransparentTextField(
                 text = nickname,
                 modifier = Modifier.align(BiasAlignment(0f, -0.1f))
             )
-
             WideButton(
                 R.drawable.btn_wide_pink,
                 stringResource(R.string.view_04_btn_try_again),
@@ -81,7 +80,6 @@ fun AutogenerateNickname(navController: NavController) {
                     nickname = getRandomNick()
                 }
             )
-
             WideButton(
                 R.drawable.btn_wide_green,
                 stringResource(R.string.view_04_btn_customise),

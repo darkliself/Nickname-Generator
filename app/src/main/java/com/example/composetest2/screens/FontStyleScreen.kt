@@ -85,11 +85,11 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.07f)
                 .align(BiasAlignment(0f, -0.6f))
         ) {
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
             RoundedButton("ALL", onClick = { println("ALL") })
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
             RoundedButton("NEW", onClick = { println("NEW") })
-            Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+            Spacer(modifier = Modifier.width(10.dp))
             RoundedButton("POPULAR", onClick = { println("POPULAR") })
         }
         LazyColumn(
@@ -100,7 +100,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(-0.8f, 1.6f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
         ) {
-
             items(TextStyler.getAlphabetCount()) { index ->
                 val nick = TextStyler.rebuildToString(data.rootAsCodeList, index)
                 LazyColumnItem2(
