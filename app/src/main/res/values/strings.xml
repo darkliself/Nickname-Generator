@@ -13,7 +13,7 @@
         <item>Historical</item>
         <item>Other</item>
     </string-array>
-    <string name="app_name" translatable="false">ComposeTest2</string>
+    <string name="app_name" translatable="false">TextStyler</string>
     <!-- main view screen -->
     <string name="view_01_header">Create\nyour perfect nickname</string>
     <string name="view_01_btn_create">Create custom nickname</string>

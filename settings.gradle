@@ -23,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ComposeTest2"
+rootProject.name = "TextStyler"
 include ':app'

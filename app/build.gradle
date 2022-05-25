@@ -11,7 +11,8 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.composetest2"
+        //applicationId "com.example.composetest2"
+        applicationId "com.example.textstyler"
         minSdk 21
         targetSdk 31
         versionCode 1
