@@ -17,6 +17,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.textstyler.R
 import com.example.textstyler.navigation.Screen
 import com.example.textstyler.components.Header
@@ -158,12 +161,21 @@ private fun Preview() {
 
 @Composable
 private fun IconAvatar(modifier: Modifier) {
-    Image(
-        ImageVector.vectorResource(id = R.drawable.view_05_customize_icon),
-        null,
-        modifier
+
+    val composition by rememberLottieComposition(LottieCompositionSpec.Url("https://api.minimalavatars.com/lottie?base=0&hair=4&eyes=4&mouth=2&baseColor=%23F4D19E&hairColor=%23352C21&eyesColor=%23C68F46&mouthColor=%23C68F46"))
+    LottieAnimation(
+        composition = composition,
+        modifier = modifier
             .fillMaxWidth(0.25f)
-            .fillMaxHeight(0.2f)
+            .fillMaxHeight(0.2f),
+        iterations = Int.MAX_VALUE
     )
+//    Image(
+//        ImageVector.vectorResource(id = R.drawable.view_05_customize_icon),
+//        null,
+//        modifier
+//            .fillMaxWidth(0.25f)
+//            .fillMaxHeight(0.2f)
+//    )
 }
 

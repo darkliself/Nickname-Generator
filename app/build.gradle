@@ -84,4 +84,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.37"
     // Ads SDK
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    // animations
+    implementation "com.airbnb.android:lottie-compose:5.0.3"
 }
