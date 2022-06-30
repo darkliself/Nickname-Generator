@@ -53,6 +53,7 @@ fun generateURLMinimalAvatar(nickname: String) {
     val eyesColor = codeArray[6]
     val mouthColor = codeArray[7]
 
+
     var resultString = "https://api.minimalavatars.com/lottie?base=$base&eyes=$eyes&hair=$hair&mouth=$mouth&baseColor=$baseColor&hairColor=$hairColor&eyesColor=$eyesColor&mouthColor=$mouthColor"
 
     println(resultString)
