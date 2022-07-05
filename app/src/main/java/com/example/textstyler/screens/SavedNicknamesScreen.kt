@@ -8,6 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -105,7 +106,10 @@ fun SavedNicknamesScreen(navController: NavController) {
                 mutable = true
             }
             if (mutable) {
-                Text("Your storage is empty")
+                Text(
+                    "Your storage is empty",
+                    Modifier.align(CenterHorizontally)
+                )
             } else {
                 Box(Modifier.fillMaxSize()) {
                     CircularProgressIndicator(

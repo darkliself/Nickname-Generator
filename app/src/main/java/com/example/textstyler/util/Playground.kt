@@ -4,20 +4,13 @@ import kotlin.math.abs
 
 
 fun main(args: Array<String>) {
-    generateURLMinimalAvatar("hello motherfucker")
-    generateURLMinimalAvatar("hello motherfucker1")
-    generateURLMinimalAvatar("h")
-    generateURLMinimalAvatar("h")
-    val testList = listOf<List<String>>(
-
-    )
-
-    for (i in 1..1000) {
-        generateURLMinimalAvatar("hello motherfucker$i")
-    }
+   val test = "fsdjfgds"
+    val big = "\uD83D\uDC97\uD83D\uDC9C.¸¸.•´¯`☆ºஇ•´♥ a"
+    val small = "●▬▬▬๑۩۩๑▬▬▬●a"
+    println(test)
 }
 
-fun generateURLMinimalAvatar(nickname: String): String {
+fun generateAvatarURL(nickname: String): String {
     var nicknameCode = nickname.hashCode().toString()
     // https://api.minimalavatars.com/lottie?base=0&eyes=1&hair=0&mouth=9&baseColor=%237d205e&hairColor=%23f573ff&eyesColor=%23f573ff&mouthColor=%23f573ff
     // 8 params
@@ -39,26 +32,39 @@ fun generateURLMinimalAvatar(nickname: String): String {
     val eyes = getItemCode(codeArray[1].toInt(), AvatarsData.eyes)
     val hair = getItemCode(codeArray[2].toInt(), AvatarsData.hair)
     val mouth = getItemCode(codeArray[3].toInt(), AvatarsData.mouth)
-    val baseColor = AvatarsData.colorsList[getItemCode(codeArray[4].toInt(), 40)] // example : %23007A5E
-    val hairColor = AvatarsData.colorsList[getItemCode(codeArray[4].toInt(), 40)]
-    val eyesColor = AvatarsData.colorsList[getItemCode(codeArray[4].toInt(), 40)]
-    val mouthColor = AvatarsData.colorsList[getItemCode(codeArray[4].toInt(), 40)]
-    println(nicknameCode)
-    return "https://api.minimalavatars.com/lottie?base=$base&eyes=$eyes&hair=$hair&mouth=$mouth&baseColor=$baseColor&hairColor=$hairColor&eyesColor=$eyesColor&mouthColor=$mouthColor"
+    val baseColor =
+        AvatarsData.colorsList[getItemCode(codeArray[4].toInt(), 37)] // example : %23007A5E
+    val baseColorId = getItemCode(codeArray[4].toInt(), 37)
+    val hairColor = AvatarsData.colorsList[getItemCode(codeArray[5].toInt(), 37, baseColorId)]
+    val eyesColor = AvatarsData.colorsList[getItemCode(codeArray[6].toInt(), 37, baseColorId)]
+    val mouthColor = AvatarsData.colorsList[getItemCode(codeArray[7].toInt(), 37, baseColorId)]
+    // println(nicknameCode)
+    val z =
+        "https://api.minimalavatars.com/lottie?base=$base&eyes=$eyes&hair=$hair&mouth=$mouth&baseColor=$baseColor&hairColor=$hairColor&eyesColor=$eyesColor&mouthColor=$mouthColor"
+    println(z)
+    return z
 }
 
-private fun getItemCode(num: Int, itemsInList: Int): Int {
+private fun getItemCode(num: Int, itemsInList: Int, baseColorId: Int = -1): Int {
+    // base color Id must be unique
+    // Sloomy●=»>◆<«=●-´¯
     val step = 100 / itemsInList
     var range = 0
     var result = 0
-    while (num >= range ) {
+    while (num >= range) {
         range += step
         result++
         if (result == itemsInList) {
             break
         }
     }
-    // println(" generated number is $num and result is $result and step is $step items in list $itemsInList")
+    if (baseColorId == result) {
+        return if (baseColorId == itemsInList) {
+            baseColorId - 1
+        } else {
+            baseColorId + 1
+        }
+    }
     return result
 }
 
@@ -73,7 +79,6 @@ private object AvatarsData {
         "%23FFEA71",
         "%2307C7AE",
         "%23FC264C",
-        "%23F7FFF7",
         "%232B1039",
         "%23426EB7",
         "%23EFC636",
@@ -106,8 +111,7 @@ private object AvatarsData {
         "%2376FFBA",
         "%231D4F7C",
         "%2329D3A2",
-        "%237d205e",
         "%23f573ff",
-        "%23f573ff",
-    )
+        )
+    val colorsNumber = colorsList.size
 }

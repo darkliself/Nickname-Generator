@@ -18,10 +18,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.textstyler.components.SmallButton
-import com.example.textstyler.components.WideButton
-import com.example.textstyler.components.Header
-import com.example.textstyler.components.TransparentTextField
+import com.example.textstyler.components.*
 import com.example.textstyler.util.TextStyler
 import com.example.textstyler.util.getRandomNick
 import com.example.textstyler.model.screendata.ScreenData
@@ -30,8 +27,6 @@ import com.example.textstyler.navigation.Screen
 /*
     View 05
 */
-
-
 @Composable
 fun AutogenerateNickname(navController: NavController) {
     var nickname by remember { mutableStateOf(getRandomNick()) }
@@ -65,7 +60,14 @@ fun AutogenerateNickname(navController: NavController) {
                 .border(1.dp, Color.Black, RoundedCornerShape(60.dp))
                 .background(Color(0xFFFFEFEB))
         ) {
-            ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
+            LottiAvatar(
+                Modifier
+                    .align(BiasAlignment(0f, -0.7f))
+                    .fillMaxWidth(0.5f)
+                    .fillMaxHeight(0.3f),
+                nickname,
+                R.drawable.view_04_autogenerate_icon
+            )
             TransparentTextField(
                 text = nickname,
                 modifier = Modifier.align(BiasAlignment(0f, -0.1f))

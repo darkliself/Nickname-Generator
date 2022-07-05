@@ -13,33 +13,4 @@
       android:strokeWidth="2"
       android:fillColor="#ffffff"
       android:strokeColor="#000000"/>
-  <path
-      android:strokeWidth="1"
-      android:pathData="M46.9,56.8L32.9,52.9L28.8,47.1L24.612,44.2V28.5H55.388V49.9L46.9,56.8Z"
-      android:fillColor="#4D217C"
-      android:strokeColor="#4D217C"/>
-  <path
-      android:strokeWidth="1"
-      android:pathData="M47.9,29.9C47.9,29.9 48.2,33.7 41.9,34C33.5,34.4 31.2,40.8 31.1,45.4C31,50 30.9,55 27.2,56.5C23.5,58 19.008,55.263 18.7,52.8C17.7,44.8 17.68,29.552 23.2,25.2C28.4,21.1 38,21.2 44.9,22.6C49.31,23.5 47.9,29.9 47.9,29.9Z"
-      android:fillColor="#ABC639"
-      android:strokeColor="#ABC639"
-      android:strokeLineCap="round"/>
-  <path
-      android:strokeWidth="1"
-      android:pathData="M47.9999,39.999C47.6966,39.9995 47.4274,39.8045 47.3333,39.5161C47.2392,39.2277 47.3416,38.9115 47.5869,38.733C49.6869,37.205 51.8779,37.207 53.9189,38.739C54.2282,38.971 54.2909,39.4097 54.0589,39.719C53.827,40.0283 53.3882,40.091 53.0789,39.859C51.5359,38.701 50.0089,38.703 48.4109,39.865C48.2915,39.9519 48.1476,39.9988 47.9999,39.999Z"
-      android:fillColor="#F573FF"
-      android:strokeColor="#F573FF"
-      android:strokeLineCap="round"/>
-  <path
-      android:strokeWidth="1"
-      android:pathData="M37.3,39.999C36.9966,39.9995 36.7275,39.8045 36.6334,39.5161C36.5393,39.2277 36.6417,38.9115 36.887,38.733C38.987,37.205 41.178,37.207 43.219,38.739C43.5283,38.971 43.591,39.4097 43.359,39.719C43.1271,40.0283 42.6883,40.091 42.379,39.859C40.836,38.701 39.309,38.703 37.711,39.865C37.5916,39.9519 37.4477,39.9988 37.3,39.999Z"
-      android:fillColor="#F573FF"
-      android:strokeColor="#F573FF"
-      android:strokeLineCap="round"/>
-  <path
-      android:strokeWidth="1"
-      android:pathData="M40.8001,51C41.6781,49.984 42.9821,48.4 45.5001,48.4C47.8001,48.4 49.0001,50.4 49.4001,51.2C49.6001,51.6 49.4001,52.1 49.0001,51.9C48.3681,51.584 47.6001,51.1 45.3001,51.2C43.5551,51.276 42.1431,51.529 41.2001,52C40.6001,52.3 40.0131,51.911 40.8001,51Z"
-      android:fillColor="#F573FF"
-      android:strokeColor="#F573FF"
-      android:strokeLineCap="round"/>
 </vector>

@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.textstyler.components.Header
+import com.example.textstyler.components.LottiAvatar
 import com.example.textstyler.components.SmallButton
 import com.example.textstyler.components.WideButton
 import com.example.textstyler.model.nickname.NicknameData
@@ -80,7 +81,16 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .border(1.dp, Color.Black, RoundedCornerShape(60.dp))
                 .background(Color(0xFFFFEFEB))
         ) {
-            ImageBox(Modifier.align(BiasAlignment(0f, -0.7f)))
+            LottiAvatar(
+                Modifier.align(BiasAlignment(0f, -0.7f))
+                    .fillMaxWidth(0.5f)
+                    .fillMaxHeight(0.3f)
+                    .clickable {
+
+                    },
+                nickname = "${data.prefix}${data.root}${data.suffix}",
+                R.drawable.view_04_autogenerate_icon
+            )
             Text(
                 text = data.nickname,
                 modifier = Modifier
@@ -110,7 +120,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                             )
                             Toast.makeText(
                                 context,
-                                "Saved",
+                                "Nickname saved to history",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

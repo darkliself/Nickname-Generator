@@ -10,19 +10,15 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.textstyler.R
 import com.example.textstyler.navigation.Screen
 import com.example.textstyler.components.Header
+import com.example.textstyler.components.LottiAvatar
 import com.example.textstyler.components.SmallButton
 import com.example.textstyler.components.WideButton
 import com.example.textstyler.loadInterstitial
@@ -30,7 +26,6 @@ import com.example.textstyler.util.DecorationSide
 import com.example.textstyler.util.TextStyler
 import com.example.textstyler.model.screendata.ScreenData
 import com.example.textstyler.showInterstitial
-
 
 /*
     View 05
@@ -73,21 +68,24 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                 .border(1.dp, Color.Black, shape = RoundedCornerShape(60.dp))
                 .background(Color(0xFFE7F2D7))
         ) {
-            IconAvatar(Modifier.align(BiasAlignment(-0.7f, -0.8f)))
+            LottiAvatar(
+                Modifier.align(BiasAlignment(-0.95f, -0.95f)),
+                nickname,
+                R.drawable.view_05_customize_icon
+            )
             Text(
                 text = nickname,
                 Modifier
-                    .fillMaxWidth(0.6f)
+                    .fillMaxWidth(0.55f)
                     .align(BiasAlignment(1f, -0.75f))
                     .padding(end = 10.dp)
                     .horizontalScroll(rememberScrollState(nickname.length / 2)),
-                // fontSize = 18.sp,
                 maxLines = 1
             )
             Text(
                 text = "Length: ${nickname.length}",
                 Modifier
-                    .fillMaxWidth(0.6f)
+                    .fillMaxWidth(0.55f)
                     .align(BiasAlignment(1f, -0.6f)),
                 color = Color(0xff9EC06A)
             )
@@ -157,25 +155,5 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
 @Composable
 private fun Preview() {
     CustomizeNickNameScreen(NavController(LocalContext.current), ScreenData("some", rootNode = ""))
-}
-
-@Composable
-private fun IconAvatar(modifier: Modifier) {
-
-    val composition by rememberLottieComposition(LottieCompositionSpec.Url("https://api.minimalavatars.com/lottie?base=0&hair=4&eyes=4&mouth=2&baseColor=%23F4D19E&hairColor=%23352C21&eyesColor=%23C68F46&mouthColor=%23C68F46"))
-    LottieAnimation(
-        composition = composition,
-        modifier = modifier
-            .fillMaxWidth(0.25f)
-            .fillMaxHeight(0.2f),
-        iterations = Int.MAX_VALUE
-    )
-//    Image(
-//        ImageVector.vectorResource(id = R.drawable.view_05_customize_icon),
-//        null,
-//        modifier
-//            .fillMaxWidth(0.25f)
-//            .fillMaxHeight(0.2f)
-//    )
 }
 

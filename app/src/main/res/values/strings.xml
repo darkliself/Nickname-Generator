@@ -52,6 +52,7 @@
     <string name="view_07_btn_copy">Copy</string>
     <string name="view_07_btn_share">Share</string>
     <string name="view_07_share_text">Share to</string>
+    <string name="view_07_toast_saved">Saved</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
     <string name="mobAds">ca-app-pub-3940256099942544~3347511712</string>

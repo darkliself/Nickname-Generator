@@ -17,6 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.changedToDown
 import androidx.compose.ui.input.pointer.consumeAllChanges
@@ -50,16 +54,20 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     var prefix by remember { mutableStateOf(data.prefix) }
     var suffix by remember { mutableStateOf(data.suffix) }
     var nicknameDemo by remember { mutableStateOf("$prefix$nicknameRoot$suffix") }
-    val decoration = if (data.side == DecorationSide.LEFT) DecorationSorting.sort(DecorationLeft) else DecorationSorting.sort(
-        DecorationRight
-    )
-    var decorationIndex = 0
+    val decoration = if (data.side == DecorationSide.LEFT)
+        DecorationSorting.sort(DecorationLeft)
+    else DecorationSorting.sort(DecorationRight)
+    var decorationIndex by remember { mutableStateOf(0) }
     var selectedItems by remember { mutableStateOf(decoration[decorationIndex]) }
-    var columnCount by remember { mutableStateOf(2) }
+    var columnCount by remember { mutableStateOf(1) }
     val isItemSelected by remember { mutableStateOf(mutableListOf<Color>()) }
+    var buttonsState by remember { mutableStateOf(mutableListOf(true, false, false)) }
     repeat(selectedItems.count()) {
         isItemSelected.add(Color.White)
     }
+
+    // change buttons colors
+    buttonsState = changeButtonColorsState(columnCount, buttonsState)
 
     BackHandler() {
         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
@@ -81,17 +89,31 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                     },
                     onDragEnd = {
                         if (startOffsetX > endOffsetX) {
-                            Log.d("RIGHT", "move right")
                             if (decorationIndex < 2) {
-                                selectedItems = decoration[++decorationIndex]
+                                val iterator = isItemSelected.listIterator()
+                                while (iterator.hasNext()) {
+                                    if (iterator.next() == Color.Green) {
+                                        iterator.set(Color.White)
+                                    }
+                                }
+                                //selectedItems = decoration[++decorationIndex]
+                                decorationIndex++
                                 columnCount++
+                                selectedItems = decoration[decorationIndex]
                             }
                         }
                         if (startOffsetX < endOffsetX) {
-                            Log.d("LEFT", "move LEFT")
                             if (decorationIndex > 0) {
-                                selectedItems = decoration[--decorationIndex]
+                                val iterator = isItemSelected.listIterator()
+                                while (iterator.hasNext()) {
+                                    if (iterator.next() == Color.Green) {
+                                        iterator.set(Color.White)
+                                    }
+                                }
+                                //selectedItems = decoration[--decorationIndex]
+                                decorationIndex--
                                 columnCount--
+                                selectedItems = decoration[decorationIndex]
                             }
                         }
                     }
@@ -174,7 +196,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 )
             }
         }
-
         Row(
             Modifier
                 .fillMaxWidth(0.7f)
@@ -184,46 +205,43 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 ),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-
-            Box(
-                Modifier
-                    .size(30.dp)
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(Color.Black.copy(0.5f))
-                    .clickable {
-                        selectedItems = decoration[0]
+            CircularNavButton(
+                onClick = {
+                    if (decorationIndex != 0) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 0
+                        // selectedItems = decoration[decorationIndex]
+                        columnCount = 1
+                        selectedItems = decoration[decorationIndex]
+                    }
+                },
+                buttonsState[0]
+            )
+            CircularNavButton(
+                onClick = {
+                    if (decorationIndex != 1) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 1
+                        // selectedItems = decoration[decorationIndex]
                         columnCount = 2
+                        selectedItems = decoration[decorationIndex]
                     }
-
-            ) {
-
-            }
-            Box(
-                Modifier
-                    .size(30.dp)
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(Color.Black.copy(0.5f))
-                    .clickable {
-                        selectedItems = decoration[1]
+                },
+                buttonsState[1]
+            )
+            CircularNavButton(
+                onClick = {
+                    if (decorationIndex != 2) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 2
+                        // selectedItems = decoration[decorationIndex]
                         columnCount = 3
+                        selectedItems = decoration[decorationIndex]
                     }
 
-            ) {
-
-            }
-            Box(
-                Modifier
-                    .size(30.dp)
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(Color.Black.copy(0.5f))
-                    .clickable {
-                        selectedItems = decoration[2]
-                        columnCount = 4
-                    }
-
-            ) {
-
-            }
+                },
+                buttonsState[2]
+            )
         }
     }
 }
@@ -254,5 +272,53 @@ fun DecorationScreenItem(
             },
     ) {
         Text(text, textAlign = TextAlign.Center)
+    }
+}
+
+
+@Composable
+fun CircularNavButton(
+    onClick: () -> Unit,
+    selected: Boolean
+) {
+    var color by remember { mutableStateOf(Color.Green) }
+    color = if (!selected) {
+        Color(0XFFDEAEA0)
+    } else {
+        Color(0XFFABC639)
+    }
+    Box(
+        Modifier
+            .size(30.dp)
+            .clip(RoundedCornerShape(30.dp))
+            .background(Color.Black.copy(0.2f))
+            .border(
+                5.dp,
+                color,
+                RoundedCornerShape(30.dp)
+            )
+            .clickable {
+                onClick()
+            }
+    )
+}
+
+private fun changeButtonColorsState(item: Int, test: MutableList<Boolean>): MutableList<Boolean> {
+    val iterator = test.listIterator()
+    while (iterator.hasNext()) {
+        if (iterator.next()) {
+            iterator.set(false)
+        }
+    }
+    test[item - 1] = true
+    return test
+}
+
+private fun removeFocusFromItems(itemsList: MutableList<Color>) {
+    val iterator = itemsList.listIterator()
+    while (iterator.hasNext()) {
+        if (iterator.next() == Color.Green) {
+            iterator.set(Color.White)
+        }
     }
 }
