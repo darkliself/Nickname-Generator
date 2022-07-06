@@ -29,6 +29,7 @@ fun generateAvatarURL(nickname: String): String {
     val codeArray = nicknameCode.chunked(2)
     // println(codeArray)
     val base = getItemCode(codeArray[0].toInt(), AvatarsData.base)
+    println(nicknameCode)
     val eyes = getItemCode(codeArray[1].toInt(), AvatarsData.eyes)
     val hair = getItemCode(codeArray[2].toInt(), AvatarsData.hair)
     val mouth = getItemCode(codeArray[3].toInt(), AvatarsData.mouth)

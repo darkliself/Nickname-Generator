@@ -2,6 +2,7 @@ package com.example.textstyler.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -35,9 +36,9 @@ fun TransparentTextField(
         TextField(
             // text
             value = text, onValueChange = onValueChange,
-            textFieldModifier
+            modifier = textFieldModifier
                 .align(Alignment.Center)
-                .fillMaxWidth(),
+                .fillMaxSize(),
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
                 // fontSize = 18.sp,

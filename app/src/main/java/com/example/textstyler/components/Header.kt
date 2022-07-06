@@ -12,13 +12,14 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.textstyler.R
 // import com.example.composetest2.ui.theme.TextBox
 
 
 @Composable
-fun Header(text: String, modifier: Modifier = Modifier, contentAlignment: Alignment = Alignment.Center) {
+fun Header(text: String, modifier: Modifier = Modifier, contentAlignment: Alignment = Alignment.Center, fontSize: TextUnit = 16.sp) {
     Box(
         modifier = modifier
             .fillMaxWidth(0.8f)
@@ -28,7 +29,7 @@ fun Header(text: String, modifier: Modifier = Modifier, contentAlignment: Alignm
         Text(
             text = text,
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
+            fontSize = fontSize,
             fontFamily = FontFamily(listOf(Font(R.font.montserrat_medium))),
             fontWeight = FontWeight.W900,
         )

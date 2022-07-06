@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.textstyler.navigation.Screen
 import com.example.textstyler.components.Background
@@ -44,7 +45,8 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth(0.8f)
                 .fillMaxHeight(0.1f)
-                .align(BiasAlignment(0f, -0.65f))
+                .align(BiasAlignment(0f, -0.65f)),
+            fontSize = 18.sp
         )
         IconButton(
             stringResource(R.string.view_01_btn_create),

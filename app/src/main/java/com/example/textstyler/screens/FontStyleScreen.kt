@@ -46,7 +46,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     }
 
     Background(image = R.drawable.view_03_08_bg)
-
     Box(
         Modifier.fillMaxSize(),
     ) {
@@ -83,7 +82,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.07f)
-                .align(BiasAlignment(0f, -0.6f))
+                .align(BiasAlignment(0f, -0.57f))
         ) {
             Spacer(modifier = Modifier.width(10.dp))
             RoundedButton("ALL", onClick = { println("ALL") })
@@ -102,7 +101,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
         ) {
             items(TextStyler.getAlphabetCount()) { index ->
                 val nick = TextStyler.rebuildToString(data.rootAsCodeList, index)
-                LazyColumnItem2(
+                LazyColumnItem(
                     text = nick,
                     onClick = {
                         val iterator = isItemSelected.listIterator()
@@ -124,7 +123,6 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
         }
     }
 }
-
 
 @RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalAnimationApi

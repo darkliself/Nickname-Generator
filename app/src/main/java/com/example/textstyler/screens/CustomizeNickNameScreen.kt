@@ -75,9 +75,9 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
             )
             Text(
                 text = nickname,
-                Modifier
+                 modifier = Modifier
                     .fillMaxWidth(0.55f)
-                    .align(BiasAlignment(1f, -0.75f))
+                    .align(BiasAlignment(1.1f, -0.75f))
                     .padding(end = 10.dp)
                     .horizontalScroll(rememberScrollState(nickname.length / 2)),
                 maxLines = 1
@@ -86,7 +86,7 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                 text = "Length: ${nickname.length}",
                 Modifier
                     .fillMaxWidth(0.55f)
-                    .align(BiasAlignment(1f, -0.6f)),
+                    .align(BiasAlignment(1.1f, -0.6f)),
                 color = Color(0xff9EC06A)
             )
             // left decoration

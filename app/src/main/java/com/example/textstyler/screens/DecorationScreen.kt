@@ -142,7 +142,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
                 .clip(RoundedCornerShape(30.dp))
-                .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp))
+                .border(1.dp, Color(0XFFE7F2D7), RoundedCornerShape(30.dp)) //
                 .align(BiasAlignment(0f, -0.8f)),
             backgroundColor = Color.White,
             readOnly = true

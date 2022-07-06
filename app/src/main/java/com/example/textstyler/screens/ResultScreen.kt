@@ -5,12 +5,16 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
@@ -24,6 +28,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.textstyler.components.Header
 import com.example.textstyler.components.LottiAvatar
@@ -42,6 +47,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val repository = NicknameViewModel(context)
+    val snackbarHostState = remember { SnackbarHostState() }
+
+
 
     Box(
         Modifier.fillMaxSize(),
@@ -82,13 +90,14 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .background(Color(0xFFFFEFEB))
         ) {
             LottiAvatar(
-                Modifier.align(BiasAlignment(0f, -0.7f))
+                Modifier
+                    .align(BiasAlignment(0f, -0.7f))
                     .fillMaxWidth(0.5f)
                     .fillMaxHeight(0.3f)
                     .clickable {
 
                     },
-                nickname = "${data.prefix}${data.root}${data.suffix}",
+                nickname = data.nickname,
                 R.drawable.view_04_autogenerate_icon
             )
             Text(
@@ -118,11 +127,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                                     alphabetIndex = data.alphabetIndex
                                 )
                             )
-                            Toast.makeText(
-                                context,
-                                "Nickname saved to history",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            scope.launch {
+                                snackbarHostState.showSnackbar("")
+                            }
                         }
                     }
                 }
@@ -174,6 +181,24 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                     }
                 )
             }
+            SnackbarHost(
+                hostState = snackbarHostState,
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth(0.75f)
+                    .fillMaxHeight(0.07f),
+            )
+            {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(15.dp))
+                        .background(Color.DarkGray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Nickname saved to history", fontSize = 18.sp, color = Color.White)
+                }
+            }
         }
     }
 }
@@ -185,20 +210,4 @@ private fun Preview() {
         NavController(LocalContext.current),
         ScreenData("Nick", rootNode = "Root", alphabetIndex = 0)
     )
-}
-
-@Composable
-private fun ImageBox(modifier: Modifier = Modifier) {
-    Box(
-        modifier
-            .fillMaxWidth(0.5f)
-            .fillMaxHeight(0.3f)
-
-    ) {
-        Image(
-            ImageVector.vectorResource(R.drawable.view_04_autogenerate_icon),
-            contentDescription = null,
-            Modifier.fillMaxSize()
-        )
-    }
 }

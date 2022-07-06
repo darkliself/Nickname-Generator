@@ -51,8 +51,8 @@ fun SavedNicknamesScreen(navController: NavController) {
             }
         )
         Header(
-            "Saved",// stringResource(id = R.string.view_08_btn_header),
-            modifier = Modifier.align(Alignment.TopCenter)
+            "History",// stringResource(id = R.string.view_08_btn_header),
+            modifier = Modifier.align(Alignment.TopCenter).fillMaxHeight()
         )
     }
     Column(
@@ -67,7 +67,7 @@ fun SavedNicknamesScreen(navController: NavController) {
                 var index = 0
                 result.forEach { (key, value) ->
                     item() {
-                        LazyColumnItem2(
+                        LazyColumnItem(
                             modifier = Modifier.padding(start = 20.dp),
                             text = "${value.prefix}${
                                 TextStyler.rebuildToString(
