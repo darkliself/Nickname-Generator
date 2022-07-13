@@ -1,7 +1,7 @@
 package com.example.textstyler.model.screendata
 
 import android.os.Parcelable
-import com.example.textstyler.util.DecorationSide
+import com.example.textstyler.model.DecorationSide
 import kotlinx.parcelize.Parcelize
 
 

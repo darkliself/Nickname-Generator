@@ -10,13 +10,11 @@ import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 
-private val Context.dataStore by preferencesDataStore(name = "nickname")
+//private val Context.dataStore by preferencesDataStore(name = "nickname")
 private val Context.protoDataStore by dataStore( "app_data.json", NicknameSerializer)
 
 class NicknameRepository @Inject constructor(
     @ApplicationContext private val context: Context) {
-
-
 
     suspend fun containsInStore(key: String): Boolean {
         return context.protoDataStore.data.first().list.containsKey(key)

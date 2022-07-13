@@ -45,16 +45,21 @@
     <string name="view_05_btn_font_style">Font style</string>
     <string name="view_05_btn_right_decoration">Right decoration</string>
     <string name="view_05_btn_ready">Ready</string>
+    <string name="view_05_length">Length</string>
     <!-- result screen -->
-    <string name="view_07_header">Result</string>
-    <string name="view_07_btn_save">Save</string>
-    <string name="view_07_btn_try_again">Try again</string>
-    <string name="view_07_btn_copy">Copy</string>
-    <string name="view_07_btn_share">Share</string>
-    <string name="view_07_share_text">Share to</string>
-    <string name="view_07_toast_saved">Saved</string>
+    <string name="view_09_header">Result</string>
+    <string name="view_09_btn_save">Save</string>
+    <string name="view_09_btn_try_again">Try again</string>
+    <string name="view_09_btn_copy">Copy</string>
+    <string name="view_09_btn_share">Share</string>
+    <string name="view_09_share_text">Share to</string>
+    <string name="view_09_snack_bar_txt">Nickname saved to history</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
     <string name="mobAds">ca-app-pub-3940256099942544~3347511712</string>
+    <!-- Filter button values -->
+    <string name="btn_all">ALL</string>
+    <string name="btn_new">NEW</string>
+    <string name="btn_popular">POPULAR</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.textstyler
+package com.example.textstyler.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -12,11 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.textstyler.model.screendata.ScreenData
-import com.example.textstyler.navigation.Screen
-import com.example.textstyler.screens.CreateNickNameScreen
-import com.example.textstyler.screens.CustomizeNickNameScreen
-import com.example.textstyler.screens.SavedNicknamesScreen
-import com.example.textstyler.ui.theme.MainScreen
+import com.example.textstyler.ui.screens.*
+import com.example.textstyler.ui.screens.MainScreen
 
 
 @ExperimentalComposeUiApi
@@ -70,9 +67,7 @@ fun Navigation() {
         }
         composable(
             route = Screen.DecorationScreen.route,
-            arguments = listOf(
-
-            )
+            arguments = listOf()
         ) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
@@ -82,19 +77,9 @@ fun Navigation() {
                     data = data
                 )
             }
-
         }
         composable(
-            route = Screen.FontStyleScreen.route, //+ "?nickname={nickname}/alphabetIndex={alphabetIndex}",
-//            arguments = listOf(
-//                navArgument("nickname") {
-//                    type = NavType.StringType
-//                    defaultValue = "Killer"
-//                },
-//                navArgument("alphabetIndex") {
-//                    type = NavType.IntType
-//                    defaultValue = 0
-//                })
+            route = Screen.FontStyleScreen.route
         ) {
             val data =
                 navController.previousBackStackEntry?.savedStateHandle?.get<ScreenData>("data")
@@ -127,28 +112,10 @@ fun Navigation() {
             }
         }
         composable(
-            route = Screen.TestScreen.route
-        ) {
-            TestScreen()
-        }
-         composable(
             route = Screen.SavedNicknamesScreen.route
         ) {
-             SavedNicknamesScreen(navController = navController)
+            SavedNicknamesScreen(navController = navController)
         }
-
-//        composable(
-//            route = Screen.SecondScreen.route + "?name={name}",
-//            arguments = listOf(
-//                navArgument("name") {
-//                    type = NavType.StringType
-//                    defaultValue = "DefaultVal"
-//                    nullable = true
-//                }
-//            )
-//        ) { entry ->
-//            SecondScreen(name = entry.arguments?.getString("name"))
-//        }
     }
 }
 

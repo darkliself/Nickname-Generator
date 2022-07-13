@@ -10,6 +10,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.textstyler.navigation.Navigation
 import com.google.android.gms.ads.*
 import dagger.hilt.android.AndroidEntryPoint
 

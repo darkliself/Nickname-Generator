@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.163" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/arrow_left_icon.xml" value="0.121" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/btn_menu.xml" value="0.121" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/btn_wide_green.xml" value="0.121" />
+        <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/ic_launcher_background.xml" value="0.163" />
+        <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/ic_minimal_avatars__1_.xml" value="0.163" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/view_03_btn_other.xml" value="0.1315" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/view_03_btn_space.xml" value="0.1315" />
         <entry key="..\:/StudioProjects/TextStyler/app/src/main/res/drawable/view_03_btn_squard.xml" value="0.1315" />
