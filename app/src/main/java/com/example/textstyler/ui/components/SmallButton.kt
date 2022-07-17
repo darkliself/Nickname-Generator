@@ -15,7 +15,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.example.textstyler.R
 
-
 @Composable
 fun SmallButton(
     modifier: Modifier = Modifier,
@@ -33,7 +32,6 @@ fun SmallButton(
             ImageVector.vectorResource(image),
             contentDescription = null,
             modifier = iconModifier.size(30.dp, 30.dp).align(Alignment.Center),
-            // contentScale = ContentScale.FillBounds
         )
     }
 }

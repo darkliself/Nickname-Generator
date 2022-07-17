@@ -13,7 +13,7 @@ import com.example.textstyler.R
 import com.example.textstyler.navigation.Screen
 import com.example.textstyler.ui.components.*
 
-/*
+/**
     View 06
 */
 

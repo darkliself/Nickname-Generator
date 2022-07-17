@@ -36,7 +36,6 @@ fun WideButton(
         modifier
             .fillMaxWidth(0.9f)
             .fillMaxHeight(0.15f)
-        //.align(BiasAlignment(0f, 0.2f))
     ) {
         Image(
             ImageVector.vectorResource(image),

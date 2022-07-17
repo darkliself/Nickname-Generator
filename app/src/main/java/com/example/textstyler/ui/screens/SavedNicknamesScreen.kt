@@ -27,7 +27,6 @@ import com.example.textstyler.viewmodel.NicknameViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("CoroutineCreationDuringComposition", "UnrememberedMutableState")
 @Composable
@@ -40,7 +39,6 @@ fun SavedNicknamesScreen(navController: NavController) {
     }
 
     Background(image = R.drawable.view_03_08_bg)
-
     Box(
         Modifier
             .fillMaxWidth()
@@ -67,7 +65,7 @@ fun SavedNicknamesScreen(navController: NavController) {
             LazyColumn(
                 Modifier.fillMaxSize(),
             ) {
-                var index = 0
+                // var index = 0
                 result.forEach { (key, value) ->
                     item() {
                         LazyColumnItem(

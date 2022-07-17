@@ -17,7 +17,6 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.textstyler.util.generateAvatarURL
 
-
 @Composable
 fun LottiAvatar(modifier: Modifier, nickname: String, @DrawableRes icon: Int) {
     val composition by rememberLottieComposition(
@@ -40,7 +39,5 @@ fun LottiAvatar(modifier: Modifier, nickname: String, @DrawableRes icon: Int) {
                 .align(BiasAlignment(-0.2f, 0f)),
             iterations = 3
         )
-        // 23f573ff
-        // 23f573ff
     }
 }

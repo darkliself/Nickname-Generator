@@ -15,7 +15,7 @@ import com.example.textstyler.ui.components.SquareButton
 import com.example.textstyler.model.screendata.ScreenData
 import com.example.textstyler.navigation.Screen
 
-/*
+/**
     View 03
 */
 

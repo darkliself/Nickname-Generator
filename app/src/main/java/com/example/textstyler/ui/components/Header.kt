@@ -2,7 +2,6 @@ package com.example.textstyler.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,8 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.textstyler.R
-// import com.example.composetest2.ui.theme.TextBox
-
 
 @Composable
 fun Header(text: String, modifier: Modifier = Modifier, contentAlignment: Alignment = Alignment.Center, fontSize: TextUnit = 16.sp) {

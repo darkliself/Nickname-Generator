@@ -1,6 +1,5 @@
 package com.example.textstyler.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -11,22 +10,19 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.textstyler.R
-import com.example.textstyler.components.*
 import com.example.textstyler.model.getRandomNick
 import com.example.textstyler.util.TextStyler
 import com.example.textstyler.model.screendata.ScreenData
 import com.example.textstyler.navigation.Screen
 import com.example.textstyler.ui.components.*
 
-/*
+/**
     View 05
 */
 @Composable
@@ -108,22 +104,6 @@ fun AutogenerateNickname(navController: NavController) {
 @Composable
 private fun defPreview() {
     AutogenerateNickname(NavController(LocalContext.current))
-}
-
-@Composable
-private fun ImageBox(modifier: Modifier = Modifier) {
-    Box(
-        modifier
-            .fillMaxWidth(0.5f)
-            .fillMaxHeight(0.3f)
-
-    ) {
-        Image(
-            ImageVector.vectorResource(R.drawable.view_04_autogenerate_icon),
-            contentDescription = null,
-            Modifier.fillMaxSize()
-        )
-    }
 }
 
 
