@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.textstyler">
+    package="com.example.nickname_generator">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name="com.example.textstyler.NicknameApp"
+        android:name="com.example.nickname_generator.NicknameApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher_foreground"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
-        android:theme="@style/TextStyler">
+        android:theme="@style/NicknameGenerator">
     <!--        android:icon="@mipmap/ic_launcher"-->
         <!--        android:roundIcon="@mipmap/ic_launcher_round"-->
         <activity
-            android:name="com.example.textstyler.MainActivity"
+            android:name="com.example.nickname_generator.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.TextStyler.NoActionBar">
+            android:theme="@style/Theme.NicknameGenerator.NoActionBar">
             <!--android:theme="@style/Theme.TexTex.NoActionBar"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,5 +30,4 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
-
 </manifest>

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         //applicationId "com.example.composetest2"
-        applicationId "com.example.textstyler"
+        applicationId "com.example.nickname_generator"
         minSdk 21
         targetSdk 31
         versionCode 1
