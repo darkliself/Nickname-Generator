@@ -10,24 +10,21 @@
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/NicknameGenerator">
-    <!--        android:icon="@mipmap/ic_launcher"-->
-        <!--        android:roundIcon="@mipmap/ic_launcher_round"-->
         <activity
             android:name="com.example.nickname_generator.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NicknameGenerator.NoActionBar">
-            <!--android:theme="@style/Theme.TexTex.NoActionBar"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="@string/AbMobID"/>
     </application>
+<!--    android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--    android:value="ca-app-pub-1124900564123572~7826543572"/>-->
 </manifest>

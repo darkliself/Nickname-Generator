@@ -16,20 +16,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RoundedButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    val focus = FocusRequester()
+fun RoundedButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    selected: Boolean
+) {
+    // val focus = FocusRequester()
     var color by remember { mutableStateOf(Color.White) }
+    color = if (!selected) Color.White else Color(0XFFFFD6CC)
+
     Button(
         onClick = {
-            focus.requestFocus()
+            //focus.requestFocus()
             onClick()
         },
         modifier = modifier
             .clip(shape = RoundedCornerShape(30.dp))
-            .border(1.dp, Color.Black, shape = RoundedCornerShape(30.dp))
-            .focusRequester(focus)
-            .onFocusChanged { color = if (it.isFocused) Color(0XFFFFD6CC) else Color.White }
-            .focusable(),
+            .border(1.dp, Color.Black, shape = RoundedCornerShape(30.dp)),
+//            .focusRequester(focus)
+//            .onFocusChanged { color = if (it.isFocused) Color(0XFFFFD6CC) else Color.White }
+//            .focusable(),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = color
         )

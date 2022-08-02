@@ -2,6 +2,7 @@ package com.example.nickname_generator.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +19,18 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.nickname_generator.util.generateAvatarURL
 
 @Composable
-fun LottiAvatar(modifier: Modifier, nickname: String, @DrawableRes icon: Int) {
+fun LottiAvatar(modifier: Modifier, nickname: String, @DrawableRes icon: Int, onClick: () -> Unit) {
     val composition by rememberLottieComposition(
-        LottieCompositionSpec.Url(generateAvatarURL(nickname))
+        //LottieCompositionSpec.Url(generateAvatarURL(nickname))
+        LottieCompositionSpec.Url("https://api.minimalavatars.com/lottie/alex")
     )
     Box(
         modifier = modifier
             .fillMaxWidth(0.43f)
-            .fillMaxHeight(0.27f),
+            .fillMaxHeight(0.27f)
+            .clickable {
+                onClick()
+            },
     ) {
         Image(
             ImageVector.vectorResource(id = icon),

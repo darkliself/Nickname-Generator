@@ -1,6 +1,9 @@
 package com.example.nickname_generator.ui.screens
 
+import android.os.Build
+import android.util.Log
 import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
@@ -22,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.nickname_generator.BuildConfig
 import com.example.nickname_generator.R
 import com.example.nickname_generator.model.DecorationLeft
 import com.example.nickname_generator.model.DecorationRight
@@ -32,9 +36,10 @@ import com.example.nickname_generator.ui.components.*
 import com.example.nickname_generator.util.*
 
 /**
-    View 07
+View 07
  */
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalFoundationApi
 @Composable
 fun DecorationScreen(navController: NavController, data: ScreenData) {
@@ -63,8 +68,10 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     // change buttons colors
     buttonsState = changeButtonColorsState(columnCount, buttonsState)
     BackHandler() {
+        Log.d("BACKSTACK TEST", navController.graph.nodes.toString())
         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-        navController.navigate(Screen.CustomizeNickNameScreen.route)
+        Log.d("FIND WAY", navController.previousBackStackEntry?.destination?.route.toString())
+        navController.popBackStack()
     }
 
     Background(image = R.drawable.view_06_07_bg)
@@ -118,7 +125,8 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
             onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController.navigate(Screen.CustomizeNickNameScreen.route)
+                // navController.navigate(Screen.CustomizeNickNameScreen.route)
+                navController.popBackStack()
             }
         )
         Header(
@@ -144,18 +152,50 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -0.55f))
         ) {
             Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton(stringResource(id = R.string.btn_all), onClick = { println("ALL") })
+            RoundedButton(
+                stringResource(id = R.string.btn_small), onClick = {
+                    if (decorationIndex != 0) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 0
+                        columnCount = 1
+                        selectedItems = decoration[decorationIndex]
+                    }
+                },
+                selected = buttonsState[0]
+            )
             Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton(stringResource(id = R.string.btn_new), onClick = { println("NEW") })
+            RoundedButton(
+                stringResource(id = R.string.btn_medium), onClick = {
+                    if (decorationIndex != 1) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 1
+                        columnCount = 2
+                        selectedItems = decoration[decorationIndex]
+                    }
+                },
+                selected = buttonsState[1]
+            )
             Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton(stringResource(id = R.string.btn_popular), onClick = { println("POPULAR") })
+            RoundedButton(
+                stringResource(id = R.string.btn_long),
+                onClick = {
+                    if (decorationIndex != 2) {
+                        removeFocusFromItems(isItemSelected)
+                        decorationIndex = 2
+                        columnCount = 3
+                        selectedItems = decoration[decorationIndex]
+                    }
+                },
+                selected = buttonsState[2]
+            )
         }
         LazyVerticalGrid(
             cells = GridCells.Fixed(columnCount),
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.7f)
-                .align(BiasAlignment(0f, 1f))
+                .align(BiasAlignment(0f, 1f)),
+
         ) {
             items(selectedItems.count()) { index ->
                 DecorationScreenItem(
@@ -185,50 +225,51 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 )
             }
         }
-        Row(
-            Modifier
-                .fillMaxWidth(0.7f)
-                .padding(bottom = 20.dp)
-                .align(Alignment.BottomCenter),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            CircularNavButton(
-                onClick = {
-                    if (decorationIndex != 0) {
-                        removeFocusFromItems(isItemSelected)
-                        decorationIndex = 0
-                        columnCount = 1
-                        selectedItems = decoration[decorationIndex]
-                    }
-                },
-                buttonsState[0]
-            )
-            CircularNavButton(
-                onClick = {
-                    if (decorationIndex != 1) {
-                        removeFocusFromItems(isItemSelected)
-                        decorationIndex = 1
-                        columnCount = 2
-                        selectedItems = decoration[decorationIndex]
-                    }
-                },
-                buttonsState[1]
-            )
-            CircularNavButton(
-                onClick = {
-                    if (decorationIndex != 2) {
-                        removeFocusFromItems(isItemSelected)
-                        decorationIndex = 2
-                        columnCount = 3
-                        selectedItems = decoration[decorationIndex]
-                    }
-                },
-                buttonsState[2]
-            )
-        }
+//        Row(
+//            Modifier
+//                .fillMaxWidth(0.7f)
+//                .padding(bottom = 20.dp)
+//                .align(Alignment.BottomCenter),
+//            horizontalArrangement = Arrangement.SpaceAround
+//        ) {
+//            CircularNavButton(
+//                onClick = {
+//                    if (decorationIndex != 0) {
+//                        removeFocusFromItems(isItemSelected)
+//                        decorationIndex = 0
+//                        columnCount = 1
+//                        selectedItems = decoration[decorationIndex]
+//                    }
+//                },
+//                buttonsState[0]
+//            )
+//            CircularNavButton(
+//                onClick = {
+//                    if (decorationIndex != 1) {
+//                        removeFocusFromItems(isItemSelected)
+//                        decorationIndex = 1
+//                        columnCount = 2
+//                        selectedItems = decoration[decorationIndex]
+//                    }
+//                },
+//                buttonsState[1]
+//            )
+//            CircularNavButton(
+//                onClick = {
+//                    if (decorationIndex != 2) {
+//                        removeFocusFromItems(isItemSelected)
+//                        decorationIndex = 2
+//                        columnCount = 3
+//                        selectedItems = decoration[decorationIndex]
+//                    }
+//                },
+//                buttonsState[2]
+//            )
+//        }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
@@ -248,13 +289,20 @@ fun DecorationScreenItem(
     Card(
         backgroundColor = colored,
         modifier = Modifier
-            .padding(bottom = 10.dp)
-            .height(35.dp)
+            .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
+            .height(40.dp)
             .clickable {
                 onClick()
             },
     ) {
-        Text(text, textAlign = TextAlign.Center)
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(text)
+        }
+
     }
 }
 

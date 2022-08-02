@@ -89,12 +89,15 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .background(Color(0xFFFFEFEB))
         ) {
             LottiAvatar(
-                Modifier
+                modifier = Modifier
                     .align(BiasAlignment(0f, -0.7f))
                     .fillMaxWidth(0.5f)
                     .fillMaxHeight(0.3f),
                 nickname = data.nickname,
-                R.drawable.view_04_autogenerate_icon
+                icon = R.drawable.view_04_autogenerate_icon,
+                onClick = {
+                }
+
             )
             Text(
                 text = data.nickname,

@@ -1,5 +1,7 @@
 package com.example.nickname_generator.ui.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,11 +28,13 @@ import com.example.nickname_generator.util.TextStyler
 import com.example.nickname_generator.model.screendata.ScreenData
 import com.example.nickname_generator.showInterstitial
 import com.example.nickname_generator.ui.components.WideButton
+import com.google.android.gms.ads.interstitial.InterstitialAd
 
 /**
-    View 05
-*/
+View 05
+ */
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData) {
     navController.enableOnBackPressed(true)
@@ -43,6 +47,21 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
         )
     }${screenData.suffix}"
 
+
+    if (navController.previousBackStackEntry?.destination?.route == Screen.DecorationScreen.route
+        || navController.previousBackStackEntry?.destination?.route == Screen.FontStyleScreen.route) {
+        navController.backQueue.removeIf {
+            it.destination.route == Screen.DecorationScreen.route
+                    || it.destination.route == Screen.FontStyleScreen.route
+        }
+        navController.backQueue.distinct()
+    }
+
+//
+//    BackHandler() {
+//        navController.popBackStack()
+//    }
+
     Box(
         Modifier.fillMaxSize()
     ) {
@@ -50,7 +69,18 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
             modifier = Modifier
                 .align(Alignment.TopStart),
             image = R.drawable.arrow_left_icon,
-            onClick = { navController.navigate(screenData.rootNode) }
+            onClick = {
+//                if (navController.previousBackStackEntry?.destination?.route == Screen.DecorationScreen.route
+//                    || navController.previousBackStackEntry?.destination?.route == Screen.FontStyleScreen.route
+//                ) {
+//                    Log.d("IF EQUALS", "TRUE")
+//                    navController.previousBackStackEntry?.destination?.id?.let {
+//                        navController.graph.nodes.remove(it)
+//                    }
+//                }
+                // navController.navigate(screenData.rootNode)
+                navController.popBackStack()
+            }
         )
         Header(
             stringResource(id = R.string.view_05_header),
@@ -69,17 +99,18 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                 .background(Color(0xFFE7F2D7))
         ) {
             LottiAvatar(
-                Modifier.align(BiasAlignment(-0.95f, -0.95f)),
-                nickname,
-                R.drawable.view_05_customize_icon
+                modifier = Modifier.align(BiasAlignment(-0.95f, -0.95f)),
+                nickname = nickname,
+                icon = R.drawable.view_05_customize_icon,
+                onClick = {}
             )
             Text(
                 text = nickname,
-                 modifier = Modifier
-                     .fillMaxWidth(0.55f)
-                     .align(BiasAlignment(1.1f, -0.75f))
-                     .padding(end = 10.dp)
-                     .horizontalScroll(rememberScrollState(nickname.length / 2)),
+                modifier = Modifier
+                    .fillMaxWidth(0.55f)
+                    .align(BiasAlignment(1.1f, -0.75f))
+                    .padding(end = 10.dp)
+                    .horizontalScroll(rememberScrollState(nickname.length / 2)),
                 maxLines = 1
             )
             Text(
@@ -151,6 +182,7 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {

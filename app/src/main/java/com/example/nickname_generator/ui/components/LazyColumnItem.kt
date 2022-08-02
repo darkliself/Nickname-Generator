@@ -10,16 +10,16 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Divider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.nickname_generator.R
 
 @ExperimentalAnimationApi
 @Composable
@@ -29,28 +29,21 @@ fun LazyColumnItem(
     onClick: () -> Unit = {},
     onIconClick: () -> Unit = {},
     onRemoveIconClick: (() -> Unit)? = null,
-    selected: Boolean = false
+    selected: Boolean = false,
 ) {
     var isNotDeleted by remember { mutableStateOf(true) }
     var arrangement by remember { mutableStateOf(Arrangement.End) }
 
     AnimatedVisibility(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         visible = isNotDeleted,
-        enter = fadeIn(
-            initialAlpha = 0.4f
-        ),
-        exit = fadeOut(
-            animationSpec = tween(durationMillis = 250)
-        )
+        enter = fadeIn(initialAlpha = 0.4f),
+        exit = fadeOut(animationSpec = tween(durationMillis = 250))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
-                    onClick()
-                },
+                .clickable { onClick() },
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -67,22 +60,17 @@ fun LazyColumnItem(
             AnimatedVisibility(
                 modifier = Modifier.padding(end = 20.dp),
                 visible = selected,
-                enter = fadeIn(
-                    initialAlpha = 0.4f
-                ),
-                exit = fadeOut(
-                    animationSpec = tween(durationMillis = 250)
-                )
+                enter = fadeIn(initialAlpha = 0.4f),
+                exit = fadeOut(animationSpec = tween(durationMillis = 250))
             ) {
                 Row(
-                    modifier = Modifier
-                        .width(90.dp),
+                    modifier = Modifier.width(90.dp),
                     horizontalArrangement = arrangement
                 ) {
                     if (onRemoveIconClick != null) {
                         arrangement = Arrangement.SpaceBetween
                         Image(
-                            ImageVector.vectorResource(id = R.drawable.btn_remove),
+                            Icons.Filled.Close,
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
@@ -94,7 +82,7 @@ fun LazyColumnItem(
                         )
                     }
                     Image(
-                        ImageVector.vectorResource(id = R.drawable.btn_agree),
+                        Icons.Filled.Done,// R.drawable.btn_agree
                         contentDescription = null,
                         modifier = Modifier
                             .size(30.dp)

@@ -63,8 +63,9 @@ fun AutogenerateNickname(navController: NavController) {
                     .align(BiasAlignment(0f, -0.7f))
                     .fillMaxWidth(0.5f)
                     .fillMaxHeight(0.3f),
-                nickname,
-                R.drawable.view_04_autogenerate_icon
+                nickname = nickname,
+                icon = R.drawable.view_04_autogenerate_icon,
+                onClick = {}
             )
             TransparentTextField(
                 text = nickname,

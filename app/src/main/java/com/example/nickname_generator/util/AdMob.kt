@@ -15,16 +15,16 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 var mInterstitialAd: InterstitialAd? = null
 
 fun loadInterstitial(context: Context) {
+    val mobAdId = if (BuildConfig.DEBUG) "ca-app-pub-3940256099942544/1033173712" else context.getString(R.string.interstitial)
     InterstitialAd.load(
         context,
-        "ca-app-pub-3940256099942544/1033173712",
+        mobAdId,
         AdRequest.Builder().build(),
         object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 mInterstitialAd = interstitialAd
                 Log.d("Admob", "onAdLoaded: Ad was loaded.")
             }
-
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                 mInterstitialAd = null
                 Log.d("Admob", "onAdFailedToLoad: ${loadAdError.message}")
@@ -53,7 +53,6 @@ fun addInterstitialCallbacks(context: Context) {
 
 fun showInterstitial(context: Context) {
     val activity = context.findActivity()
-
     if (mInterstitialAd != null) {
         mInterstitialAd?.show(activity!!)
     } else {

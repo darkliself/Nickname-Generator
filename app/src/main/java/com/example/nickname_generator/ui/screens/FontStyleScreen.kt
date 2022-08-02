@@ -43,7 +43,8 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
     }
     BackHandler() {
         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-        navController.navigate(Screen.CustomizeNickNameScreen.route)
+        navController.popBackStack()
+        // navController.navigate(Screen.CustomizeNickNameScreen.route)
     }
 
     Background(image = R.drawable.view_03_08_bg)
@@ -56,7 +57,8 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
             onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController.navigate(Screen.CustomizeNickNameScreen.route)
+                navController.popBackStack()
+                // navController.navigate(Screen.CustomizeNickNameScreen.route)
             }
         )
         Header(
@@ -79,23 +81,23 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
             readOnly = true
         )
         // Filter buttons
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.07f)
-                .align(BiasAlignment(0f, -0.57f))
-        ) {
-            Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton("ALL", onClick = { println("ALL") })
-            Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton("NEW", onClick = { println("NEW") })
-            Spacer(modifier = Modifier.width(10.dp))
-            RoundedButton("POPULAR", onClick = { println("POPULAR") })
-        }
+//        Row(
+//            Modifier
+//                .fillMaxWidth()
+//                .fillMaxHeight(0.07f)
+//                .align(BiasAlignment(0f, -0.57f))
+//        ) {
+//            Spacer(modifier = Modifier.width(10.dp))
+//            // RoundedButton("ALL", onClick = { println("ALL") }, selected = true)
+//            Spacer(modifier = Modifier.width(10.dp))
+//            // RoundedButton("NEW", onClick = { println("NEW") }, selected = true)
+//            Spacer(modifier = Modifier.width(10.dp))
+//            // RoundedButton("POPULAR", onClick = { println("POPULAR") }, selected = true)
+//        }
         LazyColumn(
             Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.8f)
+                .fillMaxHeight(0.84f)
                 .padding(start = 20.dp)
                 .align(BiasAlignment(-0.8f, 1.6f)),
             //horizontalAlignment = BiasAlignment.Horizontal(0f)
@@ -116,7 +118,8 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
                         navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     },
                     onIconClick = {
-                        navController.navigate(Screen.CustomizeNickNameScreen.route)
+                        // navController.navigate(Screen.CustomizeNickNameScreen.route)
+                        navController.popBackStack()
                     },
                     selected = isItemSelected[index]
                 )

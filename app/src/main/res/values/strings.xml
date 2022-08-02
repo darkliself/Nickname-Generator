@@ -1,5 +1,10 @@
 <resources>
     <!-- i`ll try use it later -->
+    <!-- AdMobs -->
+    <string name="AbMobID">ca-app-pub-1124900564123572~7826543572</string>
+    <string name="interstitial">ca-app-pub-1124900564123572/9085415238</string>
+
+    <!-- ist of categories -->
     <string-array name="categories">
         <item>Test</item>
         <item>Legendary</item>
@@ -56,10 +61,13 @@
     <string name="view_09_snack_bar_txt">Nickname saved to history</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
-    <string name="mobAds">ca-app-pub-3940256099942544~3347511712</string>
+    <!--    <string name="mobAds">ca-app-pub-3940256099942544~3347511712</string>-->
     <!-- Filter button values -->
     <string name="btn_all">ALL</string>
     <string name="btn_new">NEW</string>
     <string name="btn_popular">POPULAR</string>
+    <string name="btn_small">Short</string>
+    <string name="btn_medium">Medium</string>
+    <string name="btn_long">Long</string>
 
 </resources>
