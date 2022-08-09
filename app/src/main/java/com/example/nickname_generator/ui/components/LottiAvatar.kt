@@ -1,33 +1,20 @@
 package com.example.nickname_generator.ui.components
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.airbnb.lottie.LottieImageAsset
-import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionResult
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.nickname_generator.BuildConfig
@@ -35,9 +22,6 @@ import com.example.nickname_generator.R
 import com.example.nickname_generator.util.generateAvatarURL
 import com.vips.jetcapture.utils.ImageUtils
 import com.vips.jetcapture.utils.ShareUtils
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-
 
 private var jetCaptureView: MutableState<ProfileCardView>? = null
 
@@ -125,5 +109,4 @@ class ProfileCardView @JvmOverloads constructor(
             "Hey! Check this cool nickname - $text\nThat I've generated in this Nickname Generator App - https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}",
             bitmap)
     }
-
 }
