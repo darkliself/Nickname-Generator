@@ -11,7 +11,6 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-
 var mInterstitialAd: InterstitialAd? = null
 
 fun loadInterstitial(context: Context) {
@@ -38,11 +37,9 @@ fun addInterstitialCallbacks(context: Context) {
         override fun onAdDismissedFullScreenContent() {
             Log.d("Admob", "onAdDismissedFullScreenContent: Ad was dismissed")
         }
-
         override fun onAdFailedToShowFullScreenContent(p0: AdError) {
             Log.d("Admob", "onAdFailedToShowFullScreenContent: Ad failed to show")
         }
-
         override fun onAdShowedFullScreenContent() {
             mInterstitialAd = null
             loadInterstitial(context)

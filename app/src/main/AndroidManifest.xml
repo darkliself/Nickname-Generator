@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nickname_generator">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:name="com.example.nickname_generator.NicknameApp"
         android:allowBackup="true"
@@ -24,6 +25,15 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/AbMobID"/>
+        <provider
+            android:name=".util.GenericFileProvider"
+            android:authorities="${applicationId}.com.vips.jetcapture.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_path" />
+        </provider>
     </application>
 <!--    android:name="com.google.android.gms.ads.APPLICATION_ID"-->
 <!--    android:value="ca-app-pub-1124900564123572~7826543572"/>-->

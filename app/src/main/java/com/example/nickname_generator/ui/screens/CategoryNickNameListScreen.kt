@@ -80,7 +80,6 @@ fun CategoryNickNameListScreen(navController: NavController, category: String?) 
         ) {
             val sortedNicknameList = sortByCategory(nicknamesList, listOfCategories.indexOf(category), listOfCategories.count())
             items(sortedNicknameList.count()) { index ->
-                // LazyColumnItem(text = "Item: $index")
                 LazyColumnItem(text = sortedNicknameList[index],
                     onClick = {
                         navController.currentBackStackEntry?.savedStateHandle?.set(

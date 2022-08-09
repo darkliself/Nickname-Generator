@@ -11,9 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -28,14 +26,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.nickname_generator.BuildConfig
 import com.example.nickname_generator.R
-import com.example.nickname_generator.ui.components.Header
-import com.example.nickname_generator.ui.components.LottiAvatar
-import com.example.nickname_generator.ui.components.SmallButton
 import com.example.nickname_generator.model.nickname.NicknameData
 import com.example.nickname_generator.model.screendata.ScreenData
 import com.example.nickname_generator.navigation.Screen
-import com.example.nickname_generator.ui.components.WideButton
+import com.example.nickname_generator.ui.components.*
 import com.example.nickname_generator.viewmodel.NicknameViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -86,19 +82,25 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, 0.6f))
                 .clip(RoundedCornerShape(60.dp))
                 .border(1.dp, Color.Black, RoundedCornerShape(60.dp))
-                .background(Color(0xFFFFEFEB))
-        ) {
-            LottiAvatar(
-                modifier = Modifier
-                    .align(BiasAlignment(0f, -0.7f))
-                    .fillMaxWidth(0.5f)
-                    .fillMaxHeight(0.3f),
-                nickname = data.nickname,
-                icon = R.drawable.view_04_autogenerate_icon,
-                onClick = {
-                }
+                .background(Color(0xFFFFEFEB)),
 
-            )
+            ) {
+            Box(modifier = Modifier
+                .wrapContentSize()
+                .align(BiasAlignment(0f, -0.7f))) {
+                ProfileUI(nickname = data.nickname)
+            }
+
+//            LottiAvatar(
+//                modifier = Modifier
+//                    .align(BiasAlignment(0f, -0.7f))
+//                    .fillMaxWidth(0.5f)
+//                    .fillMaxHeight(0.3f),
+//                nickname = data.nickname,
+//                icon = R.drawable.view_04_autogenerate_icon,
+//                onClick = {
+//                }
+//            )
             Text(
                 text = data.nickname,
                 modifier = Modifier

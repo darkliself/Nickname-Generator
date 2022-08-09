@@ -57,9 +57,9 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
     val decoration = if (data.side == DecorationSide.LEFT)
         DecorationSorting.sort(DecorationLeft)
     else DecorationSorting.sort(DecorationRight)
-    var decorationIndex by remember { mutableStateOf(0) }
+    var decorationIndex by remember { mutableStateOf(2) }
     var selectedItems by remember { mutableStateOf(decoration[decorationIndex]) }
-    var columnCount by remember { mutableStateOf(1) }
+    var columnCount by remember { mutableStateOf(3) }
     val isItemSelected by remember { mutableStateOf(mutableListOf<Color>()) }
     var buttonsState by remember { mutableStateOf(mutableListOf(true, false, false)) }
     repeat(selectedItems.count()) {
@@ -88,19 +88,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                     },
                     onDragEnd = {
                         if (startOffsetX > endOffsetX) {
-                            if (decorationIndex < 2) {
-                                val iterator = isItemSelected.listIterator()
-                                while (iterator.hasNext()) {
-                                    if (iterator.next() == Color.Green) {
-                                        iterator.set(Color.White)
-                                    }
-                                }
-                                decorationIndex++
-                                columnCount++
-                                selectedItems = decoration[decorationIndex]
-                            }
-                        }
-                        if (startOffsetX < endOffsetX) {
                             if (decorationIndex > 0) {
                                 val iterator = isItemSelected.listIterator()
                                 while (iterator.hasNext()) {
@@ -110,6 +97,19 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                                 }
                                 decorationIndex--
                                 columnCount--
+                                selectedItems = decoration[decorationIndex]
+                            }
+                        }
+                        if (startOffsetX < endOffsetX) {
+                            if (decorationIndex < 2) {
+                                val iterator = isItemSelected.listIterator()
+                                while (iterator.hasNext()) {
+                                    if (iterator.next() == Color.Green) {
+                                        iterator.set(Color.White)
+                                    }
+                                }
+                                decorationIndex++
+                                columnCount++
                                 selectedItems = decoration[decorationIndex]
                             }
                         }
@@ -125,7 +125,6 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
             onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                // navController.navigate(Screen.CustomizeNickNameScreen.route)
                 navController.popBackStack()
             }
         )
@@ -154,14 +153,20 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             Spacer(modifier = Modifier.width(10.dp))
             RoundedButton(
                 stringResource(id = R.string.btn_small), onClick = {
-                    if (decorationIndex != 0) {
+//                    if (decorationIndex != 0) {
+//                        removeFocusFromItems(isItemSelected)
+//                        decorationIndex = 0
+//                        columnCount = 1
+//                        selectedItems = decoration[decorationIndex]
+//                    }
+                    if (decorationIndex != 2) {
                         removeFocusFromItems(isItemSelected)
-                        decorationIndex = 0
-                        columnCount = 1
+                        decorationIndex = 2
+                        columnCount = 3
                         selectedItems = decoration[decorationIndex]
                     }
                 },
-                selected = buttonsState[0]
+                selected = buttonsState[2]
             )
             Spacer(modifier = Modifier.width(10.dp))
             RoundedButton(
@@ -179,14 +184,20 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             RoundedButton(
                 stringResource(id = R.string.btn_long),
                 onClick = {
-                    if (decorationIndex != 2) {
+//                    if (decorationIndex != 2) {
+//                        removeFocusFromItems(isItemSelected)
+//                        decorationIndex = 2
+//                        columnCount = 3
+//                        selectedItems = decoration[decorationIndex]
+//                    }
+                    if (decorationIndex != 0) {
                         removeFocusFromItems(isItemSelected)
-                        decorationIndex = 2
-                        columnCount = 3
+                        decorationIndex = 0
+                        columnCount = 1
                         selectedItems = decoration[decorationIndex]
                     }
                 },
-                selected = buttonsState[2]
+                selected = buttonsState[0]
             )
         }
         LazyVerticalGrid(
@@ -196,7 +207,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                 .fillMaxHeight(0.7f)
                 .align(BiasAlignment(0f, 1f)),
 
-        ) {
+            ) {
             items(selectedItems.count()) { index ->
                 DecorationScreenItem(
                     text = selectedItems[index],
@@ -284,7 +295,7 @@ private fun Preview() {
 fun DecorationScreenItem(
     onClick: () -> Unit,
     text: String,
-    colored: Color
+    colored: Color,
 ) {
     Card(
         backgroundColor = colored,
@@ -310,7 +321,7 @@ fun DecorationScreenItem(
 @Composable
 fun CircularNavButton(
     onClick: () -> Unit,
-    selected: Boolean
+    selected: Boolean,
 ) {
     var color by remember { mutableStateOf(Color.Green) }
     color = if (!selected) {
