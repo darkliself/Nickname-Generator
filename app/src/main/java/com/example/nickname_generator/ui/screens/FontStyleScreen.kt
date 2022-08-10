@@ -70,7 +70,7 @@ fun FontStyleScreen(navController: NavController, data: ScreenData) {
         )
         //Add here
         TransparentTextField(
-            text = "${data.prefix}${nickname}${data.suffix}",
+            text = "${data.prefix} ${nickname} ${data.suffix}",
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)

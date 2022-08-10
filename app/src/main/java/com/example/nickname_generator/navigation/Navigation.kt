@@ -47,7 +47,7 @@ fun Navigation() {
             if (data != null) {
                 CustomizeNickNameScreen(
                     navController = navController,
-                    screenData = data
+                    data = data
                 )
             }
         }

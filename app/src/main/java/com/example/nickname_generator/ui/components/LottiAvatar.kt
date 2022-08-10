@@ -29,6 +29,7 @@ private var jetCaptureView: MutableState<ProfileCardView>? = null
 fun LottiAvatar(
     modifier: Modifier,
     nickname: String,
+    fullNickname: String = "",
     @DrawableRes icon: Int,
     onClick: () -> Unit,
 ) {
@@ -43,7 +44,7 @@ fun LottiAvatar(
             .fillMaxHeight(0.27f)
             .clickable {
                 onClick()
-                jetCaptureView?.value?.capture(jetCaptureView?.value as ProfileCardView, nickname)
+                jetCaptureView?.value?.capture(jetCaptureView?.value as ProfileCardView, fullNickname)
             },
     ) {
         Image(
@@ -62,7 +63,7 @@ fun LottiAvatar(
 }
 
 @Composable
-fun ProfileUI(nickname: String) {
+fun ProfileUI(nickname: String, fullNickname: String) {
     val context = LocalContext.current
     jetCaptureView = remember {
         mutableStateOf(
@@ -73,6 +74,7 @@ fun ProfileUI(nickname: String) {
         factory = {
             ProfileCardView(it).apply {
                 this.nickname = nickname
+                this.fullNickname = fullNickname
                 post {
                     jetCaptureView?.value = this
                 }
@@ -88,6 +90,7 @@ class ProfileCardView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     var nickname by mutableStateOf("")
+    var fullNickname by mutableStateOf("")
 
     @Composable
     override fun Content() {
@@ -97,9 +100,9 @@ class ProfileCardView @JvmOverloads constructor(
                 .fillMaxWidth(0.5f)
                 .fillMaxHeight(0.3f),
             nickname = nickname,
+            fullNickname = fullNickname,
             icon = R.drawable.view_04_autogenerate_icon,
-            onClick = {
-            }
+            onClick = {}
         )
     }
 

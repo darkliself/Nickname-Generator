@@ -28,7 +28,6 @@ import com.example.nickname_generator.util.TextStyler
 import com.example.nickname_generator.model.screendata.ScreenData
 import com.example.nickname_generator.showInterstitial
 import com.example.nickname_generator.ui.components.WideButton
-import com.google.android.gms.ads.interstitial.InterstitialAd
 
 /**
 View 05
@@ -36,20 +35,21 @@ View 05
 
 @RequiresApi(Build.VERSION_CODES.N)
 @Composable
-fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData) {
+fun CustomizeNickNameScreen(navController: NavController, data: ScreenData) {
     navController.enableOnBackPressed(true)
     val context = LocalContext.current
-    val alphabetIndex = screenData.alphabetIndex
-    val nickname = "${screenData.prefix}${
+    val alphabetIndex = data.alphabetIndex
+    val nickname = "${data.prefix}${
         TextStyler.rebuildToString(
-            screenData.rootAsCodeList,
+            data.rootAsCodeList,
             alphabetIndex
         )
-    }${screenData.suffix}"
+    }${data.suffix}"
 
 
     if (navController.previousBackStackEntry?.destination?.route == Screen.DecorationScreen.route
-        || navController.previousBackStackEntry?.destination?.route == Screen.FontStyleScreen.route) {
+        || navController.previousBackStackEntry?.destination?.route == Screen.FontStyleScreen.route
+    ) {
         navController.backQueue.removeIf {
             it.destination.route == Screen.DecorationScreen.route
                     || it.destination.route == Screen.FontStyleScreen.route
@@ -98,14 +98,22 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                 .border(1.dp, Color.Black, shape = RoundedCornerShape(60.dp))
                 .background(Color(0xFFE7F2D7))
         ) {
+
             LottiAvatar(
                 modifier = Modifier.align(BiasAlignment(-0.95f, -0.95f)),
                 nickname = nickname,
                 icon = R.drawable.view_05_customize_icon,
                 onClick = {}
             )
+            val prefix = if (data.prefix != "")  (data.prefix + " ") else ""
+            val suffix = if (data.suffix != "")  (" " + data.suffix)  else ""
             Text(
-                text = nickname,
+                text = "$prefix${
+                    TextStyler.rebuildToString(
+                        data.rootAsCodeList,
+                        data.alphabetIndex
+                    )
+                }$suffix",
                 modifier = Modifier
                     .fillMaxWidth(0.55f)
                     .align(BiasAlignment(1.1f, -0.75f))
@@ -128,8 +136,8 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, -0.27f)),
                 onClick = {
-                    screenData.side = DecorationSide.LEFT
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
+                    data.side = DecorationSide.LEFT
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.DecorationScreen.route)
                 }
             )
@@ -141,9 +149,9 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.25f)),
                 onClick = {
-                    screenData.nickname = nickname
-                    screenData.alphabetIndex = alphabetIndex
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
+                    data.nickname = nickname
+                    data.alphabetIndex = alphabetIndex
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.FontStyleScreen.route)
                 }
             )
@@ -155,8 +163,8 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                     .fillMaxHeight(0.21f)
                     .align(BiasAlignment(0f, 0.77f)),
                 onClick = {
-                    screenData.side = DecorationSide.RIGHT
-                    navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
+                    data.side = DecorationSide.RIGHT
+                    navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                     navController.navigate(Screen.DecorationScreen.route)
                 }
             )
@@ -170,9 +178,13 @@ fun CustomizeNickNameScreen(navController: NavController, screenData: ScreenData
                 .align(BiasAlignment(0f, 0.95f)),
             imageModifier = Modifier.fillMaxWidth(),
             onClick = {
-                screenData.nickname = nickname
-                screenData.alphabetIndex = alphabetIndex
-                navController.currentBackStackEntry?.savedStateHandle?.set("data", screenData)
+                data.root = TextStyler.rebuildToString(
+                    data.rootAsCodeList,
+                    alphabetIndex
+                )
+                data.nickname = nickname
+                data.alphabetIndex = alphabetIndex
+                navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
                 // loading ads
                 loadInterstitial(context)
                 showInterstitial(context)

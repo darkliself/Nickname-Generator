@@ -45,6 +45,8 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
     val context = LocalContext.current
     val repository = NicknameViewModel(context)
     val snackbarHostState = remember { SnackbarHostState() }
+    val prefix = if (data.prefix != "")  (data.prefix + " ") else ""
+    val suffix = if (data.suffix != "")  (" " + data.suffix)  else ""
 
     Box(
         Modifier.fillMaxSize(),
@@ -88,7 +90,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
             Box(modifier = Modifier
                 .wrapContentSize()
                 .align(BiasAlignment(0f, -0.7f))) {
-                ProfileUI(nickname = data.nickname)
+                ProfileUI(nickname = data.nickname, "$prefix${data.root}$suffix")
             }
 
 //            LottiAvatar(
@@ -101,8 +103,10 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
 //                onClick = {
 //                }
 //            )
+
+
             Text(
-                text = data.nickname,
+                text = "${prefix}${data.root}${suffix}",
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .align(BiasAlignment(0f, -0.1f))

@@ -70,12 +70,12 @@ fun SavedNicknamesScreen(navController: NavController) {
                     item() {
                         LazyColumnItem(
                             modifier = Modifier.padding(start = 20.dp),
-                            text = "${value.prefix}${
+                            text = "${value.prefix} ${
                                 TextStyler.rebuildToString(
                                     value.rootAsCodeList,
                                     value.alphabetIndex
                                 )
-                            }${value.suffix}",
+                            } ${value.suffix}",
                             onIconClick = {
                                 navController.currentBackStackEntry?.savedStateHandle?.set(
                                     "data",

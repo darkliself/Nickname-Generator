@@ -133,7 +133,7 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
             modifier = Modifier.align(Alignment.TopCenter)
         )
         TransparentTextField(
-            text = "$prefix$nicknameRoot$suffix",
+            text = "$prefix $nicknameRoot $suffix",
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(0.1f)
