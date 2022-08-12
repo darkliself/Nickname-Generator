@@ -58,8 +58,7 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
             image = R.drawable.arrow_left_icon,
             onClick = {
                 navController.currentBackStackEntry?.savedStateHandle?.set("data", data)
-                navController
-                    .navigate(Screen.CustomizeNickNameScreen.route)
+                navController.popBackStack()
             }
         )
         Header(
@@ -92,19 +91,6 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                 .align(BiasAlignment(0f, -0.7f))) {
                 ProfileUI(nickname = data.nickname, "$prefix${data.root}$suffix")
             }
-
-//            LottiAvatar(
-//                modifier = Modifier
-//                    .align(BiasAlignment(0f, -0.7f))
-//                    .fillMaxWidth(0.5f)
-//                    .fillMaxHeight(0.3f),
-//                nickname = data.nickname,
-//                icon = R.drawable.view_04_autogenerate_icon,
-//                onClick = {
-//                }
-//            )
-
-
             Text(
                 text = "${prefix}${data.root}${suffix}",
                 modifier = Modifier
@@ -177,7 +163,9 @@ fun ResultScreen(navController: NavController, data: ScreenData) {
                             action = Intent.ACTION_SEND
                             putExtra(
                                 Intent.EXTRA_TEXT,
-                                "Hey! Check this cool nickname - ${data.nickname} \n" +
+  //                              getString(id = R.string.view_09_share_text, "$prefix${data.root}$suffix", BuildConfig.APPLICATION_ID)
+
+                                "Hey! Check this cool nickname - $prefix${data.root}$suffix\n" +
                                         "That I've generated in this Nickname Generator App - https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
                             )
                             type = "text/plain"

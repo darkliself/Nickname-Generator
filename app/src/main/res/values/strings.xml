@@ -57,8 +57,10 @@
     <string name="view_09_btn_try_again">Try again</string>
     <string name="view_09_btn_copy">Copy</string>
     <string name="view_09_btn_share">Share</string>
-    <string name="view_09_share_text">Share to</string>
+<!--    <string name="view_09_share_text">Share to</string>-->
     <string name="view_09_snack_bar_txt">Nickname saved to history</string>
+    <string name="view_09_share_text_test">Website %1$s isn\'t yet available, I\'m working on it, please wait %2$s more days</string>
+    <string name="view_09_share_text">Hey! Check this cool nickname - %1$s\nThat I\'ve generated in this Nickname Generator App - https://play.google.com/store/apps/details?id=%2$s</string>
     <!-- Select font style screen -->
     <string name="view_08_btn_header">Select font style</string>
     <!--    <string name="mobAds">ca-app-pub-3940256099942544~3347511712</string>-->

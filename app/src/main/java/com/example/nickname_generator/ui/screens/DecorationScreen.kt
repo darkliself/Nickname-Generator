@@ -226,11 +226,11 @@ fun DecorationScreen(navController: NavController, data: ScreenData) {
                         // highlight item
                         val iterator = isItemSelected.listIterator()
                         while (iterator.hasNext()) {
-                            if (iterator.next() == Color.Green) {
+                            if (iterator.next() == Color(0xff81c784)) {
                                 iterator.set(Color.White)
                             }
                         }
-                        isItemSelected[index] = Color.Green
+                        isItemSelected[index] = Color(0xff81c784)
                     },
                     colored = isItemSelected[index]
                 )
