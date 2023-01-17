@@ -28,7 +28,7 @@ fun WideButton(
     textModifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Start,
     fontSize: TextUnit = 16.sp,
-    fontFamily: FontFamily = FontFamily(listOf(Font(com.example.nickname_generator.R.font.montserrat_medium))),
+    fontFamily: FontFamily = FontFamily(listOf(Font(R.font.montserrat))),
     fontWeight: FontWeight = FontWeight.W900,
     onClick :() -> Unit = { println("clicked")}
 ) {
