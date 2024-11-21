@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.nickname_generator.R
 import com.example.nickname_generator.navigation.Screen
@@ -31,7 +32,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition", "UnrememberedMutableState")
 @Composable
 fun SavedNicknamesScreen(navController: NavController) {
-    val repo = NicknameViewModel(LocalContext.current)
+    val repo = hiltViewModel<NicknameViewModel>()
     val scope = rememberCoroutineScope()
     var result by remember { mutableStateOf(mutableMapOf<String, NicknameData>()) }
     scope.launch {
