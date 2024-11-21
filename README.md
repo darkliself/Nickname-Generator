@@ -25,7 +25,7 @@ Welcome to the **Nickname Generator App** – the perfect tool for creating styl
  Clone the repository:  
    ```bash
    git clone https://github.com/darkliself/Nickname-Generator.git
-
+```
 
 ## Design Example
 
