@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.nickname_generator.BuildConfig
 import com.example.nickname_generator.R
@@ -43,7 +44,7 @@ view 09
 fun ResultScreen(navController: NavController, data: ScreenData) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val repository = NicknameViewModel(context)
+    val repository = hiltViewModel<NicknameViewModel>()
     val snackbarHostState = remember { SnackbarHostState() }
     val prefix = if (data.prefix != "")  (data.prefix + " ") else ""
     val suffix = if (data.suffix != "")  (" " + data.suffix)  else ""
